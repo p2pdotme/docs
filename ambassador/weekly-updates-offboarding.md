@@ -43,6 +43,6 @@ Missing updates triggers automatic offboarding:
 - @Alumni members can re-apply through normal Candidate → Cipher process
 - Previous experience noted but no automatic reinstatement
 
-*This applies equally to "Ciphers" and "Keymasters".*
+*This applies equally to all "Ciphers" and "Keymasters".*
 
 ---
