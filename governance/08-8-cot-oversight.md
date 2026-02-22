@@ -9,11 +9,11 @@ slug: cot-oversight
 
 Audits prevent admin-merchant collusion (fake claims, biased disputes, volume inflation).
 
-| Flag | Threshold |
-|------|-----------|
-| Claim approval rate | >80% |
-| Claims per merchant | >5/month |
-| Audit cooldown | <90 days |
+| Flag                | Threshold   |
+| ------------------- | ----------- |
+| Claim approval rate | >80%        |
+| Claims per merchant | >5/month    |
+| Audit cooldown      | &lt;90 days |
 
 ## 8.2 Audit Process
 
@@ -25,12 +25,12 @@ Audits prevent admin-merchant collusion (fake claims, biased disputes, volume in
 
 ## 8.3 Audit Outcomes
 
-| Result | Admin | Proposer |
-|--------|-------|----------|
-| PASS | Cleared | -100 $P2P |
-| FAIL (Minor) | -10% stake, -1000 RP, probation | +100 $P2P, +200 RP |
-| FAIL (Major) | -50% stake, -5000 RP, 6mo suspend | +100 $P2P, +500 RP |
-| FAIL (Fraud) | -100% stake, permanent ban | +100 $P2P, +1000 RP |
+| Result       | Admin                             | Proposer            |
+| ------------ | --------------------------------- | ------------------- |
+| PASS         | Cleared                           | -100 $P2P           |
+| FAIL (Minor) | -10% stake, -1000 RP, probation   | +100 $P2P, +200 RP  |
+| FAIL (Major) | -50% stake, -5000 RP, 6mo suspend | +100 $P2P, +500 RP  |
+| FAIL (Fraud) | -100% stake, permanent ban        | +100 $P2P, +1000 RP |
 
 ## 8.4 Anti-Collusion Mechanisms
 
