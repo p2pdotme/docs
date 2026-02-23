@@ -17,10 +17,10 @@ In this model:
 
 ## 1.2 What "good" looks like by 2026+
 
-- A user in any supported country can buy or sell stablecoins in ~minutes—targeting sub-90-second completion on fast rails—without giving custody to anyone.
+- A user in any supported country can buy, sell or pay stablecoins in ~minutes—targeting sub-90-second completion on fast rails—without giving custody to anyone.
 - Merchants are matched based on reliability and Proof-of-Credibility scores, with spread set at the protocol level rather than through merchant competition.
 - ZK-KYC and ZK payment proofs unlock higher limits and faster paths while keeping personal data off-chain.
-- Third-party apps and wallets integrate the protocol through open SDKs; Coins.me is only a reference consumer front-end, not a privileged gateway.
+- Third-party apps and wallets integrate the protocol through open SDKs; <a href="https://coins.me" target="_blank">Coins.me</a> is only a reference consumer front-end, not a privileged gateway.
 - As credibility compounds, new products (installment payouts, escrowless commerce, cross-border salaries, dispute insurance) can be built without re-KYCing the world.
 
 ## 1.3 First principles
@@ -35,7 +35,7 @@ In this model:
 
 **Is:** an open, decentralized coordination layer that trustlessly matches a buyer with a highly vetted merchant according to a transparent reputation system; settles trades using verifiable proofs; and routes fees and parameters through governance.
 
-**Is not:** a custodian, a bank, or a data broker. P2P Protocol does not custody fiat, does not warehouse users' personal information, and does not promise fixed yields.
+**Is not:** a custodian, a bank, or a data broker. P2P Protocol does not custody fiat, does not warehouse user's personal information, and does not promise fixed yields.
 
 ## 1.5 Why this matters now
 
@@ -124,6 +124,7 @@ Most people want two things at once: privacy and legality. P2P Protocol makes th
 - **Multi-chain presence:** support for additional networks including Solana and emerging high-performance chains.
 - **Composability:** third-party apps shipping useful features on the SDK without asking permission.
 - **Self-serve legitimacy:** regulators and risk teams can read the spec, verify parameters on-chain, and understand how safety is achieved—without backdoors.
+- **Roadmap features:** for current feature-track proposals (including remittance and currency expansion), see [`/roadmap-features`](/roadmap-features).
 
 ## 1.16 A short manifesto
 
@@ -131,7 +132,7 @@ Most people want two things at once: privacy and legality. P2P Protocol makes th
 
 > Reputation should be earned, portable, and revoke-able—never sold.
 
-> The best KYC is the one that proves what's needed and nothing else.
+> The best KYC is the one that proves privately what's needed and nothing else.
 
 > If only power users can use it, it isn't DeFi—it's a gated club.
 

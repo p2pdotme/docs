@@ -7,19 +7,15 @@ slug: token-utility
 
 ## Governance
 
-Token holders vote on protocol parameters including fees, transaction limits, merchant rules, oracle configurations, and treasury allocations. Governance follows the OpenZeppelin Governor model with a 7-day voting period, 4% quorum for standard proposals and 20% for critical changes, and a 7-day timelock before execution.
-
-One staked $P2P equals one vote. Delegation is supported, allowing passive holders to delegate their voting power to active participants.
+Token holders vote on protocol parameters such as fees, limits, merchant rules, oracle configs, and treasury allocation. One staked $P2P = one vote, with delegation. The target model uses OpenZeppelin Governor-style mechanics with phased decentralization. For what is live today vs planned, see [`/governance`](/governance).
 
 ## Staking
 
-$P2P tokens serve as the economic backbone of the Circles of Trust system. Circle Admins stake tokens to operate merchant networks. Community members can delegate $P2P to Circles of Trust to earn a share of circle revenue based on working capital ratio.
-
-Merchants stake USDC to join Circles. All stakes are slashable for violations including order abandonment, dispute losses, and fraud. Repeated violations result in full slashing and blacklisting.
+Circle Admins stake $P2P to operate merchant networks. Community members delegate $P2P to Circles to participate in revenue sharing. Merchants stake USDC as working capital. The staking design creates skin-in-the-game at every layer. Admins risk their stake on operational quality, merchants risk theirs on order fulfillment, and delegators share in both risk and reward. For current implementation state, see [`/circles-of-trust`](/circles-of-trust).
 
 ## Fee Distribution
 
-The protocol charges a configurable spread on each transaction, generating protocol revenue. This revenue is distributed across the network's participants:
+Protocol revenue is routed across participants. The split is governance-configurable. The target model follows.
 
 | Recipient | Share of Revenue |
 |-----------|-----------------|
@@ -28,6 +24,6 @@ The protocol charges a configurable spread on each transaction, generating proto
 | Insurance Pools | 17.78% |
 | Circle Admins | 8.89% |
 
-Revenue flows directly to network participants. The foundation receives no direct protocol fee revenue.
+The design intent is that no single party captures a majority of protocol revenue. Merchants earn the most because they provide working capital and operational labor. Buy-and-burn connects token value to protocol usage. Insurance pools exist so disputes don't become externalised costs.
 
 ---

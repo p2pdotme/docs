@@ -139,6 +139,14 @@ const config: Config = {
     ],[
       '@docusaurus/plugin-content-docs',
       {
+        id: 'roadmap-features',
+        path: 'roadmap-features',
+        routeBasePath: 'roadmap-features',
+        sidebarPath: './sidebars/roadmap-features.ts',
+      },
+    ],[
+      '@docusaurus/plugin-content-docs',
+      {
         id: 'tokenomics',
         path: 'tokenomics',
         routeBasePath: 'tokenomics',
@@ -168,6 +176,30 @@ const config: Config = {
         routeBasePath: 'ambassador',
         sidebarPath: './sidebars/ambassador.ts',
       },
+    ],[
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'user-guide',
+        path: 'user-guide',
+        routeBasePath: 'user-guide',
+        sidebarPath: './sidebars/user-guide.ts',
+      },
+    ],[
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'merchant-guide',
+        path: 'merchant-guide',
+        routeBasePath: 'merchant-guide',
+        sidebarPath: './sidebars/merchant-guide.ts',
+      },
+    ],[
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'investor-guide',
+        path: 'investor-guide',
+        routeBasePath: 'investor-guide',
+        sidebarPath: './sidebars/investor-guide.ts',
+      },
     ]
   ],
   themes: [
@@ -179,8 +211,8 @@ const config: Config = {
         indexDocs: true,
         indexBlog: false,
         indexPages: false,
-        docsRouteBasePath: ["whitepaper", "tokenomics", "governance", "circles-of-trust", "ambassador"],
-        docsDir: ["docs", "tokenomics", "governance", "circles-of-trust", "ambassador"],
+        docsRouteBasePath: ["whitepaper", "roadmap-features", "tokenomics", "governance", "circles-of-trust", "ambassador", "user-guide", "merchant-guide", "investor-guide"],
+        docsDir: ["docs", "roadmap-features", "tokenomics", "governance", "circles-of-trust", "ambassador", "user-guide", "merchant-guide", "investor-guide"],
         searchResultLimits: 10,
         searchResultContextMaxLength: 50,
       },
@@ -201,49 +233,78 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: '',
-      logo: {
-        alt: 'P2P Foundation',
-        src: 'img/p2p-foundation-main.svg',
-        srcDark: 'img/p2p-foundation-2.svg',
-      },
+  title: '',
+  logo: {
+    alt: 'P2P Foundation',
+    src: 'img/p2p-foundation-main.svg',
+    srcDark: 'img/p2p-foundation-2.svg',
+  },
+  items: [
+    {
+      type: 'docSidebar',
+      sidebarId: 'whitepaperSidebar',
+      label: 'Whitepaper',
+      position: 'left',
+    },
+    {
+      type: 'docSidebar',
+      sidebarId: 'roadmapFeaturesSidebar',
+      label: 'Roadmap',
+      docsPluginId: 'roadmap-features',
+      position: 'left',
+    },
+    {
+      type: 'docSidebar',
+      sidebarId: 'tokenomicsSidebar',
+      label: 'Token Economics',
+      docsPluginId: 'tokenomics',
+      position: 'left',
+    },
+    {
+      type: 'docSidebar',
+      sidebarId: 'governanceSidebar',
+      label: 'Governance',
+      docsPluginId: 'governance',
+      position: 'left',
+    },
+
+    {
+      type: 'docSidebar',
+      sidebarId: 'ambassadorSidebar',
+      label: 'Ambassador Program',
+      docsPluginId: 'ambassador',
+      position: 'left',
+    },
+
+    // GROUP GUIDES IN DROPDOWN
+    {
+      label: 'Guides',
+      position: 'left',
       items: [
         {
-                "type": "docSidebar",
-                "sidebarId": "whitepaperSidebar",
-                "position": "left",
-                "label": "Whitepaper"
+          type: 'docSidebar',
+          sidebarId: 'userGuideSidebar',
+          label: 'User Guide',
+          docsPluginId: 'user-guide',
         },
         {
-                "type": "docSidebar",
-                "sidebarId": "tokenomicsSidebar",
-                "position": "left",
-                "label": "Token Economics",
-                "docsPluginId": "tokenomics"
+          type: 'docSidebar',
+          sidebarId: 'merchantGuideSidebar',
+          label: 'Merchant Guide',
+          docsPluginId: 'merchant-guide',
         },
         {
-                "type": "docSidebar",
-                "sidebarId": "governanceSidebar",
-                "position": "left",
-                "label": "Governance",
-                "docsPluginId": "governance"
+          type: 'docSidebar',
+          sidebarId: 'investorGuideSidebar',
+          label: 'Investor Guide',
+          docsPluginId: 'investor-guide',
         },
-        {
-                "type": "docSidebar",
-                "sidebarId": "cotSidebar",
-                "position": "left",
-                "label": "Circles of Trust",
-                "docsPluginId": "circles-of-trust"
-        },
-        {
-                "type": "docSidebar",
-                "sidebarId": "ambassadorSidebar",
-                "position": "left",
-                "label": "Ambassador Program",
-                "docsPluginId": "ambassador"
-        }
-],
+      ],
     },
+
+    
+  ],
+},
     footer: {
       style: 'dark',
       links: [],

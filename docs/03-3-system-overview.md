@@ -17,7 +17,7 @@ The protocol involves several key participants working together to enable trustl
 
 **Proof Verifiers** are responsible for validating ZK and TLS-backed proofs submitted during transactions or disputes. Verification can occur on-chain for compact claims, or through designated off-chain attesters for more complex rail-specific statements, with results posted back on-chain.
 
-**Governance** encompasses the mechanisms through which protocol parameters, upgrades, and treasury decisions are made. Initially managed through a multisig council, governance transitions to token-holder control following the protocol's maturation.
+**Governance** encompasses the mechanisms through which protocol parameters, upgrades, and treasury decisions are made. The current implementation is admin/multisig operated, with a planned transition to broader token-holder governance as the protocol matures.
 
 ## 3.2 Components
 
@@ -32,7 +32,18 @@ The protocol involves several key participants working together to enable trustl
 2. **Order Matching:** A list of carefully vetted merchants is queued via Proof-of-Credibility. A fiat payment address is shared over the smart contract, encrypted with the user's keys; for off-ramps, a Base USDC address is presented.
 3. **Fiat/Stablecoin Transfer:** The payer performs the transfer on the designated rail.
 4. **Confirmation/Settlement:** Within minutes, settlement succeeds once the counter-proof condition is met (e.g., merchant confirms receipt or buyer submits transfer proof). Wallet balances update accordingly.
-5. **Dispute Window:** If a party contests, they submit a ZK/TLS-backed proof that a payment or action occurred (or did not). Smart contracts (and/or designated verifiers) resolve deterministically.
+5. **Dispute Window:** If a party contests, they submit evidence (including ZK/TLS-backed proofs where available) that a payment or action occurred (or did not). In the live implementation, authorized admins settle disputed orders on-chain according to protocol fault rules and dispute windows.
+
+```mermaid
+flowchart LR
+    place[PlaceOrder] --> match[MerchantMatch]
+    match --> transfer[FiatOrStablecoinTransfer]
+    transfer --> confirm[ConfirmAndSettle]
+    confirm --> done[Completed]
+    confirm --> dispute[DisputeRaised]
+    dispute --> adminSettle[AdminSettlementOnChain]
+    adminSettle --> resolved[ResolvedState]
+```
 
 ## 3.4 On-Ramp Flow
 
@@ -128,7 +139,7 @@ The protocol involves several key participants working together to enable trustl
 - The **merchant** serves the function of mediating liquidity for the transactions.
 - The **onus of sharing ZK proof** always rests on the merchant (for off-ramps) or can be provided by either party.
 - **ZK-proof performs trustless KYC** for the user without exposing personal data.
-- **ZK-proofs serve as verifiable evidence** in disputes, with designated verifiers and governance mechanisms determining outcomes.
+- **ZK-proofs serve as verifiable evidence** in disputes. In the current system, outcomes are executed via on-chain admin settlement; broader verifier and governance-driven resolution remains roadmap.
 - **Reclaim Protocol** securely encrypts all in-transit data carried by the ZK proof.
 - All proof creation, storage, and transmission is handled via the **TLS 1.2/1.3 specification**.
 
