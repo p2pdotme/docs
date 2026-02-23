@@ -23,7 +23,7 @@ slug: dispute-outcomes
 | **T2: Merchant wins (BUY)** | -500 RP only | +$1,000, +50 RP | +$25, +25 RP | ±50 RP |
 | **T3: User wins** | +$900, +150 RP | -$1,000, -300 RP, -50% stake, BAN | -$50‡, -500 RP, -10% stake | ±300 RP |
 | **T3: Merchant wins (SELL)** | -$1,000, -300 RP, BAN | +$900, +150 RP | +$50, +100 RP | ±100 RP |
-| **T3: Merchant wins (BUY)** | -1000 RP, BAN if RP<0 | +$1,000, +150 RP | +$50, +100 RP | ±100 RP |
+| **T3: Merchant wins (BUY)** | -1000 RP, BAN if RP falls below 0 | +$1,000, +150 RP | +$50, +100 RP | ±100 RP |
 
 *T2 Jurors column at T3: Jurors who voted at T2 receive RP based on alignment with final T3 outcome. T3 uses governance voting, not jury.
 

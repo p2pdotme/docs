@@ -31,7 +31,7 @@ export default function Home(): JSX.Element {
               className="button button--primary button--lg"
               to="/whitepaper/abstract"
             >
-              Read the Whitepaper
+              Read the Docs
             </Link>
             <Link
               className="button button--secondary button--lg"

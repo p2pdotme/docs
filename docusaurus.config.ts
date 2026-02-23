@@ -7,6 +7,10 @@ const config: Config = {
   tagline: 'Documentation for P2P Foundation',
   favicon: 'img/favicon.svg',
 
+  markdown: {
+    mermaid: true,
+  },
+
   url: 'https://docs.p2p.foundation',
   baseUrl: '/',
 
@@ -139,38 +143,47 @@ const config: Config = {
     ],[
       '@docusaurus/plugin-content-docs',
       {
-        id: 'tokenomics',
-        path: 'tokenomics',
-        routeBasePath: 'tokenomics',
-        sidebarPath: './sidebars/tokenomics.ts',
+        id: 'for-investors',
+        path: 'for-investors',
+        routeBasePath: 'for-investors',
+        sidebarPath: './sidebars/for-investors.ts',
       },
     ],[
       '@docusaurus/plugin-content-docs',
       {
-        id: 'governance',
-        path: 'governance',
-        routeBasePath: 'governance',
-        sidebarPath: './sidebars/governance.ts',
+        id: 'for-builders',
+        path: 'for-builders',
+        routeBasePath: 'for-builders',
+        sidebarPath: './sidebars/for-builders.ts',
       },
     ],[
       '@docusaurus/plugin-content-docs',
       {
-        id: 'circles-of-trust',
-        path: 'circles-of-trust',
-        routeBasePath: 'circles-of-trust',
-        sidebarPath: './sidebars/circles-of-trust.ts',
+        id: 'for-merchants',
+        path: 'for-merchants',
+        routeBasePath: 'for-merchants',
+        sidebarPath: './sidebars/for-merchants.ts',
       },
     ],[
       '@docusaurus/plugin-content-docs',
       {
-        id: 'ambassador',
-        path: 'ambassador',
-        routeBasePath: 'ambassador',
-        sidebarPath: './sidebars/ambassador.ts',
+        id: 'for-users',
+        path: 'for-users',
+        routeBasePath: 'for-users',
+        sidebarPath: './sidebars/for-users.ts',
+      },
+    ],[
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'for-community',
+        path: 'for-community',
+        routeBasePath: 'for-community',
+        sidebarPath: './sidebars/for-community.ts',
       },
     ]
   ],
   themes: [
+    '@docusaurus/theme-mermaid',
     [
       require.resolve("@easyops-cn/docusaurus-search-local"),
       {
@@ -179,8 +192,8 @@ const config: Config = {
         indexDocs: true,
         indexBlog: false,
         indexPages: false,
-        docsRouteBasePath: ["whitepaper", "tokenomics", "governance", "circles-of-trust", "ambassador"],
-        docsDir: ["docs", "tokenomics", "governance", "circles-of-trust", "ambassador"],
+        docsRouteBasePath: ["whitepaper", "for-investors", "for-builders", "for-merchants", "for-users", "for-community"],
+        docsDir: ["docs", "for-investors", "for-builders", "for-merchants", "for-users", "for-community"],
         searchResultLimits: 10,
         searchResultContextMaxLength: 50,
       },
@@ -196,7 +209,7 @@ const config: Config = {
     },
     image: 'https://firebasestorage.googleapis.com/v0/b/p2px-421205.appspot.com/o/user-app%2Fv2%2Fimages%2Fthumbnails%2FfoundationWebsitePreview.png?alt=media&token=b9776f2a-a5c1-43ef-a8cb-764524e16fe4',
     colorMode: {
-      defaultMode: 'light',
+      defaultMode: 'dark',
       disableSwitch: false,
       respectPrefersColorScheme: true,
     },
@@ -207,42 +220,7 @@ const config: Config = {
         src: 'img/p2p-foundation-main.svg',
         srcDark: 'img/p2p-foundation-2.svg',
       },
-      items: [
-        {
-                "type": "docSidebar",
-                "sidebarId": "whitepaperSidebar",
-                "position": "left",
-                "label": "Whitepaper"
-        },
-        {
-                "type": "docSidebar",
-                "sidebarId": "tokenomicsSidebar",
-                "position": "left",
-                "label": "Token Economics",
-                "docsPluginId": "tokenomics"
-        },
-        {
-                "type": "docSidebar",
-                "sidebarId": "governanceSidebar",
-                "position": "left",
-                "label": "Governance",
-                "docsPluginId": "governance"
-        },
-        {
-                "type": "docSidebar",
-                "sidebarId": "cotSidebar",
-                "position": "left",
-                "label": "Circles of Trust",
-                "docsPluginId": "circles-of-trust"
-        },
-        {
-                "type": "docSidebar",
-                "sidebarId": "ambassadorSidebar",
-                "position": "left",
-                "label": "Ambassador Program",
-                "docsPluginId": "ambassador"
-        }
-],
+      items: [],
     },
     footer: {
       style: 'dark',

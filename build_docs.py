@@ -287,82 +287,122 @@ slug: {url_slug}
         return generated_files
     
     def _generate_sidebar(self, doc_config: Dict, files: List[Dict]) -> str:
-        """Generate TypeScript sidebar configuration."""
+        """Generate TypeScript sidebar configuration that uses cross-links."""
         config_id = doc_config['id']
         sidebar_id = doc_config.get('sidebarId', f"{config_id}Sidebar")
         route_base = doc_config['routeBasePath']
         sidebar_style = doc_config.get('sidebarStyle', 'nested')
-        
-        # Flat style: single category with all docs as simple string items
-        if sidebar_style == 'flat':
-            doc_ids = [file_info['doc_id'] for file_info in files]
-            first_doc_id = doc_ids[0] if doc_ids else None
-            # Exclude first doc from items since it's used as the category link
-            # This prevents "Next" navigation from looping back to the same page
-            remaining_doc_ids = doc_ids[1:] if len(doc_ids) > 1 else []
-            
-            sidebar_content = {
-                'type': 'category',
-                'label': doc_config['navbarLabel'],
-                'collapsible': True,
-                'collapsed': False,
-                'link': {
-                    'type': 'doc',
-                    'id': first_doc_id,
-                },
-                'items': remaining_doc_ids,
-            }
-            
-            sidebar_ts = f"""import type {{ SidebarsConfig }} from "@docusaurus/plugin-content-docs";
+
+        # CSS class map for sidebar categories
+        sidebar_classes = {
+            'whitepaper': 'sidebar-cat-whitepaper',
+            'for-investors': 'sidebar-cat-investors',
+            'for-builders': 'sidebar-cat-builders',
+            'for-merchants': 'sidebar-cat-merchants',
+            'for-users': 'sidebar-cat-users',
+            'for-community': 'sidebar-cat-community',
+        }
+        class_name = sidebar_classes.get(config_id, f'sidebar-cat-{config_id}')
+
+        doc_ids = [file_info['doc_id'] for file_info in files]
+        first_doc_id = doc_ids[0] if doc_ids else None
+        remaining_doc_ids = doc_ids[1:] if len(doc_ids) > 1 else []
+
+        items_json = json.dumps(remaining_doc_ids, indent=4)
+
+        sidebar_ts = f'''import type {{ SidebarsConfig }} from "@docusaurus/plugin-content-docs";
+import {{ buildSidebar }} from "./cross-links";
+
+const ownCategory = {{
+  type: "category" as const,
+  label: "{doc_config['navbarLabel']}",
+  collapsible: true,
+  collapsed: false,
+  className: "{class_name}",
+  link: {{
+    type: "doc" as const,
+    id: "{first_doc_id}",
+  }},
+  items: {items_json},
+}};
 
 const sidebars: SidebarsConfig = {{
-  {sidebar_id}: [
-    {json.dumps(sidebar_content, indent=4).replace(chr(10), chr(10) + '    ')}
-  ],
+  {sidebar_id}: buildSidebar("{config_id}", ownCategory),
 }};
 
 export default sidebars;
-"""
-            return sidebar_ts
-        
-        # Nested style: each doc is its own category with subsection links
-        items = []
-        for file_info in files:
-            doc_id = file_info['doc_id']       # Use doc_id for Docusaurus references
-            url_slug = file_info['url_slug']   # Use url_slug for href links
-            title = file_info['title']
-            subsections = file_info.get('subsections', [])
-            
-            # Build subsection links if generateTocLinks is enabled
-            sub_items = []
-            if doc_config.get('generateTocLinks', True) and subsections:
-                for sub in subsections:
-                    sub_items.append({
-                        'type': 'link',
-                        'label': sub['title'],
-                        'href': f"/{route_base}/{url_slug}#{sub['slug']}"
-                    })
-            
-            item = {
-                'type': 'category',
-                'label': title,
-                'collapsible': True,
-                'collapsed': True,
-                'link': {'type': 'doc', 'id': doc_id},
-                'items': sub_items
-            }
-            items.append(item)
-        
-        # Generate TypeScript with proper JSON formatting
-        sidebar_ts = f"""import type {{SidebarsConfig}} from '@docusaurus/plugin-content-docs';
-
-const sidebars: SidebarsConfig = {{
-  {sidebar_id}: {json.dumps(items, indent=4)},
-}};
-
-export default sidebars;
-"""
+'''
         return sidebar_ts
+
+    def _generate_cross_links(self, all_doc_results: List[Tuple[Dict, List[Dict]]]) -> str:
+        """Generate the cross-links.ts file with links to all sections."""
+
+        sidebar_classes = {
+            'whitepaper': 'sidebar-cat-whitepaper',
+            'for-investors': 'sidebar-cat-investors',
+            'for-builders': 'sidebar-cat-builders',
+            'for-merchants': 'sidebar-cat-merchants',
+            'for-users': 'sidebar-cat-users',
+            'for-community': 'sidebar-cat-community',
+        }
+
+        sections = []
+        for doc_config, files in all_doc_results:
+            config_id = doc_config['id']
+            route_base = doc_config['routeBasePath']
+            class_name = sidebar_classes.get(config_id, f'sidebar-cat-{config_id}')
+
+            items = []
+            for file_info in files:
+                url_slug = file_info['url_slug']
+                title = file_info['title']
+                items.append({
+                    'type': 'link',
+                    'label': title,
+                    'href': f'/{route_base}/{url_slug}',
+                })
+
+            sections.append({
+                'key': config_id,
+                'label': doc_config['navbarLabel'],
+                'className': class_name,
+                'items': items,
+            })
+
+        sections_json = json.dumps(sections, indent=2)
+
+        cross_links_ts = f'''type LinkItem = {{
+  type: 'link';
+  label: string;
+  href: string;
+}};
+
+type SectionDef = {{
+  key: string;
+  label: string;
+  className: string;
+  items: LinkItem[];
+}};
+
+const SECTION_ORDER: SectionDef[] = {sections_json};
+
+export function buildSidebar(currentKey: string, ownCategory: any): any[] {{
+  return SECTION_ORDER.map((section) => {{
+    if (section.key === currentKey) {{
+      return ownCategory;
+    }}
+    return {{
+      type: 'category' as const,
+      label: section.label,
+      collapsible: true,
+      collapsed: true,
+      className: section.className,
+      items: section.items,
+    }};
+  }});
+}}
+'''
+        return cross_links_ts
     
     def _generate_docusaurus_config(self) -> str:
         """Generate the main Docusaurus configuration file."""
@@ -370,26 +410,33 @@ export default sidebars;
         navbar_config = self.config.get('navbar', {})
         footer_config = self.config.get('footer', {})
         
-        # Build navbar items
+        # Navbar CSS class map for icons
+        navbar_classes = {
+            'Whitepaper': 'navbar__item--whitepaper navbar-icon-whitepaper',
+            'For Investors': 'navbar-icon-investors',
+            'For Builders': 'navbar-icon-builders',
+            'For Merchants': 'navbar-icon-merchants',
+            'For Users': 'navbar-icon-users',
+            'For Community': 'navbar-icon-community',
+        }
+
+        # Build navbar items with bracket-style labels matching p2p.foundation
         navbar_items = []
         for i, doc in enumerate(docs):
-            if i == 0:
-                # First doc uses the preset - standard docSidebar
-                navbar_items.append({
-                    'type': 'docSidebar',
-                    'sidebarId': doc.get('sidebarId', f"{doc['id']}Sidebar"),
-                    'position': doc.get('navbarPosition', 'left'),
-                    'label': doc['navbarLabel'],
-                })
-            else:
-                # Additional docs use plugins - need docsPluginId
-                navbar_items.append({
-                    'type': 'docSidebar',
-                    'sidebarId': doc.get('sidebarId', f"{doc['id']}Sidebar"),
-                    'position': doc.get('navbarPosition', 'left'),
-                    'label': doc['navbarLabel'],
-                    'docsPluginId': doc['id'],
-                })
+            label = doc['navbarLabel']
+            bracket_label = f"[ {label.upper()} ]"
+            item = {
+                'type': 'docSidebar',
+                'sidebarId': doc.get('sidebarId', f"{doc['id']}Sidebar"),
+                'position': doc.get('navbarPosition', 'left'),
+                'label': bracket_label,
+            }
+            if i > 0:
+                item['docsPluginId'] = doc['id']
+            css_class = navbar_classes.get(label)
+            if css_class:
+                item['className'] = css_class
+            navbar_items.append(item)
         
         # Build docs plugins config
         # First doc uses the preset, additional docs use plugins
@@ -444,6 +491,10 @@ const config: Config = {{
   title: '{self.config.get("siteTitle", "P2P Foundation Docs")}',
   tagline: '{self.config.get("siteTagline", "Documentation")}',
   favicon: 'img/favicon.svg',
+
+  markdown: {{
+    mermaid: true,
+  }},
 
   url: 'https://docs.p2p.foundation',
   baseUrl: '/',
@@ -569,6 +620,7 @@ const config: Config = {{
   ],
 {plugins_config}
   themes: [
+    '@docusaurus/theme-mermaid',
     [
       require.resolve("@easyops-cn/docusaurus-search-local"),
       {{
@@ -594,7 +646,7 @@ const config: Config = {{
     }},
     image: 'https://firebasestorage.googleapis.com/v0/b/p2px-421205.appspot.com/o/user-app%2Fv2%2Fimages%2Fthumbnails%2FfoundationWebsitePreview.png?alt=media&token=b9776f2a-a5c1-43ef-a8cb-764524e16fe4',
     colorMode: {{
-      defaultMode: 'light',
+      defaultMode: 'dark',
       disableSwitch: false,
       respectPrefersColorScheme: true,
     }},
@@ -605,7 +657,7 @@ const config: Config = {{
         src: '{navbar_config.get("logo", {}).get("src", "img/p2p-foundation-main.svg")}',
         srcDark: '{navbar_config.get("logo", {}).get("srcDark", "img/p2p-foundation-2.svg")}',
       }},
-      items: {json.dumps(navbar_items, indent=8)},
+      items: [],
     }},
     footer: {{
       style: 'dark',
@@ -771,6 +823,9 @@ export default config;
         sidebars_dir = self.website_dir / "sidebars"
         sidebars_dir.mkdir(parents=True, exist_ok=True)
         
+        # Collect all doc processing results for cross-links generation
+        all_doc_results: List[Tuple[Dict, List[Dict]]] = []
+        
         # Process each doc
         for doc_config in self.config['docs']:
             print(f"\n📚 Processing: {doc_config['navbarLabel']}")
@@ -808,8 +863,18 @@ export default config;
             
             # Generate doc files
             files = self._generate_doc_files(sections, doc_config)
-            
-            # Generate sidebar
+            all_doc_results.append((doc_config, files))
+        
+        # Generate cross-links file (must happen before individual sidebars)
+        print(f"\n🔗 Generating cross-links sidebar")
+        cross_links_content = self._generate_cross_links(all_doc_results)
+        cross_links_path = sidebars_dir / "cross-links.ts"
+        with open(cross_links_path, 'w', encoding='utf-8') as f:
+            f.write(cross_links_content)
+        print(f"  📋 Generated: cross-links.ts")
+        
+        # Generate individual sidebars (referencing cross-links)
+        for doc_config, files in all_doc_results:
             sidebar_content = self._generate_sidebar(doc_config, files)
             sidebar_path = sidebars_dir / f"{doc_config['id']}.ts"
             with open(sidebar_path, 'w', encoding='utf-8') as f:

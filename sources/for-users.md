@@ -1,33 +1,41 @@
-# P2P Protocol User Guide
+# For Users
 
 ## Start Here
 
-- New to operations? Read this guide start to finish, then review the [`Merchant Guide`](/merchant-guide) to understand counterparty actions.
-- For system and assignment model context, read [`Circles of Trust`](/circles-of-trust).
-- For dispute/governance behavior in production, read [`Governance`](/governance).
-- For upcoming product capabilities, read [`Roadmap Features`](/roadmap-features).
+This guide covers everything you need to buy, sell, or pay with stablecoins using P2P Protocol.
+
+**Quick links to key sections.**
+
+- [Before you start](/for-users/before-you-start)
+- [Order types](/for-users/order-types)
+- [How to place an order](/for-users/how-to-place-an-order)
+- [What to do by order type](/for-users/what-to-do-by-order-type)
+- [Understanding order states](/for-users/understanding-order-states)
+- [Disputes and evidence](/for-users/disputes-and-evidence)
+- [Troubleshooting](/for-users/troubleshooting)
+- [FAQ](/for-users/faq)
+
+Also see [`/for-merchants`](/for-merchants/start-here) to understand counterparty actions and [`/whitepaper`](/whitepaper/abstract) for protocol context.
 
 ---
 
----
+## Before You Start
 
-## 1. Before You Start
+**What you need.**
 
-### What You Need
-
-- A supported wallet connected through a P2P Protocol client app.
+- An account on a P2P Protocol client app (wallet is provided in-app via thirdweb integration).
 - Access to supported payment rails in your region.
 - Stablecoin balance for SELL/PAY flows.
 
-### Basic Safety Checks
+**Basic safety checks.**
 
-- Confirm the app domain and wallet network before signing.
+- Confirm you are on the official app domain before signing in.
 - Verify order details (amount, currency, recipient) before submission.
-- Do not share private keys, seed phrases, or wallet recovery data.
+- Do not share your login credentials or account recovery information.
 
 ---
 
-## 2. Order Types
+## Order Types
 
 - **BUY.** You pay fiat and receive stablecoin.
 - **SELL.** You transfer stablecoin and receive fiat.
@@ -35,7 +43,7 @@
 
 ---
 
-## 3. How to Place an Order
+## How to Place an Order
 
 1. Open the app and select `BUY`, `SELL`, or `PAY`.
 2. Enter amount and required recipient/payment details.
@@ -53,9 +61,9 @@ flowchart LR
 
 ---
 
-## 4. What To Do By Order Type
+## What to Do by Order Type
 
-### BUY (Fiat -> Stablecoin)
+### BUY (Fiat to Stablecoin)
 
 1. Place BUY order.
 2. Receive assigned merchant payment details.
@@ -63,7 +71,7 @@ flowchart LR
 4. Complete required in-app confirmation.
 5. Track order until completion.
 
-### SELL / PAY (Stablecoin -> Fiat or Payment Rail)
+### SELL / PAY (Stablecoin to Fiat or Payment Rail)
 
 1. Place SELL or PAY order.
 2. Approve/transfer stablecoin when prompted.
@@ -72,33 +80,33 @@ flowchart LR
 
 ---
 
-## 5. Understanding Order States
+## Understanding Order States
 
-Common order statuses.
-
-- `PLACED`: Order created and pending active handling.
-- `ACCEPTED`: A merchant accepted the order.
-- `PAID`: Payment leg was marked paid in protocol flow.
-- `COMPLETED`: Settlement path finished successfully.
-- `CANCELLED`: Order was cancelled or expired.
+| Status | Meaning |
+|--------|---------|
+| `PLACED` | Order created and pending active handling |
+| `ACCEPTED` | A merchant accepted the order |
+| `PAID` | Payment leg was marked paid in protocol flow |
+| `COMPLETED` | Settlement path finished successfully |
+| `CANCELLED` | Order was cancelled or expired |
 
 If your order remains in a state longer than expected, use in-app support/escalation and check dispute eligibility.
 
 ---
 
-## 6. Disputes and Evidence
+## Disputes and Evidence
 
 If the counterparty doesn't fulfill their obligation, take the following steps.
 
 1. Open a dispute within the allowed time window.
-2. Submit evidence in-app (ZK/TLS-backed proofs where available).
+2. Submit evidence in-app.
 3. Monitor dispute status.
 
-Disputes are currently resolved on-chain by authorized admins under protocol fault rules.
+Disputes are resolved on-chain by authorized admins under protocol fault rules. *Jury-based escalation tiers are planned for a future release.*
 
 ---
 
-## 7. Troubleshooting
+## Troubleshooting
 
 ### Order was cancelled unexpectedly
 
@@ -117,7 +125,7 @@ Disputes are currently resolved on-chain by authorized admins under protocol fau
 
 ---
 
-## 8. FAQs
+## FAQ
 
 ### Do I need to understand on-chain mechanics?
 
@@ -129,11 +137,11 @@ Merchant assignment depends on real-time eligibility factors, including liquidit
 
 ### Can I appeal a dispute?
 
-Use the in-app dispute process. The roadmap includes governance-driven escalation tiers, but today disputes are admin-settled.
+Use the in-app dispute process. *Governance-driven escalation tiers are planned for a future release.*
 
 ### Is my identity stored on-chain?
 
-No raw PII is stored on-chain. The protocol uses ZK proofs and attestation hashes. Only commitments and verdicts are public.
+No raw PII is stored on-chain. The protocol uses ZK-KYC proofs for identity verification and stores only commitments and verdicts on-chain.
 
 ### How do I know what to do next?
 

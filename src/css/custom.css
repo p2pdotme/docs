@@ -98,7 +98,7 @@
   --ifm-color-primary: var(--p2p-blue);
   --ifm-color-primary-dark: var(--p2p-blue-dark);
   --ifm-color-primary-light: var(--p2p-blue-light);
-  --ifm-navbar-height: 4rem;
+  --ifm-navbar-height: 3rem;
 
   /* Common */
   --glass-backdrop: blur(12px);
@@ -254,19 +254,165 @@ h6 {
   backdrop-filter: var(--glass-backdrop);
   -webkit-backdrop-filter: var(--glass-backdrop);
   border-bottom: 1px solid var(--border-color);
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.navbar__inner {
+  max-height: var(--ifm-navbar-height);
+}
+
+.navbar__link {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.3rem 0.6rem;
+}
+
+/* Whitepaper nav button - only highlight when active */
+.navbar__item--whitepaper {
+  border-radius: 4px !important;
+  padding: 0.3rem 0.8rem !important;
+  font-weight: 700 !important;
+  border: 2px solid transparent !important;
+  transition: all 0.15s ease !important;
+}
+
+.navbar__item--whitepaper:hover {
+  background: var(--p2p-blue) !important;
+  color: #fff !important;
+  border-color: var(--p2p-blue) !important;
+}
+
+.navbar__item--whitepaper.navbar__link--active {
+  background: #fff !important;
+  color: #000 !important;
+  border-color: #fff !important;
+}
+
+[data-theme="light"] .navbar__item--whitepaper.navbar__link--active {
+  background: #000 !important;
+  color: #fff !important;
+  border-color: #000 !important;
+}
+
+[data-theme="light"] .navbar__item--whitepaper:hover {
+  background: var(--p2p-blue) !important;
+  color: #fff !important;
+  border-color: var(--p2p-blue) !important;
+}
+
+/* Navbar item icons (SVG via ::before) */
+.navbar-icon-whitepaper::before,
+.navbar-icon-investors::before,
+.navbar-icon-builders::before,
+.navbar-icon-merchants::before,
+.navbar-icon-users::before,
+.navbar-icon-community::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+  vertical-align: middle;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Whitepaper icon (document) - white for highlighted button */
+.navbar-icon-whitepaper::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z'/%3E%3Cpolyline points='14 2 14 8 20 8'/%3E%3Cline x1='16' y1='13' x2='8' y2='13'/%3E%3Cline x1='16' y1='17' x2='8' y2='17'/%3E%3Cline x1='10' y1='9' x2='8' y2='9'/%3E%3C/svg%3E");
+}
+
+/* Investors icon (trending-up) */
+.navbar-icon-investors::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='22 7 13.5 15.5 8.5 10.5 2 17'/%3E%3Cpolyline points='16 7 22 7 22 13'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"] .navbar-icon-investors::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='22 7 13.5 15.5 8.5 10.5 2 17'/%3E%3Cpolyline points='16 7 22 7 22 13'/%3E%3C/svg%3E");
+}
+
+[data-theme="dark"] .navbar-icon-investors::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='22 7 13.5 15.5 8.5 10.5 2 17'/%3E%3Cpolyline points='16 7 22 7 22 13'/%3E%3C/svg%3E");
+}
+
+/* Builders icon (wrench) */
+.navbar-icon-builders::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"] .navbar-icon-builders::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/%3E%3C/svg%3E");
+}
+
+[data-theme="dark"] .navbar-icon-builders::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/%3E%3C/svg%3E");
+}
+
+/* Merchants icon (store) */
+.navbar-icon-merchants::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7'/%3E%3Cpath d='M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8'/%3E%3Cpath d='M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4'/%3E%3Cpath d='M2 7h20'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"] .navbar-icon-merchants::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7'/%3E%3Cpath d='M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8'/%3E%3Cpath d='M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4'/%3E%3Cpath d='M2 7h20'/%3E%3C/svg%3E");
+}
+
+[data-theme="dark"] .navbar-icon-merchants::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m2 7 4.41-4.41A2 2 0 0 1 7.83 2h8.34a2 2 0 0 1 1.42.59L22 7'/%3E%3Cpath d='M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8'/%3E%3Cpath d='M15 22v-4a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4'/%3E%3Cpath d='M2 7h20'/%3E%3C/svg%3E");
+}
+
+/* Users icon (user) */
+.navbar-icon-users::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"] .navbar-icon-users::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E");
+}
+
+[data-theme="dark"] .navbar-icon-users::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E");
+}
+
+/* Community icon (globe) */
+.navbar-icon-community::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='2' y1='12' x2='22' y2='12'/%3E%3Cpath d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'/%3E%3C/svg%3E");
+}
+
+[data-theme="light"] .navbar-icon-community::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%231a1a1a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='2' y1='12' x2='22' y2='12'/%3E%3Cpath d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'/%3E%3C/svg%3E");
+}
+
+[data-theme="dark"] .navbar-icon-community::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'/%3E%3Cline x1='2' y1='12' x2='22' y2='12'/%3E%3Cpath d='M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z'/%3E%3C/svg%3E");
 }
 
 .navbar__brand {
   font-family: "Nohemi", sans-serif;
   font-weight: 700;
   letter-spacing: -0.03em;
-  font-size: 1.25rem;
+  font-size: 1.1rem;
+}
+
+.navbar__logo img {
+  height: 26px;
 }
 
 /* Sidebar Navigation - Contrast */
 .theme-doc-sidebar-container {
   border-right: 1px solid var(--border-color) !important;
   background-color: var(--site-sidebar-bg) !important;
+}
+
+/* Separator between sidebar sections */
+.theme-doc-sidebar-menu > .menu__list-item + .menu__list-item {
+  margin-top: 0.25rem;
+  padding-top: 0.25rem;
+  border-top: 1px solid var(--border-color);
 }
 
 /* Top-level sidebar category (Documentation Title) */
@@ -337,7 +483,7 @@ h6 {
 
 /* Base style for all links */
 .menu__link {
-  border-radius: 6px;
+  border-radius: 2px;
   color: var(--p2p-text-secondary);
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
@@ -362,7 +508,7 @@ h6 {
   transform: translateX(-100%);
   opacity: 0;
   z-index: -1;
-  border-radius: 6px;
+  border-radius: 2px;
   pointer-events: none;
 }
 
@@ -412,34 +558,38 @@ h6 {
 /* Buttons */
 .button.button--primary {
   background: var(--p2p-blue);
-  border: none;
-  border-radius: 8px;
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+  border: 2px solid var(--p2p-blue);
+  border-radius: 4px;
+  padding: 0.6rem 1.5rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  transition: all 0.15s ease;
 }
 
 .button.button--primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 20px rgba(73, 63, 238, 0.4);
-  background: var(--p2p-blue-light);
+  background: transparent;
+  color: var(--p2p-blue);
+  border-color: var(--p2p-blue);
 }
 
 .button.button--secondary {
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  background: transparent;
+  border: 2px solid var(--p2p-text-primary);
   color: var(--p2p-text-primary);
-  border-radius: 8px;
-  padding: 0.75rem 1.5rem;
-  font-weight: 500;
-  transition: all 0.2s ease;
+  border-radius: 4px;
+  padding: 0.6rem 1.5rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  transition: all 0.15s ease;
 }
 
 .button.button--secondary:hover {
-  background: var(--glass-border);
-  border-color: var(--glass-border);
+  background: var(--p2p-text-primary);
+  color: var(--ifm-background-color);
 }
 
 /* Cards & Glass Containers */
@@ -448,7 +598,7 @@ h6 {
   backdrop-filter: var(--glass-backdrop);
   -webkit-backdrop-filter: var(--glass-backdrop);
   border: 1px solid var(--glass-border);
-  border-radius: 16px;
+  border-radius: 4px;
   box-shadow: var(--glass-shadow);
 }
 
@@ -518,8 +668,8 @@ h6 {
 .footer {
   border-top: 1px solid var(--border-color);
   background: var(--site-footer-bg);
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
 }
 
 .footer__title {
@@ -608,7 +758,7 @@ h6 {
 
 .footer__copyright {
   margin-top: 0;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #555;
   text-align: center;
   width: 100%;
@@ -624,7 +774,7 @@ h6 {
   margin: 0 auto;
   padding: 0 1rem;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem;
 }
 
 .footer-left {
@@ -633,16 +783,16 @@ h6 {
 }
 
 .footer-logo {
-  height: 28px;
+  height: 22px;
   width: auto;
 }
 
 .footer-center {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
   color: #666;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -667,8 +817,8 @@ h6 {
 /* Social Icons */
 .footer-social-link {
   display: inline-block;
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
@@ -715,7 +865,7 @@ h6 {
 .navbar__search-input {
   background: var(--search-bg);
   border: 1px solid var(--search-border);
-  border-radius: 8px;
+  border-radius: 4px;
   color: var(--search-text);
   padding: 0.5rem 1rem;
   font-size: 0.9rem;
@@ -736,7 +886,7 @@ h6 {
 .DocSearch-Button {
   background: var(--search-bg) !important;
   border: 1px solid var(--search-border) !important;
-  border-radius: 8px !important;
+  border-radius: 4px !important;
   color: var(--p2p-text-secondary) !important;
   padding: 0 1rem !important;
   height: 36px !important;
@@ -807,19 +957,19 @@ h6 {
 
   /* Footer mobile */
   .footer {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 
   .footer-row-container {
     flex-direction: column;
     text-align: center;
-    gap: 1.5rem;
+    gap: 0.75rem;
   }
 
   .footer-center {
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 0.5rem;
   }
 
   .footer-right {
@@ -827,7 +977,7 @@ h6 {
   }
 
   .footer-logo {
-    height: 24px;
+    height: 20px;
   }
 
   /* Buttons mobile */

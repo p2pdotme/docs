@@ -69,7 +69,7 @@ slug: appendix-c-simulation-results
 | ID | Parameter | Proposed | Range | Risk | Rationale |
 |----|-----------|----------|-------|------|-----------|
 | S30 | CAIP_CONTRIBUTION | 0.1% | 0.1%-0.15% | Low | ~1.2x coverage ratio |
-| S31 | DISPUTE_FEES | 2.5%/2.5%/5% | 2%-3%/2%-3%/4%-6% | Medium | Deters 39% frivolous, suppresses <0.1% legitimate |
+| S31 | DISPUTE_FEES | 2.5%/2.5%/5% | 2%-3%/2%-3%/4%-6% | Medium | Deters 39% frivolous, suppresses fewer than 0.1% legitimate |
 | S32 | RP_PENALTIES (SELL) | -25/-100/-300 | -15 to -25 (T1) | Medium | Veterans survive T3 loss |
 | S33 | RP_PENALTIES (BUY) | -250/-500/-1000 | -100 to -250 (T1) | Medium | New users blacklisted on T3 loss (intentional) |
 | S34 | TIER_THRESHOLDS | J1:1.5k, A1:9k | J1:1k-2k | Low | Juror ~1mo, Admin ~13mo for active users |
