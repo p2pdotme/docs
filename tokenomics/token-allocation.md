@@ -13,6 +13,6 @@ slug: token-allocation
 | **Investors** | **5,160,000** | **20%** | 1-year cliff (20%), then 20% per quarter for 4 quarters |
 | **Total** | **25,800,000** | **100%** | |
 
-No investor or team tokens unlock at TGE. At launch, 12.9M tokens circulate (10M sale + 2.9M liquidity). Mint authority transfers to the market-governed treasury post-sale; future issuance requires governance approval via futarchy.
+No investor or team tokens unlock at TGE. At launch, 12.9M tokens circulate (10M sale + 2.9M liquidity). Future issuance is governance-gated per the documented model.
 
 ---

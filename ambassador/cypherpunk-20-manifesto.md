@@ -15,6 +15,7 @@ We the cypherpunks are dedicated to building anonymous systems. We are defending
 - Empower individuals to transact freely across borders
 - Spread the tools and knowledge of financial liberation
 
-Participation requires no identity. Contribution requires no permission. Impact is measured by action, not affiliation.
-
----
+```bash
+# Participation requires no identity.
+# Contribution requires no permission.
+# Impact is measured by action, not affiliation.

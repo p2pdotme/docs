@@ -5,6 +5,8 @@ title: "Governance Mechanics"
 slug: governance-mechanics
 ---
 
+Target parameterization. For what is live today, see [`/governance`](/governance).
+
 | Parameter | Value |
 |-----------|-------|
 | Voting Power | 1 staked $P2P = 1 vote (delegatable) |
@@ -16,7 +18,7 @@ slug: governance-mechanics
 | Critical Majority | 66% supermajority |
 | Timelock | 7 days before execution |
 
-Governance proposals that pass quorum and threshold are automatically queued, then execute via smart contract after the 7-day timelock. No team signature is required. In Phase 3 (18+ months), all foundation veto authority is removed.
+Proposals that pass quorum and threshold are queued and executed after timelock. The dual quorum model (4% standard, 20% critical) exists so routine parameter tuning doesn't require mobilizing the entire token base, while high-impact changes demand broad consensus.
 
 ## Governable Parameters
 

@@ -9,16 +9,13 @@ const sidebars: SidebarsConfig = {
         "collapsed": false,
         "link": {
             "type": "doc",
-            "id": "what-is-a-circle-of-trust"
+            "id": "implementation-status"
         },
         "items": [
-            "why-circles-of-trust",
-            "how-circles-work",
-            "merchant-onboarding",
-            "rewards",
-            "insurance-system",
-            "anti-collusion-measures",
-            "role-based-access-control"
+            "what-exists-today-merchant-registry-model",
+            "contract-surfaces-current",
+            "roadmap-not-yet-implemented-on-chain-in-this-repo",
+            "integration-guidance"
         ]
     }
   ],

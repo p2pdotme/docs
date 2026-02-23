@@ -5,14 +5,12 @@ title: "Buy-and-Burn"
 slug: buy-and-burn
 ---
 
-Protocol revenue directly reduces token supply through an automated buy-and-burn mechanism:
+Buy-and-burn ties token supply reduction directly to protocol usage. Every transaction the protocol processes funds a portion of the burn.
 
-- 20% of protocol revenue is allocated to buy-and-burn (increasing to 33% via governance by 2027)
-- Tokens are purchased on the open market via DEX
-- Purchased tokens are sent to the zero address (permanently burned)
-- The process is automated via smart contract
-- First burn expected Q2 2026 (approximately 3 months post-TGE)
+- 20% of protocol revenue allocated to buy-and-burn (increasing to 33% via governance by 2027)
+- Tokens purchased on open market via DEX and sent to zero address
+- First burn expected Q2 2026 (~3 months post-TGE)
 
-Every transaction the protocol processes makes the supply smaller.
+The mechanism is deliberately simple. Revenue comes in, and tokens are burned. The approach avoids complex rebasing or staking-dependent emissions. The burn rate scales with volume, creating a direct link between product traction and supply pressure.
 
 ---

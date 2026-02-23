@@ -22,7 +22,7 @@ slug: actions-by-role
 | Action | Description |
 |--------|-------------|
 | Appoint "Keymasters" | Select "Keymasters" for all tracks in their country |
-| Conduct inductions | Run induction sessions on 1st and 3rd Sunday (1-2 hours) |
+| Conduct inductions | Run induction sessions on 1st and 3rd Sunday (1-2 hours) of each month|
 | Review "Keymaster" updates | Check weekly updates from "Keymasters", flag missed updates |
 | Weekly sync with "Keymasters" | Async thread with all track "Keymasters" |
 | Monthly reporting | Submit country activity report to "Core Team" |

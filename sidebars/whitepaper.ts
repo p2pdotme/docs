@@ -13,7 +13,7 @@ const sidebars: SidebarsConfig = {
         },
         "items": [
             "01-1-the-vision",
-            "02-how-the-protocol-works-today-high-level-not-vendor-locked",
+            "02-how-the-protocol-works-today-high-level-implementation-aware",
             "03-why-credibility-matters-and-why-over-collateralization-shouldnt-be-the-only-answer",
             "02-2-design-goals-and-non-goals",
             "03-3-system-overview",

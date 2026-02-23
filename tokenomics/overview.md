@@ -5,7 +5,9 @@ title: "Overview"
 slug: overview
 ---
 
-The $P2P token is the governance and utility token of P2P Protocol. It enables community-driven protocol management, economic participation through staking and delegation, and value accrual through a buy-and-burn mechanism funded by protocol revenue.
+$P2P is an ownership token. Holders control protocol financials, vote on operational decisions, and hold enforceable claim over protocol intellectual property. The token is structured so that revenue flows, parameter changes, treasury allocation, and IP stewardship are governed by token holders rather than a centralized operator. Economic participation through staking, delegation, and buy-and-burn connects holder incentives directly to protocol performance.
+
+For an investor-oriented overview with FAQs and reading order, see the [`Investor Guide`](/investor-guide).
 
 ## Token Details
 
