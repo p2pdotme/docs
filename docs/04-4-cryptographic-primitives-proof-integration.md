@@ -9,6 +9,8 @@ slug: cryptographic-primitives-proof-integration
 
 P2P Protocol uses ZK proofs for privacy-preserving identity verification. A new member can perform trustless KYC by sharing a ZK proof of their identity—keeping their personal data private while building on-chain reputation and unlocking higher transaction limits without revealing raw PII on-chain.
 
+![ZK-KYC Comparison](/img/zk_kyc_comparison.png)
+
 The protocol currently supports identity verification through multiple ZK-based methods:
 
 - **Government ID verification** via on-chain ZK proof verifiers for supported identity documents.
