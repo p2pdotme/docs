@@ -1,18 +1,15 @@
 ---
 id: buy-and-burn
 sidebar_position: 5
-title: "Buy-and-Burn"
+title: "Treasury and Token Value"
 slug: buy-and-burn
 ---
 
-Protocol revenue directly reduces token supply through an automated buy-and-burn mechanism:
+20% of protocol revenue is contributed back to the on-chain treasury, planned to increase to 35% as the protocol matures—subject to MetaDAO futarchy governance. This creates a direct link between protocol usage and token economics.
 
-- 20% of protocol revenue is allocated to buy-and-burn (increasing to 33% via governance by 2027)
-- Tokens are purchased on the open market via DEX
-- Purchased tokens are sent to the zero address (permanently burned)
-- The process is automated via smart contract
-- First burn expected Q2 2026 (approximately 3 months post-TGE)
-
-Every transaction the protocol processes makes the supply smaller.
+- 20% of protocol revenue flows to the treasury (planned increase to 35% via MetaDAO futarchy governance)
+- Via MetaDAO futarchy governance, token holders decide how treasury funds are deployed—including buy-and-burn, ecosystem grants, liquidity incentives, or other value-accruing actions
+- Buy-and-burn is one governance-approved mechanism: tokens purchased on the open market via DEX and sent to the zero address (permanently burned)
+- First treasury allocation expected Q2 2026 (approximately 3 months post-TGE)
 
 ---

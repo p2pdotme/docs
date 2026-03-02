@@ -44,7 +44,7 @@ slug: reputation-points-rp-system
 
 **RP Penalties:** See Section 6.3 for dispute loss penalties. Lying (payment claim mismatch): -25 RP.
 
-**Demotion:** RP < 0 = protocol blacklist (applies to all roles).
+**Demotion:** RP below 0 = protocol blacklist (applies to all roles).
 
 ---
 
@@ -74,7 +74,7 @@ slug: reputation-points-rp-system
 
 **Slash Consequences:** See Section 6.4 for slash percentages; Section 6.3 for RP penalties.
 
-**Demotion:** RP < 0 = protocol blacklist (applies to all roles).
+**Demotion:** RP below 0 = protocol blacklist (applies to all roles).
 
 ---
 
@@ -86,7 +86,7 @@ slug: reputation-points-rp-system
 
 | Tier | RP Range | Eligible Disputes | Audit Voting | Selection Weight |
 |------|----------|-------------------|--------------|-------------------|
-| J1 | 1,500-2,999 | < $500 only | No | 1x (base) |
+| J1 | 1,500-2,999 | Under $500 only | No | 1x (base) |
 | J2 | 3,000-5,999 | All values | No | 2x |
 | J3 | 6,000-14,999 | All + Audits | Yes | 4x |
 | J4 | 15,000+ | All + PIP claims | Yes | 8x |
@@ -97,7 +97,7 @@ slug: reputation-points-rp-system
 
 **Role in Governance:** Jurors form T2 resolution panels (5 members, 3/5 majority). Per Section 8.2, audits require J3+ jurors (>6k RP).
 
-**Disqualification:** 3 consecutive wrong votes = 30-day ban. RP < 1,500 = ineligible.
+**Disqualification:** 3 consecutive wrong votes = 30-day ban. RP below 1,500 = ineligible.
 
 ---
 
@@ -127,7 +127,7 @@ slug: reputation-points-rp-system
 
 **SLA Breach Penalties:** See Section 4.2 for fine/RP/stake penalties by breach count.
 
-**Demotion:** RP < 9,000 = demoted to merchant. Audit fail (fraud) = permanent ban.
+**Demotion:** RP below 9,000 = demoted to merchant. Audit fail (fraud) = permanent ban.
 
 ---
 
@@ -162,7 +162,7 @@ where decayPercentage = min(calculateDecay(daysSinceLastActivity), 1.0)
 | Severe decay | 365 | 25% | 2,500 |
 | Total decay | 400+ | 0% | 0 |
 
-*After ~400 days of complete inactivity (365 days to 75% + ~5 weeks at 5%/week for remaining 25%), RP decays to 0. User is effectively reset but not blacklisted (blacklist requires RP < 0 from penalties, not decay).*
+*After ~400 days of complete inactivity (365 days to 75% + ~5 weeks at 5%/week for remaining 25%), RP decays to 0. User is effectively reset but not blacklisted (blacklist requires RP below 0 from penalties, not decay).*
 
 **Implementation Note:** Reputation decay is **lazily calculated**. The stored RP value is not continuously updated; instead, decay is computed on-demand during every `getReputation()` call based on `block.timestamp - lastActivityTimestamp`. This approach:
 - Eliminates gas costs for idle accounts
@@ -184,10 +184,10 @@ where decayPercentage = min(calculateDecay(daysSinceLastActivity), 1.0)
 
 | Role | RP Threshold | Blacklist Trigger | Unique Rights |
 |------|--------------|-------------------|---------------|
-| User | 0 (+300 verify) | RP < 0 | Raise disputes |
-| Merchant | 0 (+ stake) | RP < 0 | Raise claims |
-| Juror | 1,500 | RP < 1,500 | T2 voting, audits (J3+) |
-| Admin | 9,000 + gov vote | RP < 9,000 or fraud | T1 resolution, Circle ops |
+| User | 0 (+300 verify) | RP below 0 | Raise disputes |
+| Merchant | 0 (+ stake) | RP below 0 | Raise claims |
+| Juror | 1,500 | RP below 1,500 | T2 voting, audits (J3+) |
+| Admin | 9,000 + gov vote | RP below 9,000 or fraud | T1 resolution, Circle ops |
 
 **Unified RP:** Participants hold one RP balance across all roles. Role transitions carry over RP plus bonuses. Any role blacklist = all roles blacklisted.
 

@@ -9,11 +9,19 @@ slug: cot-oversight
 
 Audits prevent admin-merchant collusion (fake claims, biased disputes, volume inflation).
 
+<<<<<<< HEAD
 | Flag                | Threshold   |
 | ------------------- | ----------- |
 | Claim approval rate | >80%        |
 | Claims per merchant | >5/month    |
 | Audit cooldown      | &lt;90 days |
+=======
+| Flag | Threshold |
+|------|-----------|
+| Claim approval rate | >80% |
+| Claims per merchant | >5/month |
+| Audit cooldown | fewer than 90 days |
+>>>>>>> main
 
 ## 8.2 Audit Process
 

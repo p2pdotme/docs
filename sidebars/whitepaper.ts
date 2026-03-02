@@ -13,8 +13,6 @@ const sidebars: SidebarsConfig = {
         },
         "items": [
             "01-1-the-vision",
-            "02-how-the-protocol-works-today-high-level-not-vendor-locked",
-            "03-why-credibility-matters-and-why-over-collateralization-shouldnt-be-the-only-answer",
             "02-2-design-goals-and-non-goals",
             "03-3-system-overview",
             "04-4-cryptographic-primitives-proof-integration",
@@ -32,7 +30,7 @@ const sidebars: SidebarsConfig = {
             "16-16-token-economics",
             "17-17-disclosures-risks",
             "18-18-references",
-            "21-appendices"
+            "19-appendices"
         ]
     }
   ],

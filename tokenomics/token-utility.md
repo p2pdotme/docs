@@ -5,6 +5,10 @@ title: "Token Utility"
 slug: token-utility
 ---
 
+## Ownership
+
+$P2P is an ownership token. Protocol IP, treasury funds, and mint authority are all controlled by token holders through futarchy-based governance—not by any single team, foundation, or entity. Decisions that affect token supply must pass through a prediction-market governance mechanism, where participants stake real capital on whether a proposal increases or decreases token value. Proposals the market predicts will harm value are automatically rejected.
+
 ## Governance
 
 Token holders vote on protocol parameters including fees, transaction limits, merchant rules, oracle configurations, and treasury allocations. Governance follows the OpenZeppelin Governor model with a 7-day voting period, 4% quorum for standard proposals and 20% for critical changes, and a 7-day timelock before execution.
@@ -24,7 +28,7 @@ The protocol charges a configurable spread on each transaction, generating proto
 | Recipient | Share of Revenue |
 |-----------|-----------------|
 | Merchants + Delegators | 53.33% |
-| Buy-and-Burn | 20% (increasing to 33% via governance) |
+| Treasury | 20%, planned increase to 35% (governed via MetaDAO futarchy) |
 | Insurance Pools | 17.78% |
 | Circle Admins | 8.89% |
 

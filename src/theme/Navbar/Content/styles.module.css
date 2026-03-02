@@ -1,0 +1,60 @@
+/*
+Hide color mode toggle in small viewports
+ */
+@media (max-width: 996px) {
+  .colorModeToggle {
+    display: none;
+  }
+}
+
+/*
+Restore some Infima style that broke with CSS Cascade Layers
+See https://github.com/facebook/docusaurus/pull/11142
+ */
+:global(.navbar__items--right) > :last-child {
+  padding-right: 0;
+}
+
+.scrollableContainer {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  height: 100%;
+}
+
+.scrollableItems {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  align-items: center;
+  white-space: nowrap;
+  height: 100%;
+}
+
+.scrollableItems::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollButtonLeft,
+.scrollButtonRight {
+  background: var(--ifm-navbar-background-color);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  color: var(--ifm-navbar-link-color);
+  z-index: 10;
+  height: 100%;
+}
+
+.scrollButtonLeft:hover,
+.scrollButtonRight:hover {
+  color: var(--ifm-navbar-link-hover-color);
+  background: var(--ifm-navbar-background-color);
+}

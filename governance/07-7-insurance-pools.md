@@ -41,7 +41,7 @@ Flow: CAIP > CALR > PIP
 
 | Amount | Approval | Time |
 |--------|----------|------|
-| < $1,000 | 2 CoT Admins | Instant |
+| Under $1,000 | 2 CoT Admins | Instant |
 | $1k-$10k | 3 CoT Admins (different Circles) | 24hr |
 | $10k-$50k | Jury vote | 72hr |
 | > $50k | Governance vote | 7-14 days |

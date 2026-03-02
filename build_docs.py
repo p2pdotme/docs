@@ -27,6 +27,7 @@ class DocBuilder:
         self.config_path = self.root_dir / config_path
         self.config = self._load_config()
         self.website_dir = self.root_dir  # Script is now inside website folder
+        self._all_generated_files = {}  # doc_id -> list of generated file info
         
     def _load_config(self) -> Dict[str, Any]:
         """Load the docs configuration file."""
@@ -370,26 +371,51 @@ export default sidebars;
         navbar_config = self.config.get('navbar', {})
         footer_config = self.config.get('footer', {})
         
-        # Build navbar items
+        # Navbar CSS class map for icons
+        navbar_classes = {
+            'Whitepaper': 'navbar__item--whitepaper navbar-icon-whitepaper',
+            'For Investors': 'navbar-icon-investors',
+            'For Builders': 'navbar-icon-builders',
+            'For Merchants': 'navbar-icon-merchants',
+            'For Users': 'navbar-icon-users',
+            'For Community': 'navbar-icon-community',
+        }
+
+        # Build navbar items as dropdowns expanding into section index
         navbar_items = []
         for i, doc in enumerate(docs):
-            if i == 0:
-                # First doc uses the preset - standard docSidebar
-                navbar_items.append({
-                    'type': 'docSidebar',
-                    'sidebarId': doc.get('sidebarId', f"{doc['id']}Sidebar"),
+            label = doc['navbarLabel']
+            generated_files = self._all_generated_files.get(doc['id'], [])
+            
+            if generated_files:
+                dropdown_items = []
+                for file_info in generated_files:
+                    doc_item = {
+                        'type': 'doc',
+                        'docId': file_info['doc_id'],
+                        'label': file_info['title'],
+                    }
+                    if i > 0:
+                        doc_item['docsPluginId'] = doc['id']
+                    dropdown_items.append(doc_item)
+                
+                item = {
+                    'type': 'dropdown',
+                    'label': label,
                     'position': doc.get('navbarPosition', 'left'),
-                    'label': doc['navbarLabel'],
-                })
+                    'items': dropdown_items,
+                }
             else:
-                # Additional docs use plugins - need docsPluginId
-                navbar_items.append({
+                item = {
                     'type': 'docSidebar',
                     'sidebarId': doc.get('sidebarId', f"{doc['id']}Sidebar"),
                     'position': doc.get('navbarPosition', 'left'),
-                    'label': doc['navbarLabel'],
-                    'docsPluginId': doc['id'],
-                })
+                    'label': label,
+                }
+                if i > 0:
+                    item['docsPluginId'] = doc['id']
+            
+            navbar_items.append(item)
         
         # Build docs plugins config
         # First doc uses the preset, additional docs use plugins
@@ -444,6 +470,10 @@ const config: Config = {{
   title: '{self.config.get("siteTitle", "P2P Foundation Docs")}',
   tagline: '{self.config.get("siteTagline", "Documentation")}',
   favicon: 'img/favicon.svg',
+
+  markdown: {{
+    mermaid: true,
+  }},
 
   url: 'https://docs.p2p.foundation',
   baseUrl: '/',
@@ -544,9 +574,7 @@ const config: Config = {{
     }},
   ],
 
-  stylesheets: [
-    'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;700&display=swap',
-  ],
+  stylesheets: [],
 
   clientModules: [
     './src/clientModules/tocAutoScroll.js',
@@ -569,6 +597,7 @@ const config: Config = {{
   ],
 {plugins_config}
   themes: [
+    '@docusaurus/theme-mermaid',
     [
       require.resolve("@easyops-cn/docusaurus-search-local"),
       {{
@@ -808,6 +837,7 @@ export default config;
             
             # Generate doc files
             files = self._generate_doc_files(sections, doc_config)
+            self._all_generated_files[doc_config['id']] = files
             
             # Generate sidebar
             sidebar_content = self._generate_sidebar(doc_config, files)

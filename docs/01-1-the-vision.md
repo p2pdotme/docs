@@ -12,14 +12,14 @@ P2P Protocol starts with the most practical chokepoint—moving between fiat and
 In this model:
 
 - **Reputation** is earned on-chain through completed trades, clean dispute histories, and ZK-KYC tiers—not through centralized account vetting.
-- **Privacy** is preserved by default via zero knowledge proofs that reveal facts (paid, verified, permitted) without revealing raw identities or bank data.
+- **Privacy** is preserved by default via zero-knowledge proofs for identity verification, revealing only that a user is verified and permitted—without exposing raw identities.
 - **Usefulness** beats theory: micro-payments, everyday off-ramps, wages, remittances, and merchant payouts come first—designed to feel as simple as sending a message.
 
 ## 1.2 What "good" looks like by 2026+
 
 - A user in any supported country can buy or sell stablecoins in ~minutes—targeting sub-90-second completion on fast rails—without giving custody to anyone.
 - Merchants are matched based on reliability and Proof-of-Credibility scores, with spread set at the protocol level rather than through merchant competition.
-- ZK-KYC and ZK payment proofs unlock higher limits and faster paths while keeping personal data off-chain.
+- ZK-KYC unlocks higher limits and faster paths while keeping personal data off-chain.
 - Third-party apps and wallets integrate the protocol through open SDKs; Coins.me is only a reference consumer front-end, not a privileged gateway.
 - As credibility compounds, new products (installment payouts, escrowless commerce, cross-border salaries, dispute insurance) can be built without re-KYCing the world.
 
@@ -33,7 +33,7 @@ In this model:
 
 ## 1.4 What P2P Protocol is (and is not)
 
-**Is:** an open, decentralized coordination layer that trustlessly matches a buyer with a highly vetted merchant according to a transparent reputation system; settles trades using verifiable proofs; and routes fees and parameters through governance.
+**Is:** an open, decentralized coordination layer that trustlessly matches a buyer with a highly vetted merchant according to a transparent reputation system; settles trades with on-chain coordination; and routes fees and parameters through governance.
 
 **Is not:** a custodian, a bank, or a data broker. P2P Protocol does not custody fiat, does not warehouse users' personal information, and does not promise fixed yields.
 
@@ -42,7 +42,7 @@ In this model:
 Over the past decade, crypto solved programmatic finance but left the real world at the door. Today three curves finally cross:
 
 - Instant local rails (UPI/PIX/QRIS & peers) are mainstream.
-- Practical ZK (including TLS-backed proofs) can attest to real-world facts without exposing the data.
+- Practical ZK can attest to real-world facts without exposing the data—already used for identity verification, with bank transaction proofs on the roadmap.
 - L2s and stablecoins have made small payments cheap and fast enough to care about.
 
 P2P Protocol sits exactly at that intersection. It turns *trust me* into *prove it*, and it does so without handing anyone your money or your identity.
@@ -51,7 +51,7 @@ P2P Protocol sits exactly at that intersection. It turns *trust me* into *prove 
 
 By 2026+:
 
-- Sub-90-second settlement on fast rails, median cost < $0.20 per $100.
+- Sub-90-second settlement on fast rails, median cost under $0.20 per $100.
 - \>99% disputes resolved by proofs within the window, not by moderators.
 - Portable credibility: your reputation and limits travel with you across clients and countries—without doxxing you.
 - Neutral access: multiple wallets and apps, including Coins.me as a reference, all using the same permissionless SDKs atop the Protocol.
@@ -70,7 +70,7 @@ Over-collateralization made early DeFi safe, but it makes the everyday world fee
 We design for someone who has a phone and a paycheck, not a Bloomberg terminal.
 
 - **Micro-friendly:** The Protocol must feel safe at $15 as much as at $1,500.
-- **Dignity with Privacy:** selective disclosure in ZK verifications proves what's necessary and nothing more, no Personal Identification revelation — protecting freelance workers, activists, and anyone who values privacy.
+- **Dignity with Privacy:** ZK-KYC verifications prove what's necessary and nothing more, no Personal Identification revelation—protecting freelance workers, activists, and anyone who values privacy.
 
 ## 1.9 Protocol-agnostic by design
 
@@ -78,7 +78,7 @@ Vendors and chains will change; the principles cannot. The whitepaper commits to
 
 - No single L2, oracle, or proof provider baked into the logic.
 - Clear interfaces (verifier registry, oracle adapter, rail registry) so parts can be swapped without rewriting the paper or the social contract.
-- Open Sourcing and Decentralizing each part of the Protocol as public goods.
+- open-sourcing and decentralizing each part of the Protocol as public goods.
 
 ## 1.10 Credibility but with Privacy
 
@@ -94,7 +94,7 @@ Most people want two things at once: privacy and legality. P2P Protocol makes th
 
 - **Policy-as-parameters:** rails, timeouts, and proof requirements are governed on-chain by region and risk class.
 - **ZK-KYC tiers** satisfy "permitted user" checks while keeping PII off-chain.
-- **Travel-Rule-style needs** can be met via selective disclosure circuits when a counterparty is a registered business—without turning the protocol into a data broker.
+- **Travel-Rule-style needs** can be met via selective disclosure circuits (planned) when a counterparty is a registered business—without turning the protocol into a data broker.
 
 ## 1.12 What gets unlocked if we get this right
 
@@ -113,7 +113,7 @@ Most people want two things at once: privacy and legality. P2P Protocol makes th
 ## 1.14 What we won't compromise on
 
 - Non-custody of fiat (ever).
-- No honeypots of PII (Personal Identifiable Information) on-chain (ever).
+- No honeypots of PII (Personally Identifiable Information) on-chain (ever).
 - No privileged clients (ever). Everyone uses the same pipes.
 - No "trust us" black boxes. If it can't be proven or audited, it doesn't make core.
 
@@ -121,15 +121,16 @@ Most people want two things at once: privacy and legality. P2P Protocol makes th
 
 - **Ubiquity:** a credible merchant presence in every major region/rail pair.
 - **Geographic reach:** expansion to 20+ markets across Asia, Africa, Latin America, and MENA.
-- **Multi-chain presence:** support for additional networks including Solana and emerging high-performance chains.
+- **Multi-chain presence:** Solana deployment planned within six months; support for additional emerging high-performance chains to follow.
 - **Composability:** third-party apps shipping useful features on the SDK without asking permission.
 - **Self-serve legitimacy:** regulators and risk teams can read the spec, verify parameters on-chain, and understand how safety is achieved—without backdoors.
+- **Roadmap features:** for current feature-track proposals (including remittance and currency expansion), see [`/for-builders`](/for-builders/start-here).
 
 ## 1.16 A short manifesto
 
 > Privacy is a user interface problem as much as a math problem.
 
-> Reputation should be earned, portable, and revoke-able—never sold.
+> Reputation should be earned, portable, and revocable—never sold.
 
 > The best KYC is the one that proves what's needed and nothing else.
 

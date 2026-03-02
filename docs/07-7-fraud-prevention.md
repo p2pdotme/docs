@@ -1,6 +1,6 @@
 ---
 id: 07-7-fraud-prevention
-sidebar_position: 9
+sidebar_position: 7
 title: "7. Fraud Prevention"
 slug: fraud-prevention
 ---
@@ -17,6 +17,6 @@ The underlying RP mechanism practically eliminates the risk of money laundering 
 
 ## 7.3 Merchant Accountability
 
-The virtually handpicked nature of the peers fulfilling individual orders—via the breakthrough Proof-of-Credibility algorithm—means a serious disincentive and unlikelihood for any merchant to attempt a fraudulent transaction.
+The selected nature of the merchants fulfilling individual orders—via the Proof-of-Credibility algorithm—means a serious disincentive and unlikelihood for any merchant to attempt a fraudulent transaction.
 
 ---

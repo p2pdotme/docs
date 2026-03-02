@@ -1,15 +1,15 @@
 ---
 id: 14-14-accessing-p2p-protocol-clients-sdks
-sidebar_position: 16
+sidebar_position: 14
 title: "14. Accessing P2P Protocol: Clients & SDKs"
 slug: accessing-p2p-protocol-clients-sdks
 ---
 
 ## 14.1 Clients and Ease of Use
 
-The primary clients for accessing P2P Protocol are the p2p.me and coins.me Progressive Web Apps (PWAs). These browser-based applications provide seamless access across devices, letting users import or export their wallet address for Base USDC (and any other chains supported in the future).
+The primary clients for accessing P2P Protocol are the p2p.me and coins.me Progressive Web Apps (PWAs). These browser-based applications provide seamless access across devices with integrated wallet functionality powered by thirdweb.
 
-Getting started with on-ramps is as simple as buying stablecoins via a fiat transfer; off-ramps are just as reliable through a stablecoin deposit to a trusted in-app wallet.
+Getting started with on-ramps is as simple as buying stablecoins via a fiat transfer. Off-ramps are just as reliable through a stablecoin deposit to the in-app wallet.
 
 Of course, these PWAs are not the only way to access P2P Protocol. Any entity can create and distribute a functional UI client for the Protocol to conduct fully decentralized on/off-ramp transactions.
 
