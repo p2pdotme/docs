@@ -5,7 +5,7 @@ title: "16. Token Economics"
 slug: token-economics
 ---
 
-The protocol token is an **ownership token**. The most important parts of the protocol—intellectual property, treasury funds, and the ability to mint new tokens—are controlled by token holders through futarchy-based governance, not by any single team, foundation, or entity. This is real, unruggable ownership of revenue-generating infrastructure.
+The protocol token is an **ownership token**. The most important parts of the protocol—intellectual property, treasury funds, and the ability to mint new tokens—are controlled by token holders through [futarchy-based governance](https://en.wikipedia.org/wiki/Futarchy), not by any single team, foundation, or entity. This is real, unruggable ownership of revenue-generating infrastructure.
 
 On the ownership side, decisions that affect token supply must pass through a prediction-market governance mechanism, where participants stake real capital on whether a proposal increases or decreases token value. Proposals the market predicts will harm value are automatically rejected. This replaces subjective voting with market-driven accountability.
 
