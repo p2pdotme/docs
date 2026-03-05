@@ -7,6 +7,21 @@ slug: trade-protocol-on-and-off-ramp
 
 We formalize the order lifecycle as a state machine with timeouts:
 
+```mermaid
+stateDiagram-v2
+    [*] --> OPEN : User places order
+    OPEN --> MATCHED : Merchant assigned via PoC
+    OPEN --> EXPIRED : T_match timeout
+    MATCHED --> FUNDED : Fiat / USDC transferred
+    FUNDED --> CONFIRMED : Payment confirmed
+    CONFIRMED --> SETTLED : Contract settles ✓
+    CONFIRMED --> DISPUTED : Party raises challenge
+    DISPUTED --> RESOLVED : Admin on-chain verdict
+    EXPIRED --> [*]
+    SETTLED --> [*]
+    RESOLVED --> [*]
+```
+
 **States:** `OPEN → MATCHED → FUNDED → CONFIRMED → SETTLED | DISPUTED → RESOLVED | EXPIRED`
 
 **Common Parameters (governed):**
@@ -35,5 +50,11 @@ We formalize the order lifecycle as a state machine with timeouts:
 ## 5.3 Payment-Rail Risk Classes
 
 Rails differ (instant/irreversible vs reversible/chargeback-prone). The protocol maps rails to bond multipliers, confirmation requirements, and longer/shorter dispute windows.
+
+| Rail Type              | Example     | Reversible?    | Bond Multiplier | Dispute Window |
+| ---------------------- | ----------- | -------------- | --------------- | -------------- |
+| Instant / Irreversible | UPI, PIX    | ✗              | Low             | Short          |
+| Bank Transfer          | SEPA, ACH   | ✓ (chargeback) | High            | Extended       |
+| Card / Wallet          | Credit card | ✓ (chargeback) | Highest         | Extended       |
 
 ---

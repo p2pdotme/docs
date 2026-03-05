@@ -1,75 +1,5 @@
-/* Nohemi Font Family */
-@font-face {
-  font-family: "Nohemi";
-  src: url("../fonts/Nohemi-Thin-BF6438cc57e2011.woff") format("woff");
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Nohemi";
-  src: url("../fonts/Nohemi-ExtraLight-BF6438cc581502c.woff") format("woff");
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Nohemi";
-  src: url("../fonts/Nohemi-Light-BF6438cc5702321.woff") format("woff");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Nohemi";
-  src: url("../fonts/Nohemi-Regular-BF6438cc579d934.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Nohemi";
-  src: url("../fonts/Nohemi-Medium-BF6438cc57ddecd.woff") format("woff");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Nohemi";
-  src: url("../fonts/Nohemi-SemiBold-BF6438cc57db2ff.woff") format("woff");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Nohemi";
-  src: url("../fonts/Nohemi-Bold-BF6438cc577b524.woff") format("woff");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Nohemi";
-  src: url("../fonts/Nohemi-ExtraBold-BF6438cc5761ae2.woff") format("woff");
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Nohemi";
-  src: url("../fonts/Nohemi-Black-BF6438cc565e67b.woff") format("woff");
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
+/* Inter Font — via Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 /* Sidebar Active Gradient Animation */
 @keyframes sidebarGradientSlide {
@@ -90,9 +20,11 @@
   --p2p-blue-dark: #3b32d9;
   --p2p-blue-light: #6a62f5;
 
-  /* Typography — system font stack for readability */
-  --ifm-font-family-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  --ifm-heading-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  /* Typography — Inter */
+  --ifm-font-family-base:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --ifm-heading-font-family:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* Overriding Docusaurus Variables */
   --ifm-color-primary: var(--p2p-blue);
@@ -161,6 +93,8 @@
 /* Global Styles */
 body {
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Fixed background layer */
@@ -197,8 +131,14 @@ h4,
 h5,
 h6 {
   font-family: var(--ifm-heading-font-family);
-  font-weight: 500;
+  font-weight: 500 !important;
   letter-spacing: -0.02em;
+}
+
+/* Bold text — use 600 instead of browser default 700 to avoid heavy rendering on light backgrounds */
+.markdown strong,
+.markdown b {
+  font-weight: 600 !important;
 }
 
 /* Highlight Chapter Titles (H1) */
@@ -206,6 +146,7 @@ h6 {
   font-size: 3rem;
   background: var(--hero-title-gradient);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 2rem;
   padding-bottom: 1rem;
@@ -636,6 +577,7 @@ h6 {
   line-height: 1.1;
   background: var(--hero-title-gradient);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 1.5rem;
 }
@@ -1076,7 +1018,8 @@ h6 {
   --biel-primary-color: var(--p2p-blue);
   --biel-primary-light-color: var(--p2p-blue-light);
   --biel-primary-hover-color: var(--p2p-blue-dark);
-  --biel-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --biel-font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 
   /* Button: rounded, soft shadow, matches site buttons */
   --biel-button-border-radius: 12px;
@@ -1089,7 +1032,8 @@ h6 {
 
   /* Modal / chat panel */
   --biel-bot-content-border-radius: 16px;
-  --biel-bot-content-box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(73, 63, 238, 0.08);
+  --biel-bot-content-box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(73, 63, 238, 0.08);
   --biel-bot-content-border-color: var(--glass-border);
   --biel-bot-content-font-family: var(--biel-font-family);
   --biel-header-font-family: var(--biel-font-family);
@@ -1122,17 +1066,114 @@ h6 {
 }
 
 [data-theme="dark"] {
-  --biel-bot-content-box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(73, 63, 238, 0.15);
+  --biel-bot-content-box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4), 0 2px 8px rgba(73, 63, 238, 0.15);
   --biel-message-biel-bg-color: rgba(255, 255, 255, 0.06);
   --biel-message-user-bg-color: var(--p2p-blue);
 }
 
 /* Optional: extra polish for the floating button (CSS parts if available) */
 biel-button::part(button) {
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 biel-button::part(button):hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 24px rgba(73, 63, 238, 0.35);
+}
+
+/* Mermaid Diagrams — Remove default yellow subgraph background */
+.docusaurus-mermaid-container .cluster rect,
+.mermaid .cluster rect {
+  fill: transparent !important;
+  stroke: none !important;
+}
+
+/* Global Stats Grid (Reusable Component) */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+  margin: 32px 0;
+}
+
+.stat-card {
+  background: var(--ifm-background-surface-color);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+[data-theme='dark'] .stat-card {
+  box-shadow: 0 4px 24px rgba(73, 63, 238, 0.08);
+  background: linear-gradient(145deg, rgba(20,20,24,1) 0%, rgba(28,28,34,1) 100%);
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--p2p-blue);
+  box-shadow: 0 8px 32px rgba(73, 63, 238, 0.15);
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--p2p-blue);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.stat-card:hover::before {
+  opacity: 1;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--ifm-color-emphasis-600);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.stat-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ifm-font-color-base);
+  line-height: 1.4;
+}
+
+.stat-subtext {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--ifm-color-emphasis-600);
+  margin-top: 4px;
+}
+
+.stat-highlight {
+  color: var(--p2p-blue);
+  font-size: 1.5rem;
+}
+
+/* Accessibility — Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
