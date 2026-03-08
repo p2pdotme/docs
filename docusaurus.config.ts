@@ -114,6 +114,7 @@ const config: Config = {
 
   clientModules: [
     './src/clientModules/tocAutoScroll.js',
+    './src/clientModules/bielTranslations.js',
   ],
 
   presets: [
@@ -178,6 +179,14 @@ const config: Config = {
         routeBasePath: 'for-community',
         sidebarPath: './sidebars/for-community.ts',
       },
+    ],[
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'whitepaper-pt',
+        path: 'translations/pt/whitepaper',
+        routeBasePath: 'pt/whitepaper',
+        sidebarPath: './translations/pt/whitepaper/sidebar.ts',
+      },
     ]
   ],
   themes: [
@@ -186,12 +195,12 @@ const config: Config = {
       require.resolve("@easyops-cn/docusaurus-search-local"),
       {
         hashed: true,
-        language: ["en"],
+        language: ["en", "pt"],
         indexDocs: true,
         indexBlog: false,
         indexPages: false,
-        docsRouteBasePath: ["whitepaper", "for-investors", "for-builders", "for-merchants", "for-users", "for-community"],
-        docsDir: ["docs", "for-investors", "for-builders", "for-merchants", "for-users", "for-community"],
+        docsRouteBasePath: ["whitepaper", "for-investors", "for-builders", "for-merchants", "for-users", "for-community", "pt/whitepaper"],
+        docsDir: ["docs", "for-investors", "for-builders", "for-merchants", "for-users", "for-community", "translations/pt/whitepaper"],
         searchResultLimits: 10,
         searchResultContextMaxLength: 50,
       },

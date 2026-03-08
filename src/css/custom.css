@@ -448,7 +448,10 @@ h6 {
 .theme-doc-sidebar-menu
   > .menu__list-item
   > .menu__list-item-collapsible
-  > .menu__link {
+  > .menu__link,
+.theme-doc-sidebar-menu
+  > .menu__list-item
+  > .menu__link--sublist {
   font-weight: 600;
   font-size: 1.1rem;
   color: var(--p2p-text-primary);
@@ -459,7 +462,10 @@ h6 {
 .theme-doc-sidebar-menu
   > .menu__list-item
   > .menu__list-item-collapsible
-  > .menu__link:hover {
+  > .menu__link:hover,
+.theme-doc-sidebar-menu
+  > .menu__list-item
+  > .menu__link--sublist:hover {
   background: transparent;
 }
 
