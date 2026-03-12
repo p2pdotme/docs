@@ -13,7 +13,7 @@ The token enables community-driven protocol management, economic participation t
 
 | Field | Value |
 |-------|-------|
-| Name | P2P Governance Token |
+| Name | P2P Ownership and Governance Token |
 | Ticker | $P2P |
 | Total Supply | 25,800,000 (25.8M at launch) |
 | Initial Float | 12.9M at TGE (10M sale + 2.9M liquidity = 50%) |
