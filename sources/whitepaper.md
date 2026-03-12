@@ -10,7 +10,7 @@ In the wake of centralized exchanges, early decentralized exchanges led the DeFi
 
 P2P Protocol reflects a departure from fiat escrows and traditional custodians by using zero-knowledge (ZK) proofs for non-custodial KYC, making on/off-ramps privacy-preserving and governed by users' collective interests.
 
-Currently deployed on the Base network (coming soon to solana), P2P Protocol trustlessly matches buyers and highly vetted merchants according to a Proof-of-Credibility reputation algorithm, settles trades with on-chain coordination, and resolves disputes through on-chain admin settlement rather than platform custody. Deployment on Solana is on the roadmap within six months. This paper formalizes design goals, protocol flows, reputation, dispute resolution, pricing, security and privacy models, governance, and token economics in preparation for a Token Generation Event (TGE) planned for March 2026.
+Currently deployed on the Base network (coming soon to solana), P2P Protocol trustlessly matches buyers and merchants on-chain based on staked USDC, settles trades with on-chain coordination, and resolves disputes through on-chain admin settlement rather than platform custody. Deployment on Solana is on the roadmap within six months. This paper formalizes design goals, protocol flows, reputation, dispute resolution, pricing, security and privacy models, governance, and token economics in preparation for a Token Generation Event (TGE) planned for March 2026.
 
 The end-state is a credibility-based DeFi ecosystem where peers transact, save, and build services on top of an open Proof-of-Credibility graph—useful, easy to use, privacy-first, and not reliant on over-collateralized mechanics for every everyday action. This paper lays out that vision, the principles guiding it, what works today, and the path to a mature, protocol-neutral, global network by and beyond 2026.
 
@@ -31,7 +31,7 @@ In this model:
 ### 1.2 What "good" looks like by 2026+
 
 - A user in any supported country can buy or sell stablecoins in ~minutes—targeting sub-90-second completion on fast rails—without giving custody to anyone.
-- Merchants are matched based on reliability and Proof-of-Credibility scores, with spread set at the protocol level rather than through merchant competition.
+- Merchants are matched on-chain based on staked USDC, with spread set at the protocol level rather than through merchant competition. The Proof-of-Credibility system handles fraud prevention and transaction-limit tiering.
 - ZK-KYC unlocks higher limits and faster paths while keeping personal data off-chain.
 - Third-party apps and wallets integrate the protocol through open SDKs; Coins.me is only a reference consumer front-end, not a privileged gateway.
 - As credibility compounds, new products (installment payouts, escrowless commerce, cross-border salaries, dispute insurance) can be built without re-KYCing the world.
@@ -46,7 +46,7 @@ In this model:
 
 ### 1.4 What P2P Protocol is (and is not)
 
-**Is:** an open, decentralized coordination layer that trustlessly matches a buyer with a highly vetted merchant according to a transparent reputation system; settles trades with on-chain coordination; and routes fees and parameters through governance.
+**Is:** an open, decentralized coordination layer that trustlessly matches a buyer with a merchant on-chain based on staked USDC; settles trades with on-chain coordination; and routes fees and parameters through governance.
 
 **Is not:** a custodian, a bank, or a data broker. P2P Protocol does not custody fiat, does not warehouse users' personal information, and does not promise fixed yields.
 
@@ -195,7 +195,7 @@ The protocol involves several key participants working together to enable trustl
 ### 3.3 High-Level Flow
 
 1. **Placing Orders:** A user clicks "Buy USDC" (or "Sell USDC") and enters amount. The app provides an integrated wallet for the transaction.
-2. **Order Matching:** A list of carefully vetted merchants is queued via Proof-of-Credibility. A fiat payment address is shared over the smart contract, encrypted with the user's keys; for off-ramps, a USDC address on Base (Solana planned) is presented.
+2. **Order Matching:** A merchant is assigned on-chain based on staked USDC. A fiat payment address is shared over the smart contract, encrypted with the user's keys; for off-ramps, a USDC address on Base (Solana planned) is presented.
 3. **Fiat/Stablecoin Transfer:** The payer performs the transfer on the designated rail.
 4. **Confirmation/Settlement:** Within minutes, settlement succeeds once the merchant confirms receipt. Wallet balances update accordingly.
 5. **Dispute Window:** If a party contests, they submit evidence that a payment or action occurred (or did not). In the live implementation, authorized admins settle disputed orders on-chain according to protocol fault rules and dispute windows.
@@ -361,7 +361,7 @@ We formalize the order lifecycle as a state machine with timeouts:
 ### 5.1 On-Ramp (Fiat → USDC on Base; Solana planned)
 
 1. **Open:** User opens BUY order with amount & rail.
-2. **Match:** Protocol assigns a merchant (highest compatible Proof-of-Credibility and quote). Refundable bonds may lock.
+2. **Match:** Protocol assigns a merchant on-chain based on staked USDC. Refundable bonds may lock.
 3. **Fund Fiat:** User pays fiat to provided account within `T_fiat`.
 4. **Merchant Ack:** Merchant confirms receipt of fiat payment.
 5. **Settle:** Contract releases USDC to user; fees assessed; bonds unlocked.
@@ -501,7 +501,7 @@ Blockchain transactions have been traditionally notorious for high transfer fees
 
 The Protocol's robust on-chain reputation management coupled with its transaction limits does more than just drive mass adoption of decentralized currencies and transactions. In fact, a sole emphasis on large transactions ironically coincides with the prospects of money laundering and other foul economic practices. P2P Protocol in the space particularly underscores the importance of micro-transactions instead, by making these both viable and useful for the community.
 
-Besides mass consumer adoption of cryptocurrencies, microtransactions enable newfound financial access through web3 for underrepresented communities in today's banking system. Specifically, it has been noted that nearly **1.2 billion people have mobile phones but lack any reliable access to banks**. For them, being able to perform transactions in the neighborhood of $50-$500 in a way that is secure and egalitarian is paramount—a feat that P2P Protocol can readily help achieve.
+Besides mass consumer adoption of cryptocurrencies, microtransactions enable newfound financial access through web3 for underrepresented communities in today's banking system. Specifically, it has been noted that nearly **1.5 billion people have mobile phones but lack any reliable access to banks**. For them, being able to perform transactions in the neighborhood of $50-$500 in a way that is secure and egalitarian is paramount—a feat that P2P Protocol can readily help achieve.
 
 The adoption of crypto for consumer payments has implications for both the Web2 and Web3 economies. Existing consumer tech companies can finally start accepting payments online using cryptocurrency. Likewise, the market can explore newly enabled ways of spending and deploying capital, thanks to a microtransaction economy powering fully decentralized finance.
 
@@ -540,7 +540,7 @@ Coins.me is one of the two primary PWAs for accessing P2P Protocol, alongside p2
 
 The protocol token is an **ownership token**. The most important parts of the protocol—intellectual property, treasury funds, and the ability to mint new tokens—are controlled by token holders through futarchy-based governance, not by any single team, foundation, or entity. This is real, unruggable ownership of revenue-generating infrastructure.
 
-On the ownership side, decisions that affect token supply must pass through a prediction-market governance mechanism, where participants stake real capital on whether a proposal increases or decreases token value. Proposals the market predicts will harm value are automatically rejected. This replaces subjective voting with market-driven accountability.
+On the ownership side, decisions that affect token supply must pass through a decision-market governance mechanism, where participants stake real capital on whether a proposal increases or decreases token value. Proposals the market predicts will harm value are automatically rejected. This replaces subjective voting with market-driven accountability.
 
 On the governance side, holders vote on fee structures, transaction limits, risk weights, oracle configurations, treasury allocation, and protocol upgrades. Revenue direction, parameter changes, and IP stewardship belong to the token holder base rather than a centralized team.
 

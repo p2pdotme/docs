@@ -10,6 +10,7 @@ slug: investor-thesis
 - **Early-stage structure.** Compact launch supply with no insider tokens at TGE.
 - **Governance transition path.** Admin-operated today, with a documented multi-phase migration to token-governed control.
 - **Value capture is explicit.** Staking, delegation, and treasury contributions connect protocol revenue to token economics.
-- **Sustainable growth is achieved.** Over the last 15 months an average month-on-month growth of 27% is recorded. We expect the protocol to continue with the same growth rate over the next 18 months to reach $500mn in monthly volume. Protocol metrics can be tracked on-chain [here](https://dune.com/p2pme/latest).
+- **Sustainable growth is achieved.** Over the last 16 months an average month-on-month growth of 27% is recorded, with 2 years of live transaction volume and $4M monthly volume recorded in February 2026. We expect the protocol to continue with the same growth rate over the next 18 months to reach $500M in monthly volume. Protocol metrics can be tracked on-chain [here](https://dune.com/p2pme/latest).
+- **Revenue-generating today.** $578K in annual revenue run rate. Unit breakeven achieved, with up to 20% of revenue expected to flow as gross profit to the treasury from June 2026.
 
 ---

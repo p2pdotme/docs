@@ -14,6 +14,6 @@ The $P2P token launches through a MetaDAO-style sale mechanism designed for fair
 5. Post-sale, the treasury provides 20% of raised USDC and 2.9M tokens to liquidity pools
 6. Mint authority transfers to the market-governed treasury
 
-Existing protocol users with XP receive allocations and priority access.
+Existing protocol users receive a preferential allocation at the same valuation as all ICO investors, based on their XP on [p2p.foundation](https://p2p.foundation/).
 
 ---

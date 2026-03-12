@@ -15,7 +15,7 @@ Yes. This is protocol ownership, distinct from equity in a traditional company. 
 
 ## How does the MetaDAO-style sale work?
 
-Users commit USDC during a 4-day window. If oversubscribed, allocations are pro-rata. Existing protocol users with XP get priority. No private rounds happen at TGE. The sale is the primary distribution event.
+Users commit USDC during a 4-day window. If oversubscribed, allocations are pro-rata. Existing protocol users receive a preferential allocation at the same valuation as all ICO investors, based on their XP on [p2p.foundation](https://p2p.foundation/). No private rounds happen at TGE. The sale is the primary distribution event.
 
 ## What unlocks at TGE?
 

@@ -5,7 +5,7 @@ title: "Token Utility"
 slug: token-utility
 ---
 
-**Ownership.** $P2P is an ownership token. Protocol IP, treasury funds, and mint authority are all controlled by token holders through futarchy-based governance—not by any single team, foundation, or entity. This means the token carries real, enforceable ownership: if resources were ever misappropriated, governance provides the mechanism to redirect control. Decisions that affect token supply (minting) must pass through a prediction-market governance mechanism, where participants stake real capital on whether a proposal increases or decreases token value. Proposals that the market predicts will harm value are automatically rejected.
+**Ownership.** $P2P is an ownership token. Protocol IP, treasury funds, and mint authority are all controlled by token holders through futarchy-based governance—not by any single team, foundation, or entity. This means the token carries real, enforceable ownership: if resources were ever misappropriated, governance provides the mechanism to redirect control. Decisions that affect token supply (minting) must pass through a decision-market governance mechanism, where participants stake real capital on whether a proposal increases or decreases token value. Proposals that the market predicts will harm value are automatically rejected.
 
 **Governance.** Token holders vote on protocol parameters such as fees, limits, merchant rules, oracle configs, and treasury allocation. One staked $P2P = one vote, with delegation.
 

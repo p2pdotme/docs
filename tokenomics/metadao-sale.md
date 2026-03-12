@@ -18,6 +18,6 @@ The $P2P token launches through a MetaDAO-style sale mechanism designed for fair
 
 ## XP-Based Priority
 
-Existing protocol users with XP receive allocations and priority access. Users who have actively used the protocol through trades, referrals, and community participation are rewarded with preferential positioning in the sale.
+Existing protocol users receive a preferential allocation at the same valuation as all ICO investors, based on their XP on [p2p.foundation](https://p2p.foundation/). Users who have actively used the protocol through trades, referrals, and community participation are rewarded with preferential positioning in the sale.
 
 ---

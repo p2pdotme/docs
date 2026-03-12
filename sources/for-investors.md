@@ -29,7 +29,8 @@ Also see [`/whitepaper`](/whitepaper/abstract) for protocol context and [`/for-b
 - **Early-stage structure.** Compact launch supply with no insider tokens at TGE.
 - **Governance transition path.** Admin-operated today, with a documented multi-phase migration to token-governed control.
 - **Value capture is explicit.** Staking, delegation, and treasury contributions connect protocol revenue to token economics.
-- **Sustainable growth is achieved.** Over the last 15 months an average month-on-month growth of 27% is recorded. We expect the protocol to continue with the same growth rate over the next 18 months to reach $500mn in monthly volume. Protocol metrics can be tracked on-chain [here](https://dune.com/p2pme/latest).
+- **Sustainable growth is achieved.** Over the last 16 months an average month-on-month growth of 27% is recorded, with 2 years of live transaction volume and $4M monthly volume recorded in February 2026. We expect the protocol to continue with the same growth rate over the next 18 months to reach $500M in monthly volume. Protocol metrics can be tracked on-chain [here](https://dune.com/p2pme/latest).
+- **Revenue-generating today.** $578K in annual revenue run rate. Unit breakeven achieved, with up to 20% of revenue expected to flow as gross profit to the treasury from June 2026.
 
 ---
 
@@ -62,7 +63,7 @@ The token enables four things.
 
 ## Token Utility
 
-**Ownership.** $P2P is an ownership token. Protocol IP, treasury funds, and mint authority are all controlled by token holders through futarchy-based governance—not by any single team, foundation, or entity. This means the token carries real, enforceable ownership: if resources were ever misappropriated, governance provides the mechanism to redirect control. Decisions that affect token supply (minting) must pass through a prediction-market governance mechanism, where participants stake real capital on whether a proposal increases or decreases token value. Proposals that the market predicts will harm value are automatically rejected.
+**Ownership.** $P2P is an ownership token. Protocol IP, treasury funds, and mint authority are all controlled by token holders through futarchy-based governance—not by any single team, foundation, or entity. This means the token carries real, enforceable ownership: if resources were ever misappropriated, governance provides the mechanism to redirect control. Decisions that affect token supply (minting) must pass through a decision-market governance mechanism, where participants stake real capital on whether a proposal increases or decreases token value. Proposals that the market predicts will harm value are automatically rejected.
 
 **Governance.** Token holders vote on protocol parameters such as fees, limits, merchant rules, oracle configs, and treasury allocation. One staked $P2P = one vote, with delegation.
 
@@ -95,6 +96,15 @@ No investor or team tokens unlock at TGE. At launch, 12.9M tokens circulate (10M
 
 ---
 
+## Past Investors
+
+- **[Reclaim Protocol](https://reclaimprotocol.org/)** angel invested in P2P Protocol in March 2023. They own **3.45%** of the supply and invested $80K.
+- **[Alliance DAO](https://alliance.xyz/)** invested in March 2024. They own **4.66%** of supply and invested $350K.
+- **[Multicoin Capital](https://multicoin.capital/)** is the first institutional investor in P2P Protocol. They invested $1.4 million in January 2025 at $15M FDV and own **9.33%** of the supply.
+- **[Coinbase Ventures](https://www.coinbase.com/ventures)** invested $500K in P2P Protocol in February 2025 at $19.5M FDV. They own **2.56%** of the supply.
+
+---
+
 ## MetaDAO Sale
 
 The $P2P token launches through a MetaDAO-style sale mechanism designed for fair, community-first distribution.
@@ -106,7 +116,7 @@ The $P2P token launches through a MetaDAO-style sale mechanism designed for fair
 5. Post-sale, the treasury provides 20% of raised USDC and 2.9M tokens to liquidity pools
 6. Mint authority transfers to the market-governed treasury
 
-Existing protocol users with XP receive allocations and priority access.
+Existing protocol users receive a preferential allocation at the same valuation as all ICO investors, based on their XP on [p2p.foundation](https://p2p.foundation/).
 
 ---
 
@@ -180,11 +190,11 @@ For contract-level governance detail (roles, permissions, dispute mechanics), se
 
 Decentralization is phased because governance quality matters more than governance speed.
 
-**Phase 1 (months 0-6 post-TGE).** Foundation multisig controls upgrades. Emergency pause capability exists.
+**Phase 1 (months 4-6 post-TGE).** Insurance pools, disputes, and claims go live on-chain. Foundation multisig controls upgrades. Emergency pause capability exists.
 
-**Phase 2 (months 6-18 post-TGE).** Token-holder voting activates for non-critical parameters. Community can submit governance proposals.
+**Phase 2 (months 7-9 post-TGE).** Token-holder voting activates for non-critical parameters. Community can submit governance proposals.
 
-**Phase 3 (month 18+ post-TGE).** Full DAO control. Foundation veto authority sunsets permanently. All protocol parameters governed by token holders.
+**Phase 3 (months 10-12 post-TGE).** Foundation veto authority sunset planning begins. Full DAO control is the target end-state, with all protocol parameters governed by token holders.
 
 ---
 
@@ -258,7 +268,7 @@ Yes. This is protocol ownership, distinct from equity in a traditional company. 
 
 ### How does the MetaDAO-style sale work?
 
-Users commit USDC during a 4-day window. If oversubscribed, allocations are pro-rata. Existing protocol users with XP get priority. No private rounds happen at TGE. The sale is the primary distribution event.
+Users commit USDC during a 4-day window. If oversubscribed, allocations are pro-rata. Existing protocol users receive a preferential allocation at the same valuation as all ICO investors, based on their XP on [p2p.foundation](https://p2p.foundation/). No private rounds happen at TGE. The sale is the primary distribution event.
 
 ### What unlocks at TGE?
 
