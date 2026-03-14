@@ -30,7 +30,8 @@ We formalize the order lifecycle as a state machine with timeouts:
 2. **Match:** Merchant accepts and posts quote/bond.
 3. **Fund Crypto:** User's USDC is locked for settlement.
 4. **Merchant Pays Fiat:** Merchant pays fiat and confirms completion; or user challenges.
-5. **Settle/Dispute:** As above.
+5. **Settle:** Contract releases USDC to merchant; fees assessed; bonds unlocked.
+6. **Dispute:** If conflict, parties submit evidence; authorized admins issue on-chain verdict.
 
 ## 5.3 Payment-Rail Risk Classes
 

@@ -15,7 +15,7 @@ The protocol involves several key participants working together to enable trustl
 
 **Protocol Contracts** are the on-chain smart contracts that orchestrate the entire order lifecycle. They handle order queuing, matching based on credibility scores, state verification, and final settlement outcomes. These contracts currently operate on Base L2 (Solana planned).
 
-**Proof Verifiers** currently validate ZK-KYC proofs for identity verification (government IDs, social accounts, and passports via Reclaim Protocol and other ZK verifiers). Bank transaction verification is planned (see Section 4.2).
+**Proof Verifiers** currently validate ZK-KYC proofs for identity verification (government IDs, social accounts, and passports via Reclaim Protocol and other ZK verifiers). Bank transaction verification is planned (see [Section 4.2](/whitepaper/cryptographic-primitives-proof-integration#42-evidence-module-for-bank-transaction-verification-roadmap)).
 
 **Governance** encompasses the mechanisms through which protocol parameters, upgrades, and treasury decisions are made. The current implementation is admin/multisig operated, with a planned transition to broader token-holder governance as the protocol matures.
 
@@ -138,7 +138,7 @@ flowchart LR
 - The **merchant** serves the function of mediating liquidity for the transactions.
 - The **onus of confirming payment** rests on the merchant (for off-ramps) or can be provided by either party.
 - **ZK-KYC performs trustless identity verification** for the user without exposing personal data.
-- **Evidence is submitted and reviewed** in disputes. In the current system, outcomes are executed via on-chain admin settlement; broader verifier and governance-driven resolution remains roadmap (see Section 4.2).
+- **Evidence is submitted and reviewed** in disputes. In the current system, outcomes are executed via on-chain admin settlement; broader verifier and governance-driven resolution remains roadmap (see [Section 4.2](/whitepaper/cryptographic-primitives-proof-integration#42-evidence-module-for-bank-transaction-verification-roadmap)).
 - **Reclaim Protocol** enables privacy-preserving identity verification via social accounts and government IDs.
 
 ---

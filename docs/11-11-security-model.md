@@ -13,6 +13,6 @@ slug: security-model
 ## 11.2 Mitigations
 
 - Bonds/slashing; rail-class windows; proof verification requirements; oracle deviation guards; rate/limit throttles.
-- **Audits & Bounty:** Core contracts, verifiers, and circuits will undergo independent audits; a public bounty program will operate pre- and post-TGE.
+- **Audits & Bounty:** Core contracts, verifiers, and circuits will undergo independent audits; a public bounty program will operate pre-TGE and post-TGE.
 
 ---

@@ -5,6 +5,8 @@ title: "1. The Vision"
 slug: the-vision
 ---
 
+Today, moving money between fiat and crypto means trusting intermediaries with your funds and your identity. P2P Protocol exists to make moving between fiat and crypto as private, neutral, and provable as sending a message.
+It replaces "trust me" finance with verifiable coordination without custody.
 ## 1.1 From "ramps" to a privacy and credibility based economy
 
 P2P Protocol starts with the most practical chokepoint—moving between fiat and stablecoins—without custodial escrow. The same rails, proofs, and incentives that make an honest ramp work at scale also enable the next layer: credibility-based liquidity, bridging the gap between fiat and crypto currencies, for all DeFi.
@@ -17,10 +19,11 @@ In this model:
 
 ## 1.2 What "good" looks like by 2026+
 
-- A user in any supported country can buy or sell stablecoins in ~minutes—targeting sub-90-second completion on fast rails—without giving custody to anyone.
+- A user in any supported country can buy, sell or pay via stablecoins in ~minutes—targeting sub-90-second completion on fast rails—without giving custody to anyone.
 - Merchants are matched based on reliability and Proof-of-Credibility scores, with spread set at the protocol level rather than through merchant competition.
 - ZK-KYC unlocks higher limits and faster paths while keeping personal data off-chain.
-- Third-party apps and wallets integrate the protocol through open SDKs; Coins.me is only a reference consumer front-end, not a privileged gateway.
+- Third-party apps and wallets integrate the protocol through open SDKs; [Coins.me](https://coins.me)
+is only a reference consumer front-end, not a privileged gateway.
 - As credibility compounds, new products (installment payouts, escrowless commerce, cross-border salaries, dispute insurance) can be built without re-KYCing the world.
 
 ## 1.3 First principles
@@ -78,9 +81,11 @@ Vendors and chains will change; the principles cannot. The whitepaper commits to
 
 - No single L2, oracle, or proof provider baked into the logic.
 - Clear interfaces (verifier registry, oracle adapter, rail registry) so parts can be swapped without rewriting the paper or the social contract.
-- open-sourcing and decentralizing each part of the Protocol as public goods.
+- Open-sourcing and decentralizing each part of the Protocol as public goods.
 
 ## 1.10 Credibility but with Privacy
+> **Proof-of-Credibility (PoC)**  
+> A weighted on-chain score derived from completed trades, dispute outcomes, ZK-KYC tier, and time-decayed behavior signals.
 
 Think of P2P Protocol's Proof-of-Credibility as a public good in itself:
 
@@ -112,7 +117,7 @@ Most people want two things at once: privacy and legality. P2P Protocol makes th
 
 ## 1.14 What we won't compromise on
 
-- Non-custody of fiat (ever).
+- Non-custody of fiat. Ever.
 - No honeypots of PII (Personally Identifiable Information) on-chain (ever).
 - No privileged clients (ever). Everyone uses the same pipes.
 - No "trust us" black boxes. If it can't be proven or audited, it doesn't make core.
@@ -127,13 +132,13 @@ Most people want two things at once: privacy and legality. P2P Protocol makes th
 - **Roadmap features:** for current feature-track proposals (including remittance and currency expansion), see [`/for-builders`](/for-builders/start-here).
 
 ## 1.16 A short manifesto
+``` bash
+# Privacy is a user interface problem as much as a math problem.
 
-> Privacy is a user interface problem as much as a math problem.
+# Reputation should be earned, portable, and revocable—never sold.
 
-> Reputation should be earned, portable, and revocable—never sold.
+# The best KYC is the one that proves what's needed and nothing else.
 
-> The best KYC is the one that proves what's needed and nothing else.
-
-> If only power users can use it, it isn't DeFi—it's a gated club.
-
+# If only power users can use it, it isn't DeFi—it's a gated club.
+```
 ---
