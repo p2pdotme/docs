@@ -187,6 +187,10 @@ THE LIBERATION NETWORK
 
 ## FAQ
 
+### Why is the token on Solana if the protocol is on Base?
+
+The token launches on Solana to build community and network effects ahead of deploying the protocol there. Solana is the planned hub chain. The protocol is live on Base today and will expand to Solana next.
+
 ### Do I need to reveal my identity to participate?
 
 No. The program is anonymous-first at every level.

@@ -10,7 +10,7 @@ In the wake of centralized exchanges, early decentralized exchanges led the DeFi
 
 P2P Protocol reflects a departure from fiat escrows and traditional custodians by using zero-knowledge (ZK) proofs for non-custodial KYC, making on/off-ramps privacy-preserving and governed by users' collective interests.
 
-Currently deployed on the Base network (coming soon to solana), P2P Protocol trustlessly matches buyers and merchants on-chain based on staked USDC, settles trades with on-chain coordination, and resolves disputes through on-chain admin settlement rather than platform custody. Deployment on Solana is on the roadmap within six months. This paper formalizes design goals, protocol flows, reputation, dispute resolution, pricing, security and privacy models, governance, and token economics in preparation for a Token Generation Event (TGE) planned for March 2026.
+Currently deployed on the Base network, with Solana deployment planned as the next step toward a multichain architecture, P2P Protocol trustlessly matches buyers and merchants on-chain based on staked USDC, settles trades with on-chain coordination, and resolves disputes through on-chain governance settlement rather than platform custody. The $P2P token launches on Solana to establish network effects ahead of the protocol's deployment there; Solana is the planned hub chain, with Base and future high-performance chains as supported spokes. This paper formalizes design goals, protocol flows, reputation, dispute resolution, pricing, security and privacy models, governance, and token economics.
 
 The end-state is a credibility-based DeFi ecosystem where peers transact, save, and build services on top of an open Proof-of-Credibility graph—useful, easy to use, privacy-first, and not reliant on over-collateralized mechanics for every everyday action. This paper lays out that vision, the principles guiding it, what works today, and the path to a mature, protocol-neutral, global network by and beyond 2026.
 
@@ -134,7 +134,7 @@ Most people want two things at once: privacy and legality. P2P Protocol makes th
 
 - **Ubiquity:** a credible merchant presence in every major region/rail pair.
 - **Geographic reach:** expansion to 20+ markets across Asia, Africa, Latin America, and MENA.
-- **Multi-chain presence:** Solana deployment planned within six months; support for additional emerging high-performance chains to follow.
+- **Multi-chain presence:** Solana is the planned hub chain. The $P2P token launches on Solana first to build network effects; protocol deployment on Solana follows. Additional high-performance chains will be supported as spokes.
 - **Composability:** third-party apps shipping useful features on the SDK without asking permission.
 - **Self-serve legitimacy:** regulators and risk teams can read the spec, verify parameters on-chain, and understand how safety is achieved—without backdoors.
 - **Roadmap features:** for current feature-track proposals (including remittance and currency expansion), see [`/for-builders`](/for-builders/start-here).
@@ -179,7 +179,7 @@ The protocol involves several key participants working together to enable trustl
 
 **Merchants**, also known as liquidity peers, serve as the counterparties who mediate liquidity between stablecoins and fiat currencies. These are carefully vetted participants who maintain sufficient liquidity and have established strong reputations through the Proof-of-Credibility system.
 
-**Protocol Contracts** are the on-chain smart contracts that orchestrate the entire order lifecycle. They handle order queuing, matching based on credibility scores, state verification, and final settlement outcomes. These contracts currently operate on Base L2 (Solana planned).
+**Protocol Contracts** are the on-chain smart contracts that orchestrate the entire order lifecycle. They handle order queuing, matching based on credibility scores, state verification, and final settlement outcomes. These contracts currently operate on Base L2 (multichain expansion to Solana planned).
 
 **Proof Verifiers** currently validate ZK-KYC proofs for identity verification (government IDs, social accounts, and passports via Reclaim Protocol and other ZK verifiers). Bank transaction verification is planned (see Section 4.2).
 
@@ -187,7 +187,7 @@ The protocol involves several key participants working together to enable trustl
 
 ### 3.2 Components
 
-- **Base L2 smart contracts** (Solana planned) for order lifecycle, matching, dispute windows, parameter registry, and fee routing.
+- **Base L2 smart contracts** (expanding to Solana) for order lifecycle, matching, dispute windows, parameter registry, and fee routing.
 - **Reputation registry** implementing Proof-of-Credibility (inputs, scoring, decay).
 - **Oracle adapter** for reference pricing and safeguards (median/TWAP, fallbacks, circuit breakers).
 - **Client SDKs** and reference apps (e.g., Coins.me) that speak the protocol.
@@ -195,7 +195,7 @@ The protocol involves several key participants working together to enable trustl
 ### 3.3 High-Level Flow
 
 1. **Placing Orders:** A user clicks "Buy USDC" (or "Sell USDC") and enters amount. The app provides an integrated wallet for the transaction.
-2. **Order Matching:** A merchant is assigned on-chain based on staked USDC. A fiat payment address is shared over the smart contract, encrypted with the user's keys; for off-ramps, a USDC address on Base (Solana planned) is presented.
+2. **Order Matching:** A merchant is assigned on-chain based on staked USDC. A fiat payment address is shared over the smart contract, encrypted with the user's keys; for off-ramps, a USDC address on Base (expanding to Solana) is presented.
 3. **Fiat/Stablecoin Transfer:** The payer performs the transfer on the designated rail.
 4. **Confirmation/Settlement:** Within minutes, settlement succeeds once the merchant confirms receipt. Wallet balances update accordingly.
 5. **Dispute Window:** If a party contests, they submit evidence that a payment or action occurred (or did not). In the live implementation, authorized admins settle disputed orders on-chain according to protocol fault rules and dispute windows.
@@ -358,7 +358,7 @@ We formalize the order lifecycle as a state machine with timeouts:
 - `B_bond_user`, `B_bond_merchant` (optional performance bonds/slashing weights by reputation tier and payment rail risk class).
 - `min_amount`, `max_amount` per rail/region; fee schedules; quote expiry windows.
 
-### 5.1 On-Ramp (Fiat → USDC on Base; Solana planned)
+### 5.1 On-Ramp (Fiat → USDC on Base; expanding to Solana)
 
 1. **Open:** User opens BUY order with amount & rail.
 2. **Match:** Protocol assigns a merchant on-chain based on staked USDC. Refundable bonds may lock.
@@ -367,7 +367,7 @@ We formalize the order lifecycle as a state machine with timeouts:
 5. **Settle:** Contract releases USDC to user; fees assessed; bonds unlocked.
 6. **Dispute:** If conflict, parties submit evidence; authorized admins issue on-chain verdict.
 
-### 5.2 Off-Ramp (USDC on Base → Fiat; Solana planned)
+### 5.2 Off-Ramp (USDC on Base → Fiat; expanding to Solana)
 
 1. **Open:** User opens SELL order; transfers USDC to escrowless settlement adapter (contract holds or streams atomically per design).
 2. **Match:** Merchant accepts and posts quote/bond.
@@ -462,7 +462,7 @@ Quote commitment, minimum depth, and cancellation penalties are governed to redu
 
 ### 11.1 Assumptions & Adversaries
 
-- Network liveness on Base (Solana planned); oracle availability; honest-majority assumptions not required for fiat rails.
+- Network liveness on Base (multichain expansion to Solana planned); oracle availability; honest-majority assumptions not required for fiat rails.
 - Adversaries include chargeback fraudsters, proof forgers, oracle manipulators, griefers, and sybils.
 
 ### 11.2 Mitigations
@@ -497,7 +497,7 @@ Likewise, it must be noted that the Protocol in no way intends to advocate tax e
 
 ### 13.2 Micro-Transactions for Mass Adoption
 
-Blockchain transactions have been traditionally notorious for high transfer fees and slow processing times. Currently deployed on Base (Solana planned), the Protocol can afford to charge very nominal fees for its on- and off-ramps, thanks to the faster validation times and lower gas costs. The difference is especially pronounced for smaller transactions where newcomers routinely feel discouraged by the slow and expensive economics involved.
+Blockchain transactions have been traditionally notorious for high transfer fees and slow processing times. Currently deployed on Base (expanding to Solana as the hub chain), the Protocol can afford to charge very nominal fees for its on- and off-ramps, thanks to the faster validation times and lower gas costs. The difference is especially pronounced for smaller transactions where newcomers routinely feel discouraged by the slow and expensive economics involved.
 
 The Protocol's robust on-chain reputation management coupled with its transaction limits does more than just drive mass adoption of decentralized currencies and transactions. In fact, a sole emphasis on large transactions ironically coincides with the prospects of money laundering and other foul economic practices. P2P Protocol in the space particularly underscores the importance of micro-transactions instead, by making these both viable and useful for the community.
 

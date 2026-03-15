@@ -7,7 +7,7 @@ slug: security-model
 
 ## 11.1 Assumptions & Adversaries
 
-- Network liveness on Base (Solana planned); oracle availability; honest-majority assumptions not required for fiat rails.
+- Network liveness on Base (multichain expansion to Solana planned); oracle availability; honest-majority assumptions not required for fiat rails.
 - Adversaries include chargeback fraudsters, proof forgers, oracle manipulators, griefers, and sybils.
 
 ## 11.2 Mitigations

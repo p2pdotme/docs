@@ -15,6 +15,7 @@ The token enables community-driven protocol management, economic participation t
 |-------|-------|
 | Name | P2P Ownership and Governance Token |
 | Ticker | $P2P |
+| Chain | Solana (SPL token) |
 | Total Supply | 25,800,000 (25.8M at launch) |
 | Initial Float | 12.9M at TGE (10M sale + 2.9M liquidity = 50%) |
 | Future Issuance | Only via governance-approved proposals (futarchy) |

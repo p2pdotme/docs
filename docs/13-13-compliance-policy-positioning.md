@@ -19,7 +19,7 @@ Likewise, it must be noted that the Protocol in no way intends to advocate tax e
 
 ## 13.2 Micro-Transactions for Mass Adoption
 
-Blockchain transactions have been traditionally notorious for high transfer fees and slow processing times. Currently deployed on Base (Solana planned), the Protocol can afford to charge very nominal fees for its on- and off-ramps, thanks to the faster validation times and lower gas costs. The difference is especially pronounced for smaller transactions where newcomers routinely feel discouraged by the slow and expensive economics involved.
+Blockchain transactions have been traditionally notorious for high transfer fees and slow processing times. Currently deployed on Base (expanding to Solana as the hub chain), the Protocol can afford to charge very nominal fees for its on- and off-ramps, thanks to the faster validation times and lower gas costs. The difference is especially pronounced for smaller transactions where newcomers routinely feel discouraged by the slow and expensive economics involved.
 
 The Protocol's robust on-chain reputation management coupled with its transaction limits does more than just drive mass adoption of decentralized currencies and transactions. In fact, a sole emphasis on large transactions ironically coincides with the prospects of money laundering and other foul economic practices. P2P Protocol in the space particularly underscores the importance of micro-transactions instead, by making these both viable and useful for the community.
 

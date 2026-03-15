@@ -13,7 +13,7 @@ The protocol involves several key participants working together to enable trustl
 
 **Merchants**, also known as liquidity peers, serve as the counterparties who mediate liquidity between stablecoins and fiat currencies. These are carefully vetted participants who maintain sufficient liquidity and have established strong reputations through the Proof-of-Credibility system.
 
-**Protocol Contracts** are the on-chain smart contracts that orchestrate the entire order lifecycle. They handle order queuing, matching based on credibility scores, state verification, and final settlement outcomes. These contracts currently operate on Base L2 (Solana planned).
+**Protocol Contracts** are the on-chain smart contracts that orchestrate the entire order lifecycle. They handle order queuing, matching based on credibility scores, state verification, and final settlement outcomes. These contracts currently operate on Base L2 (multichain expansion to Solana planned).
 
 **Proof Verifiers** currently validate ZK-KYC proofs for identity verification (government IDs, social accounts, and passports via Reclaim Protocol and other ZK verifiers). Bank transaction verification is planned (see Section 4.2).
 
@@ -21,7 +21,7 @@ The protocol involves several key participants working together to enable trustl
 
 ## 3.2 Components
 
-- **Base L2 smart contracts** (Solana planned) for order lifecycle, matching, dispute windows, parameter registry, and fee routing.
+- **Base L2 smart contracts** (expanding to Solana) for order lifecycle, matching, dispute windows, parameter registry, and fee routing.
 - **Reputation registry** implementing Proof-of-Credibility (inputs, scoring, decay).
 - **Oracle adapter** for reference pricing and safeguards (median/TWAP, fallbacks, circuit breakers).
 - **Client SDKs** and reference apps (e.g., Coins.me) that speak the protocol.
@@ -29,7 +29,7 @@ The protocol involves several key participants working together to enable trustl
 ## 3.3 High-Level Flow
 
 1. **Placing Orders:** A user clicks "Buy USDC" (or "Sell USDC") and enters amount. The app provides an integrated wallet for the transaction.
-2. **Order Matching:** A list of carefully vetted merchants is queued via Proof-of-Credibility. A fiat payment address is shared over the smart contract, encrypted with the user's keys; for off-ramps, a USDC address on Base (Solana planned) is presented.
+2. **Order Matching:** A list of carefully vetted merchants is queued via Proof-of-Credibility. A fiat payment address is shared over the smart contract, encrypted with the user's keys; for off-ramps, a USDC address on Base (expanding to Solana) is presented.
 3. **Fiat/Stablecoin Transfer:** The payer performs the transfer on the designated rail.
 4. **Confirmation/Settlement:** Within minutes, settlement succeeds once the merchant confirms receipt. Wallet balances update accordingly.
 5. **Dispute Window:** If a party contests, they submit evidence that a payment or action occurred (or did not). In the live implementation, authorized admins settle disputed orders on-chain according to protocol fault rules and dispute windows.

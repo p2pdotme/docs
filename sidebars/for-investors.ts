@@ -23,11 +23,11 @@ const sidebars: SidebarsConfig = {
             "staking-mechanics",
             "token-holder-governance",
             "progressive-decentralization",
+            "multichain-strategy",
             "insurance",
             "financials-and-estimates",
-            "faq",
-            "why-base-chain-when-will-you-launch-on-solana",
-            "disclosures"
+            "disclosures",
+            "faq"
         ]
     }
   ],

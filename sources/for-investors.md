@@ -55,6 +55,7 @@ The token enables four things.
 |-------|-------|
 | Name | P2P Ownership and Governance Token |
 | Ticker | $P2P |
+| Chain | Solana (SPL token) |
 | Total Supply | 25,800,000 (25.8M at launch) |
 | Initial Float | 12.9M at TGE (10M sale + 2.9M liquidity = 50%) |
 | Future Issuance | Only via governance-approved proposals (futarchy) |
@@ -107,9 +108,9 @@ No investor or team tokens unlock at TGE. At launch, 12.9M tokens circulate (10M
 
 ## MetaDAO Sale
 
-The $P2P token launches through a MetaDAO-style sale mechanism designed for fair, community-first distribution.
+The $P2P token launches on Solana through a MetaDAO-style sale mechanism designed for fair, community-first distribution.
 
-1. Users commit USDC during a 4-day commitment window
+1. Users commit USDC on Solana during a 4-day commitment window
 2. Founders set a discretionary cap on total raise accepted
 3. If oversubscribed, allocations and refunds are distributed pro-rata
 4. 10M tokens are distributed proportionally among all participants at launch
@@ -258,6 +259,10 @@ The protocol is forecast to reach operating profitability by mid-2027 as volume 
 
 ## FAQ
 
+### Why is the token launching on Solana if the protocol is on Base?
+
+The protocol is live on Base today. The token launches on Solana to build network effects ahead of deploying the protocol there. Solana is the planned hub of a multichain architecture. See [Multichain Strategy](/for-investors/multichain-strategy) for the full roadmap.
+
 ### Why does P2P need a token?
 
 P2P on/off ramping is essential financial infrastructure in emerging markets. Without a token, control over this infrastructure stays with a single operator who can change fees, censor users, or shut it down. The token transfers that control to the community.
@@ -282,9 +287,19 @@ Users commit USDC during a 4-day window. If oversubscribed, allocations are pro-
 
 Yes, fixed at launch (25.8M). Future issuance requires governance approval via futarchy. The protocol runs on transaction revenue, not token emissions.
 
-## Why Base chain? When will you launch on solana?
+## Multichain Strategy
 
-Low fees and fast finality make frequent small transactions practical. Solana deployment is planned within six months. Chain choice does not lock the token design.
+P2P Protocol envisions a multichain future with Solana as its hub chain.
+
+The protocol's smart contracts are live on Base today—chosen during the bootstrapping phase for low fees and fast finality. The $P2P token launches on Solana deliberately: building network effects and community in the Solana ecosystem is the precursor to deploying the protocol there. Once the protocol is live on Solana, it becomes the hub of a multichain architecture, with Base and future chains as supported spokes.
+
+### Why is the token launching on Solana if the protocol is on Base?
+
+The protocol is live on Base today. The token launches on Solana to build network effects ahead of deploying the protocol there. Solana is the planned hub of a multichain architecture.
+
+### Does chain choice lock the protocol?
+
+No. The protocol is chain-agnostic by architecture. Verifier registries, oracle adapters, and rail registries are designed as swappable interfaces. Deploying on a new chain requires re-deployment, not a rewrite.
 
 ### How do I separate what's live from what's planned?
 

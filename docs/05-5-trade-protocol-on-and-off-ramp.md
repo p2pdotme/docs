@@ -15,7 +15,7 @@ We formalize the order lifecycle as a state machine with timeouts:
 - `B_bond_user`, `B_bond_merchant` (optional performance bonds/slashing weights by reputation tier and payment rail risk class).
 - `min_amount`, `max_amount` per rail/region; fee schedules; quote expiry windows.
 
-## 5.1 On-Ramp (Fiat → USDC on Base; Solana planned)
+## 5.1 On-Ramp (Fiat → USDC on Base; expanding to Solana)
 
 1. **Open:** User opens BUY order with amount & rail.
 2. **Match:** Protocol assigns a merchant (highest compatible Proof-of-Credibility and quote). Refundable bonds may lock.
@@ -24,7 +24,7 @@ We formalize the order lifecycle as a state machine with timeouts:
 5. **Settle:** Contract releases USDC to user; fees assessed; bonds unlocked.
 6. **Dispute:** If conflict, parties submit evidence; authorized admins issue on-chain verdict.
 
-## 5.2 Off-Ramp (USDC on Base → Fiat; Solana planned)
+## 5.2 Off-Ramp (USDC on Base → Fiat; expanding to Solana)
 
 1. **Open:** User opens SELL order; transfers USDC to escrowless settlement adapter (contract holds or streams atomically per design).
 2. **Match:** Merchant accepts and posts quote/bond.
