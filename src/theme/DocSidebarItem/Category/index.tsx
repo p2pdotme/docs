@@ -6,6 +6,7 @@
 import React, {
   type ComponentProps,
   type ReactNode,
+  useCallback,
   useEffect,
   useMemo,
 } from 'react';
@@ -51,7 +52,7 @@ function useCategoryHrefWithSSRFallback(
   }, [item, isBrowser]);
 }
 
-function CollapseButton({
+const CollapseButton = React.memo(function CollapseButton({
   collapsed,
   categoryLabel,
   onClick,
@@ -87,15 +88,15 @@ function CollapseButton({
       onClick={onClick}
     />
   );
-}
+});
 
-function CategoryLinkLabel({label}: {label: string}) {
+const CategoryLinkLabel = React.memo(function CategoryLinkLabel({label}: {label: string}) {
   return (
     <span title={label} className={styles.categoryLinkLabel}>
       {label}
     </span>
   );
-}
+});
 
 export default function DocSidebarItemCategory(props: Props): ReactNode {
   const visibleChildren = useVisibleSidebarItems(
@@ -159,10 +160,14 @@ function DocSidebarItemCategoryCollapsible({
   });
 
   const {expandedItem, setExpandedItem} = useDocSidebarItemsExpandedState();
-  const updateCollapsed = (toCollapsed: boolean = !collapsed) => {
-    setExpandedItem(toCollapsed ? null : index);
-    setCollapsed(toCollapsed);
-  };
+  const updateCollapsed = useCallback(
+    (toCollapsed: boolean | undefined = undefined) => {
+      const next = toCollapsed ?? !collapsed;
+      setExpandedItem(next ? null : index);
+      setCollapsed(next);
+    },
+    [collapsed, index, setExpandedItem, setCollapsed],
+  );
 
   useEffect(() => {
     if (
@@ -175,22 +180,33 @@ function DocSidebarItemCategoryCollapsible({
     }
   }, [collapsible, expandedItem, index, setCollapsed, autoCollapseCategories]);
 
-  const handleItemClick: ComponentProps<'a'>['onClick'] = (e) => {
-    onItemClick?.(item);
-    if (collapsible) {
-      if (href) {
-        if (isCurrentPage) {
+  const handleItemClick: ComponentProps<'a'>['onClick'] = useCallback(
+    (e) => {
+      onItemClick?.(item);
+      if (collapsible) {
+        if (href) {
+          if (isCurrentPage) {
+            e.preventDefault();
+            updateCollapsed();
+          } else {
+            updateCollapsed(false);
+          }
+        } else {
           e.preventDefault();
           updateCollapsed();
-        } else {
-          updateCollapsed(false);
         }
-      } else {
-        e.preventDefault();
-        updateCollapsed();
       }
-    }
-  };
+    },
+    [onItemClick, item, collapsible, href, isCurrentPage, updateCollapsed],
+  );
+
+  const handleCollapseClick = useCallback(
+    (e: React.MouseEvent) => {
+      e.preventDefault();
+      updateCollapsed();
+    },
+    [updateCollapsed],
+  );
 
   return (
     <li
@@ -225,15 +241,12 @@ function DocSidebarItemCategoryCollapsible({
           <CollapseButton
             collapsed={collapsed}
             categoryLabel={label}
-            onClick={(e) => {
-              e.preventDefault();
-              updateCollapsed();
-            }}
+            onClick={handleCollapseClick}
           />
         )}
       </div>
 
-      <Collapsible lazy as="ul" className="menu__list" collapsed={collapsed}>
+      <Collapsible lazy={false} as="ul" className="menu__list" collapsed={collapsed} animation={{duration: 200}}>
         <DocSidebarItems
           items={items}
           tabIndex={collapsed ? -1 : 0}
