@@ -111,13 +111,172 @@ No investor or team tokens unlock at TGE. At launch, 12.9M tokens circulate (10M
 The $P2P token launches on Solana through a MetaDAO-style sale mechanism designed for fair, community-first distribution.
 
 1. Users commit USDC on Solana during a 4-day commitment window
-2. Founders set a discretionary cap on total raise accepted
+2. Founders set the total USDC accepted (**F**) using commitment-weighted tiers (see below)
 3. If oversubscribed, allocations and refunds are distributed pro-rata
 4. 10M tokens are distributed proportionally among all participants at launch
 5. Post-sale, the treasury provides 20% of raised USDC and 2.9M tokens to liquidity pools
 6. Mint authority transfers to the market-governed treasury
 
+**Note — no bid wall.** The sale does not use a bid-wall or minimum-bid ladder. Clearing is pro-rata against the accepted cap; any USDC that is not allocated is refunded.
+
+### Raise size, FDV steps, and refunds
+
+The public ask is **$6M** USDC. If total commitments exceed **$6M**, only the accepted amount is filled; **excess commitments are refunded** according to the pro-rata and XP-preference steps below.
+
+How much can be accepted scales with **total commitments** (**C**):
+
+| If total commitments **C**… | USDC accepted | Implied FDV |
+|----------------------------|---------------|-------------|
+| **C** ≤ **$80M** | Up to **$6M** | **$15M** |
+| **$80M** < **C** ≤ **$150M** | Up to **$8M** | **$20M** |
+| **C** > **$150M** | Up to **$10M** | **$25M** |
+
+Only when **C** is **greater than $80M** does the sale accept up to **$8M** at **$20M** FDV. Only when **C** is **greater than $150M** does it accept up to **$10M** at **$25M** FDV. In all cases, unaccepted USDC is returned to participants.
+
 Existing protocol users receive a preferential allocation at the same valuation as all ICO investors, based on their XP on [p2p.foundation](https://p2p.foundation/).
+
+### Preferential allocation formula
+
+The following defines how commitments are converted into final allocations when the sale is oversubscribed and XP tiers apply multipliers. Non-XP participants still receive a pro-rata share; XP holders receive a boosted slice of the accepted raise, capped at what they committed.
+
+#### Variables
+
+| Symbol | Definition |
+|--------|------------|
+| **C** | Total USDC committed by all participants |
+| **F** | Funding cap accepted by founders (**F** ≤ **C**) |
+| **c_i** | USDC committed by participant *i* |
+| **T1, T2, T3** | Sets of participants in XP tiers 1 (highest), 2, and 3 |
+| **N** | Set of non-XP participants |
+| **m_1 = 3** | Tier 1 multiplier |
+| **m_2 = 2** | Tier 2 multiplier |
+| **m_3 = 1.5** | Tier 3 multiplier |
+
+#### Steps
+
+**Step 1 — Base pro-rata rate.** Compute the acceptance rate as if no preferences existed.
+
+```
+r = F / C
+```
+
+**Step 2 — Base allocation per participant.** Every participant receives a base slice proportional to their commitment.
+
+```
+base_i = c_i * r
+```
+
+**Step 3 — Apply XP multiplier.** For each XP holder in tier *t*, multiply their base allocation by that tier’s multiplier. Allocation cannot exceed what they committed.
+
+```
+pref_i = min(base_i * m_t, c_i)
+```
+
+Non-XP participants are unchanged at this step.
+
+**Step 4 — Total preferred allocation.** Sum all XP-preferred allocations.
+
+```
+A_pref = sum(pref_i)  for all i in T1 + T2 + T3
+```
+
+**Step 5 — Remaining pool for non-XP holders.** Subtract XP allocations from the funding cap.
+
+```
+A_remaining = F - A_pref
+```
+
+**Step 6 — Non-XP reallocation.** Non-XP holders split the remaining pool pro-rata by commitment.
+
+```
+C_N = sum(c_j)  for all j in N
+final_j = c_j * (A_remaining / C_N)
+```
+
+**Step 7 — Refunds.** Each participant receives the difference between commitment and final allocation.
+
+```
+refund_i = c_i - final_allocation_i
+```
+
+#### Worked example
+
+**Setup.** XP holders are a small fraction of the pool. Ten non-XP participants each commit $10,000. Three XP holders commit smaller amounts.
+
+| Participant | Commitment | XP tier | Multiplier |
+|---------------|------------|---------|------------|
+| Alice | $500 | Tier 1 | 3× |
+| Bob | $300 | Tier 2 | 2× |
+| Carol | $200 | Tier 3 | 1.5× |
+| D1 through D10 | $10,000 each | None | 1× |
+
+- **C** = $101,000 (total committed)
+- **F** = $10,000 (founders accept $10,000; the remainder is refunded)
+
+**Step 1 — Base rate.**
+
+```
+r = 10,000 / 101,000 = 0.0990 (9.9%)
+```
+
+**Step 2 — Base allocation.**
+
+| Participant | Commitment | base_i |
+|---------------|------------|--------|
+| Alice | $500 | $49.50 |
+| Bob | $300 | $29.70 |
+| Carol | $200 | $19.80 |
+| Each D | $10,000 | $990.10 |
+
+Without preferences, Alice would receive $49.50 allocated and $450.50 refunded.
+
+**Step 3 — Apply multipliers.**
+
+| Participant | base_i | Multiplier | pref_i |
+|---------------|--------|------------|--------|
+| Alice | $49.50 | 3× | min($148.51, $500) = **$148.51** |
+| Bob | $29.70 | 2× | min($59.41, $300) = **$59.41** |
+| Carol | $19.80 | 1.5× | min($29.70, $200) = **$29.70** |
+
+**Step 4 — Total preferred.**
+
+```
+A_pref = 148.51 + 59.41 + 29.70 = $237.62
+```
+
+**Step 5 — Remaining pool.**
+
+```
+A_remaining = 10,000 - 237.62 = $9,762.38
+```
+
+**Step 6 — Non-XP reallocation.**
+
+```
+C_N = 10 * 10,000 = $100,000
+Each D: 10,000 * (9,762.38 / 100,000) = $976.24
+```
+
+**Result.**
+
+| Participant | Final allocation | Refund |
+|-------------|------------------|--------|
+| Alice (T1) | $148.51 | $351.49 |
+| Bob (T2) | $59.41 | $240.59 |
+| Carol (T3) | $29.70 | $170.30 |
+| Each D (×10) | $976.24 | $9,023.76 |
+| **Total** | **$10,000.00** | **$91,000.00** |
+
+**Versus no preferences.**
+
+| Participant | Without preference | With preference | Difference |
+|---------------|-------------------|-----------------|------------|
+| Alice | $49.50 | $148.51 | +$99.01 (3×) |
+| Bob | $29.70 | $59.41 | +$29.71 (2×) |
+| Carol | $19.80 | $29.70 | +$9.90 (1.5×) |
+| Each D | $990.10 | $976.24 | −$13.86 |
+
+XP holders receive **$138.62** more in aggregate than they would without preferences. That amount is spread across ten non-XP participants, so each D is lower by **$13.86** (about **1.4%** of their base allocation). The effect on non-XP holders stays small when XP commitments are a small share of **C**.
 
 ---
 
@@ -299,7 +458,7 @@ Yes. This is protocol ownership, distinct from equity in a traditional company. 
 
 ### How does the MetaDAO-style sale work?
 
-Users commit USDC during a 4-day window. If oversubscribed, allocations are pro-rata. Existing protocol users receive a preferential allocation at the same valuation as all ICO investors, based on their XP on [p2p.foundation](https://p2p.foundation/). No private rounds happen at TGE. The sale is the primary distribution event.
+Users commit USDC during a 4-day window. **There is no bid wall**—clearing is pro-rata against the accepted cap, with refunds for any unallocated USDC. The ask is **$6M**; if commitments exceed that, excess is refunded. If total commitments are **above $80M** (and up to **$150M**), up to **$8M** is accepted at **$20M** FDV; if they are **above $150M**, up to **$10M** is accepted at **$25M** FDV. If oversubscribed at the active cap, allocations follow the pro-rata and XP-preference rules on the [MetaDAO sale](/for-investors/metadao-sale) page. Existing protocol users receive a preferential allocation at the same valuation as all ICO investors, based on their XP on [p2p.foundation](https://p2p.foundation/). No private rounds happen at TGE. The sale is the primary distribution event.
 
 ### What unlocks at TGE?
 
