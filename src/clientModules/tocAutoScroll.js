@@ -2,6 +2,8 @@ import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 
 if (ExecutionEnvironment.canUseDOM) {
   let lastActiveLink = null;
+  let observer = null;
+  let scrollTimeout = null;
 
   const scrollActiveIntoView = () => {
     const tocContainer = document.querySelector('.theme-doc-toc-desktop');
@@ -12,18 +14,13 @@ if (ExecutionEnvironment.canUseDOM) {
 
     lastActiveLink = activeLink;
 
-    // Get the scrollable container (the ul inside theme-doc-toc-desktop)
-    const scrollContainer = tocContainer.querySelector('.table-of-contents') || tocContainer;
-    
     const containerRect = tocContainer.getBoundingClientRect();
     const linkRect = activeLink.getBoundingClientRect();
 
-    // Check if active link is outside visible area of the TOC
     const isAbove = linkRect.top < containerRect.top + 50;
     const isBelow = linkRect.bottom > containerRect.bottom - 50;
 
     if (isAbove || isBelow) {
-      // Calculate scroll position to center the active link
       const linkOffsetTop = activeLink.offsetTop;
       const containerHeight = tocContainer.clientHeight;
       const scrollTo = linkOffsetTop - (containerHeight / 2) + (activeLink.clientHeight / 2);
@@ -35,47 +32,40 @@ if (ExecutionEnvironment.canUseDOM) {
     }
   };
 
-  // Use scroll event on main content to detect changes
-  const init = () => {
-    // Check periodically and on scroll
-    let scrollTimeout;
-    const onScroll = () => {
-      if (scrollTimeout) clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(scrollActiveIntoView, 100);
-    };
+  const onScroll = () => {
+    if (scrollTimeout) cancelAnimationFrame(scrollTimeout);
+    scrollTimeout = requestAnimationFrame(scrollActiveIntoView);
+  };
 
-    window.addEventListener('scroll', onScroll, { passive: true });
+  const startObserving = () => {
+    if (observer) {
+      observer.disconnect();
+    }
+    lastActiveLink = null;
 
-    // Also use MutationObserver as backup
-    const observer = new MutationObserver(() => {
+    const tocContainer = document.querySelector('.theme-doc-toc-desktop');
+    if (tocContainer) {
+      observer = new MutationObserver(onScroll);
+      observer.observe(tocContainer, {
+        attributes: true,
+        subtree: true,
+        attributeFilter: ['class'],
+      });
       scrollActiveIntoView();
-    });
+    } else {
+      setTimeout(startObserving, 500);
+    }
+  };
 
-    const startObserving = () => {
-      const tocContainer = document.querySelector('.theme-doc-toc-desktop');
-      if (tocContainer) {
-        observer.observe(tocContainer, {
-          attributes: true,
-          subtree: true,
-          attributeFilter: ['class'],
-        });
-        // Initial check
-        scrollActiveIntoView();
-      } else {
-        setTimeout(startObserving, 500);
-      }
-    };
-
+  const init = () => {
+    window.addEventListener('scroll', onScroll, { passive: true });
     startObserving();
 
-    // Re-initialize on route change (SPA navigation)
-    if (typeof window !== 'undefined') {
-      const originalPushState = history.pushState;
-      history.pushState = function() {
-        originalPushState.apply(this, arguments);
-        setTimeout(startObserving, 100);
-      };
-    }
+    const originalPushState = history.pushState;
+    history.pushState = function() {
+      originalPushState.apply(this, arguments);
+      setTimeout(startObserving, 100);
+    };
   };
 
   if (document.readyState === 'complete') {

@@ -130,7 +130,9 @@ All "Ciphers" and "Keymasters" must submit weekly updates.
 | "Keymaster" | "Country Lead" | Saturday 00:00 to Sunday 24:00 UTC |
 | "Country Lead" | "Core Team" | Saturday 00:00 to Sunday 24:00 UTC |
 
-**Auto-offboarding.** Missing 1 consecutive update triggers a warning DM. Missing 2 consecutive updates results in role removal and move to @Alumni. Alumni can re-apply through the normal process.
+**Auto-offboarding:** 
+- Missing 1 consecutive update triggers a warning DM. 
+- Missing 2 consecutive updates results in role removal and move to @Alumni. Alumni can re-apply through the normal process.
 
 ---
 
@@ -186,6 +188,10 @@ THE LIBERATION NETWORK
 ---
 
 ## FAQ
+
+### Why is the token on Solana if the protocol is on Base?
+
+The token launches on Solana to build community and network effects ahead of deploying the protocol there. Solana is the planned hub chain. The protocol is live on Base today and will expand to Solana next.
 
 ### Do I need to reveal my identity to participate?
 

@@ -163,6 +163,10 @@ The bottleneck for geographic expansion is local knowledge. Open-source configs 
 
 ## FAQ
 
+### What chain are the contracts deployed on?
+
+The protocol's smart contracts are live on Base (EVM). Solana deployment is planned as part of the multichain expansion. The $P2P token is an SPL token on Solana. See [Multichain Strategy](/for-investors/multichain-strategy) for details.
+
 ### Where are the contract ABIs?
 
 Contract references are listed in the [Contract References](/for-builders/contract-references) section. Source code is pending audits and will be opensourced by june 2026.

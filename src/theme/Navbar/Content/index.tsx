@@ -1,5 +1,6 @@
 import React, {type ReactNode, useRef, useState, useEffect} from 'react';
 import clsx from 'clsx';
+import {useLocation} from '@docusaurus/router';
 import {
   useThemeConfig,
   ErrorCauseBoundary,
@@ -153,6 +154,8 @@ function NavbarContentLayout({
 
 export default function NavbarContent(): ReactNode {
   const mobileSidebar = useNavbarMobileSidebar();
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   const items = useNavbarItems();
   const [leftItems, rightItems] = splitNavbarItems(items);
@@ -162,9 +165,8 @@ export default function NavbarContent(): ReactNode {
   return (
     <NavbarContentLayout
       left={
-        // TODO stop hardcoding items?
         <>
-          {!mobileSidebar.disabled && <NavbarMobileSidebarToggle />}
+          {!mobileSidebar.disabled && !isHomePage && <NavbarMobileSidebarToggle />}
           <NavbarLogo />
           <ScrollableNavbarItems items={leftItems} />
         </>

@@ -5,11 +5,11 @@ title: "MetaDAO Sale"
 slug: metadao-sale
 ---
 
-The $P2P token launches through a MetaDAO-style sale mechanism designed for fair, community-first distribution.
+The $P2P token launches on Solana through a MetaDAO-style sale mechanism designed for fair, community-first distribution.
 
 ## How It Works
 
-1. Users commit USDC during a 4-day commitment window
+1. Users commit USDC on Solana during a 4-day commitment window
 2. Founders set a discretionary cap on total raise accepted
 3. If oversubscribed, allocations and refunds are distributed pro-rata
 4. 10M tokens are distributed proportionally among all participants at launch

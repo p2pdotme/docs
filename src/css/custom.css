@@ -1,88 +1,3 @@
-/* Nohemi Font Family */
-@font-face {
-  font-family: "Nohemi";
-  src: url("../fonts/Nohemi-Thin-BF6438cc57e2011.woff") format("woff");
-  font-weight: 100;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Nohemi";
-  src: url("../fonts/Nohemi-ExtraLight-BF6438cc581502c.woff") format("woff");
-  font-weight: 200;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Nohemi";
-  src: url("../fonts/Nohemi-Light-BF6438cc5702321.woff") format("woff");
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Nohemi";
-  src: url("../fonts/Nohemi-Regular-BF6438cc579d934.woff") format("woff");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Nohemi";
-  src: url("../fonts/Nohemi-Medium-BF6438cc57ddecd.woff") format("woff");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Nohemi";
-  src: url("../fonts/Nohemi-SemiBold-BF6438cc57db2ff.woff") format("woff");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Nohemi";
-  src: url("../fonts/Nohemi-Bold-BF6438cc577b524.woff") format("woff");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Nohemi";
-  src: url("../fonts/Nohemi-ExtraBold-BF6438cc5761ae2.woff") format("woff");
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Nohemi";
-  src: url("../fonts/Nohemi-Black-BF6438cc565e67b.woff") format("woff");
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Sidebar Active Gradient Animation */
-@keyframes sidebarGradientSlide {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
 /* Global Design System */
 :root {
   /* Brand Colors */
@@ -100,15 +15,13 @@
   --ifm-color-primary-light: var(--p2p-blue-light);
   --ifm-navbar-height: 3.5rem;
 
-  /* Common */
-  --glass-backdrop: blur(12px);
 }
 
 /* Light Mode */
 [data-theme="light"] {
   --ifm-background-color: #ffffff;
   --ifm-background-surface-color: #ffffff;
-  --ifm-navbar-background-color: rgba(255, 255, 255, 0.85);
+  --ifm-navbar-background-color: rgba(255, 255, 255, 0.97);
 
   --p2p-text-primary: #1a1a1a;
   --p2p-text-secondary: #555555;
@@ -135,7 +48,7 @@
 [data-theme="dark"] {
   --ifm-background-color: #131313;
   --ifm-background-surface-color: #1e1e1e;
-  --ifm-navbar-background-color: rgba(19, 19, 19, 0.8);
+  --ifm-navbar-background-color: rgba(19, 19, 19, 0.97);
 
   --p2p-text-primary: #ffffff;
   --p2p-text-secondary: #a1a1a1;
@@ -266,8 +179,6 @@ h6 {
   content: "";
   position: absolute;
   inset: 0;
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
   background: var(--ifm-navbar-background-color);
   z-index: -1;
   pointer-events: none;
@@ -437,6 +348,26 @@ h6 {
   background-color: var(--site-sidebar-bg) !important;
 }
 
+.theme-doc-sidebar-menu {
+  contain: layout style;
+}
+
+/* Fade-in when a sidebar category expands */
+@keyframes sidebarItemReveal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.menu__list-item:not(.menu__list-item--collapsed) > .menu__list > .menu__list-item {
+  animation: sidebarItemReveal 0.12s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu__list-item:not(.menu__list-item--collapsed) > .menu__list > .menu__list-item {
+    animation: none;
+  }
+}
+
 /* Separator between sidebar sections */
 .theme-doc-sidebar-menu > .menu__list-item + .menu__list-item {
   margin-top: 0.25rem;
@@ -501,18 +432,6 @@ h6 {
   > .menu__list-item
   > .menu__link--active {
   border-left-color: var(--p2p-blue);
-  background: transparent !important;
-}
-
-.theme-doc-sidebar-menu
-  > .menu__list-item
-  > .menu__list
-  > .menu__list-item
-  > .menu__link--active::before {
-  transform: translateX(0);
-  opacity: 1;
-  animation: sidebarGradientSlide 0.4s ease-out forwards;
-  border-radius: 0 6px 6px 0;
 }
 
 /* Base style for all links */
@@ -521,29 +440,7 @@ h6 {
   color: var(--p2p-text-secondary);
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
-  transition: color 0.15s ease;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
-}
-
-.menu__link::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(
-    90deg,
-    rgba(73, 63, 238, 0.15) 0%,
-    transparent 100%
-  );
-  transform: translateX(-100%);
-  opacity: 0;
-  z-index: -1;
-  border-radius: 2px;
-  pointer-events: none;
+  transition: color 0.15s ease, background 0.2s ease;
 }
 
 .menu__link:hover {
@@ -556,13 +453,7 @@ h6 {
   color: var(--ifm-color-primary) !important;
   font-weight: 500;
   border-left: none;
-  background: transparent !important;
-}
-
-.menu__link--active::before {
-  transform: translateX(0);
-  opacity: 1;
-  animation: sidebarGradientSlide 0.4s ease-out forwards;
+  background: linear-gradient(90deg, rgba(73, 63, 238, 0.12) 0%, transparent 100%) !important;
 }
 
 /* Nested List */
@@ -579,14 +470,6 @@ h6 {
 
 .menu__list .menu__link--active {
   border-left-color: var(--p2p-blue);
-  background: transparent !important;
-}
-
-.menu__list .menu__link--active::before {
-  transform: translateX(0);
-  opacity: 1;
-  animation: sidebarGradientSlide 0.4s ease-out forwards;
-  border-radius: 0 6px 6px 0;
 }
 
 /* Buttons */
@@ -629,8 +512,6 @@ h6 {
 /* Cards & Glass Containers */
 .glass-card {
   background: var(--glass-bg);
-  backdrop-filter: var(--glass-backdrop);
-  -webkit-backdrop-filter: var(--glass-backdrop);
   border: 1px solid var(--glass-border);
   border-radius: 4px;
   box-shadow: var(--glass-shadow);
@@ -918,28 +799,6 @@ h6 {
   color: var(--search-placeholder);
 }
 
-/* Local Search Plugin Styles */
-.DocSearch-Button {
-  background: var(--search-bg) !important;
-  border: 1px solid var(--search-border) !important;
-  border-radius: 4px !important;
-  color: var(--p2p-text-secondary) !important;
-  padding: 0 1rem !important;
-  height: 36px !important;
-}
-
-.DocSearch-Button:hover {
-  background: var(--search-bg-hover) !important;
-  border-color: var(--p2p-blue) !important;
-}
-
-.DocSearch-Button-Placeholder {
-  color: var(--search-placeholder) !important;
-}
-
-.DocSearch-Search-Icon {
-  color: var(--p2p-text-secondary) !important;
-}
 
 /* Responsive Styles */
 
@@ -1055,14 +914,44 @@ h6 {
     font-size: 0.9rem;
   }
 
-  /* Search mobile */
-  .DocSearch-Button {
-    padding: 0 0.75rem !important;
+  /* Search mobile — icon-only magnifying glass */
+  .navbar__search-input {
+    width: 36px !important;
+    height: 36px !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    color: transparent !important;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E") !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    background-size: 20px !important;
   }
 
-  .DocSearch-Button-Placeholder,
-  .DocSearch-Button-Keys {
-    display: none !important;
+  .navbar__search-input::placeholder {
+    color: transparent !important;
+  }
+
+  .navbar__search-input:focus {
+    width: calc(100vw - 2rem) !important;
+    position: absolute;
+    right: 0;
+    padding: 0.5rem 1rem !important;
+    background: var(--ifm-background-color) !important;
+    border: 1px solid var(--p2p-blue) !important;
+    color: var(--search-text) !important;
+    background-image: none !important;
+    border-radius: 4px;
+    z-index: 100;
+  }
+
+  .navbar__search-input:focus::placeholder {
+    color: var(--search-placeholder) !important;
+  }
+
+  [data-theme="dark"] .navbar__search-input {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23aaa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E") !important;
   }
 }
 
@@ -1145,4 +1034,18 @@ biel-button::part(button) {
 biel-button::part(button):hover {
   transform: translateY(-2px);
   box-shadow: 0 6px 24px rgba(73, 63, 238, 0.35);
+}
+
+.header-github-link::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  display: flex;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12' fill='%23000'/%3E%3C/svg%3E")
+    no-repeat;
+}
+
+[data-theme='dark'] .header-github-link::before {
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12' fill='%23fff'/%3E%3C/svg%3E")
+    no-repeat;
 }

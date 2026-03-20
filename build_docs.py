@@ -73,9 +73,9 @@ class DocBuilder:
                     f.write(base64.b64decode(img_data))
                 image_count += 1
                 image_map[img_num] = img_path
-                print(f"  📷 Extracted {filename}")
+                print(f"  Extracted {filename}")
             except Exception as e:
-                print(f"  ⚠️ Error saving {filename}: {e}")
+                print(f"  WARNING: Error saving {filename}: {e}")
             
             # Remove the reference definition entirely (we'll use inline syntax)
             return ''
@@ -207,7 +207,8 @@ class DocBuilder:
     
     def _generate_doc_files(self, sections: List[Dict], doc_config: Dict) -> List[str]:
         """Generate individual markdown files for each section."""
-        output_dir = Path(self.root_dir / doc_config['outputDir'])
+        # Output into content/{doc_id}/ for unified docs structure
+        output_dir = Path(self.root_dir / "content" / doc_config['id'])
         output_dir.mkdir(parents=True, exist_ok=True)
         
         generated_files = []
@@ -283,82 +284,46 @@ slug: {url_slug}
                 'position': i
             })
             
-            print(f"  📄 Generated {filename}")
+            print(f"  Generated {filename}")
         
         return generated_files
     
-    def _generate_sidebar(self, doc_config: Dict, files: List[Dict]) -> str:
-        """Generate TypeScript sidebar configuration."""
-        config_id = doc_config['id']
-        sidebar_id = doc_config.get('sidebarId', f"{config_id}Sidebar")
-        route_base = doc_config['routeBasePath']
-        sidebar_style = doc_config.get('sidebarStyle', 'nested')
-        
-        # Flat style: single category with all docs as simple string items
-        if sidebar_style == 'flat':
-            doc_ids = [file_info['doc_id'] for file_info in files]
-            first_doc_id = doc_ids[0] if doc_ids else None
-            # Exclude first doc from items since it's used as the category link
-            # This prevents "Next" navigation from looping back to the same page
-            remaining_doc_ids = doc_ids[1:] if len(doc_ids) > 1 else []
-            
-            sidebar_content = {
-                'type': 'category',
-                'label': doc_config['navbarLabel'],
-                'collapsible': True,
-                'collapsed': False,
-                'link': {
-                    'type': 'doc',
-                    'id': first_doc_id,
-                },
-                'items': remaining_doc_ids,
-            }
-            
-            sidebar_ts = f"""import type {{ SidebarsConfig }} from "@docusaurus/plugin-content-docs";
+    def _generate_sidebar_category(self, doc_config: Dict, files: List[Dict]) -> Dict:
+        """Generate a sidebar category for a single doc section."""
+        doc_id = doc_config['id']
+
+        # Build doc IDs with the content subdirectory prefix
+        doc_ids = [f"{doc_id}/{file_info['doc_id']}" for file_info in files]
+        first_doc_id = doc_ids[0] if doc_ids else None
+        remaining_doc_ids = doc_ids[1:] if len(doc_ids) > 1 else []
+
+        category = {
+            'type': 'category',
+            'label': doc_config['navbarLabel'],
+            'collapsible': True,
+            'collapsed': True,
+            'link': {
+                'type': 'doc',
+                'id': first_doc_id,
+            },
+            'items': remaining_doc_ids,
+        }
+
+        return category
+
+    def _generate_unified_sidebar(self) -> str:
+        """Generate a unified sidebars/main.ts with all doc sections."""
+        categories = []
+        for doc_config in self.config['docs']:
+            files = self._all_generated_files.get(doc_config['id'], [])
+            if files:
+                category = self._generate_sidebar_category(doc_config, files)
+                categories.append(category)
+
+        sidebar_ts = f"""import type {{ SidebarsConfig }} from "@docusaurus/plugin-content-docs";
 
 const sidebars: SidebarsConfig = {{
-  {sidebar_id}: [
-    {json.dumps(sidebar_content, indent=4).replace(chr(10), chr(10) + '    ')}
-  ],
-}};
-
-export default sidebars;
-"""
-            return sidebar_ts
-        
-        # Nested style: each doc is its own category with subsection links
-        items = []
-        for file_info in files:
-            doc_id = file_info['doc_id']       # Use doc_id for Docusaurus references
-            url_slug = file_info['url_slug']   # Use url_slug for href links
-            title = file_info['title']
-            subsections = file_info.get('subsections', [])
-            
-            # Build subsection links if generateTocLinks is enabled
-            sub_items = []
-            if doc_config.get('generateTocLinks', True) and subsections:
-                for sub in subsections:
-                    sub_items.append({
-                        'type': 'link',
-                        'label': sub['title'],
-                        'href': f"/{route_base}/{url_slug}#{sub['slug']}"
-                    })
-            
-            item = {
-                'type': 'category',
-                'label': title,
-                'collapsible': True,
-                'collapsed': True,
-                'link': {'type': 'doc', 'id': doc_id},
-                'items': sub_items
-            }
-            items.append(item)
-        
-        # Generate TypeScript with proper JSON formatting
-        sidebar_ts = f"""import type {{SidebarsConfig}} from '@docusaurus/plugin-content-docs';
-
-const sidebars: SidebarsConfig = {{
-  {sidebar_id}: {json.dumps(items, indent=4)},
+  mainSidebar: {json.dumps(categories, indent=4)},
 }};
 
 export default sidebars;
@@ -366,76 +331,16 @@ export default sidebars;
         return sidebar_ts
     
     def _generate_docusaurus_config(self) -> str:
-        """Generate the main Docusaurus configuration file."""
-        docs = self.config['docs']
+        """Generate the main Docusaurus configuration file.
+
+        Uses a unified single-docs architecture: all content lives under
+        content/ and is served from routeBasePath '/' with a single sidebar.
+        """
         navbar_config = self.config.get('navbar', {})
         footer_config = self.config.get('footer', {})
-        
-        # Navbar CSS class map for icons
-        navbar_classes = {
-            'Whitepaper': 'navbar__item--whitepaper navbar-icon-whitepaper',
-            'For Investors': 'navbar-icon-investors',
-            'For Builders': 'navbar-icon-builders',
-            'For Merchants': 'navbar-icon-merchants',
-            'For Users': 'navbar-icon-users',
-            'For Community': 'navbar-icon-community',
-        }
+        social_links = footer_config.get('socialLinks', {})
 
-        # Build navbar items as dropdowns expanding into section index
-        navbar_items = []
-        for i, doc in enumerate(docs):
-            # Skip translated docs from navbar (handled by client-side hook)
-            if doc.get('skipGeneration', False):
-                continue
-
-            label = doc['navbarLabel']
-            generated_files = self._all_generated_files.get(doc['id'], [])
-            
-            if generated_files:
-                dropdown_items = []
-                is_skip = doc.get('skipGeneration', False)
-                for file_info in generated_files:
-                    if is_skip and 'url_slug' in file_info:
-                        # Pre-generated docs (e.g. translations) use href
-                        doc_item = {
-                            'href': f"/{doc['routeBasePath']}/{file_info['url_slug']}",
-                            'label': file_info['title'],
-                        }
-                    else:
-                        # Normal docs use type:'doc' for native active link
-                        doc_item = {
-                            'type': 'doc',
-                            'docId': file_info['doc_id'],
-                            'label': file_info['title'],
-                        }
-                        if i > 0:
-                            doc_item['docsPluginId'] = doc['id']
-                    dropdown_items.append(doc_item)
-                
-                item = {
-                    'type': 'dropdown',
-                    'label': label,
-                    'position': doc.get('navbarPosition', 'left'),
-                    'items': dropdown_items,
-                }
-            else:
-                item = {
-                    'type': 'docSidebar',
-                    'sidebarId': doc.get('sidebarId', f"{doc['id']}Sidebar"),
-                    'position': doc.get('navbarPosition', 'left'),
-                    'label': label,
-                }
-                if i > 0:
-                    item['docsPluginId'] = doc['id']
-            
-            navbar_items.append(item)
-        
-        # Build docs plugins config
-        # First doc uses the preset, additional docs use plugins
-        first_doc = docs[0]
-        additional_docs = docs[1:] if len(docs) > 1 else []
-        
-        # Build plugins array: Biel.ai widget (from config) + additional docs plugins
+        # Build plugins array (only Biel.ai widget, no multi-docs plugins)
         plugins = []
         biel_config = self.config.get('biel', {})
         if biel_config.get('enable', True) and biel_config.get('project'):
@@ -455,28 +360,8 @@ export default sidebars;
         {', '.join(biel_opts)}
       }},
     ]""")
-        if additional_docs:
-            for doc in additional_docs:
-                # Use custom sidebar path if specified, otherwise use default
-                sidebar_path = doc.get('sidebarPath', f'./sidebars/{doc["id"]}.ts')
-                plugins.append(f"""[
-      '@docusaurus/plugin-content-docs',
-      {{
-        id: '{doc["id"]}',
-        path: '{doc["outputDir"]}',
-        routeBasePath: '{doc["routeBasePath"]}',
-        sidebarPath: '{sidebar_path}',
-      }},
-    ]""")
         plugins_config = f"\n  plugins: [\n    {','.join(plugins)}\n  ]," if plugins else ""
-        
-        # Build search plugin config based on actual docs
-        docs_route_base_paths = [doc['routeBasePath'] for doc in docs]
-        docs_dirs = [doc['outputDir'] for doc in docs]
-        
-        # Social links for footer
-        social_links = footer_config.get('socialLinks', {})
-        
+
         config = f"""import {{themes as prismThemes}} from 'prism-react-renderer';
 import type {{Config}} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
@@ -593,7 +478,6 @@ const config: Config = {{
 
   clientModules: [
     './src/clientModules/tocAutoScroll.js',
-    './src/clientModules/uiTranslations.js',
   ],
 
   presets: [
@@ -601,8 +485,9 @@ const config: Config = {{
       'classic',
       {{
         docs: {{
-          sidebarPath: './sidebars/{first_doc["id"]}.ts',
-          routeBasePath: '{first_doc["routeBasePath"]}',
+          path: 'content',
+          routeBasePath: '/',
+          sidebarPath: './sidebars/main.ts',
         }},
         blog: false,
         theme: {{
@@ -622,8 +507,8 @@ const config: Config = {{
         indexDocs: true,
         indexBlog: false,
         indexPages: false,
-        docsRouteBasePath: {json.dumps([doc['routeBasePath'] for doc in self.config['docs']])},
-        docsDir: {json.dumps([doc['outputDir'] for doc in self.config['docs']])},
+        docsRouteBasePath: ["/"],
+        docsDir: ["content"],
         searchResultLimits: 10,
         searchResultContextMaxLength: 50,
       }},
@@ -650,7 +535,14 @@ const config: Config = {{
         src: '{navbar_config.get("logo", {}).get("src", "img/p2p-foundation-main.svg")}',
         srcDark: '{navbar_config.get("logo", {}).get("srcDark", "img/p2p-foundation-2.svg")}',
       }},
-      items: {json.dumps(navbar_items, indent=8)},
+      items: [
+        {{
+          href: 'https://github.com/p2pdotme/docs',
+          position: 'right',
+          className: 'header-github-link',
+          'aria-label': 'GitHub repository',
+        }},
+      ],
     }},
     footer: {{
       style: 'dark',
@@ -743,22 +635,16 @@ export default config;
         
         Returns True if validation passes, False if there are errors.
         """
-        print("\n🔍 Validating source files...")
+        print("\nValidating source files...")
         print("-" * 40)
         
         all_errors = []
         all_warnings = []
         
         for doc_config in self.config['docs']:
-            doc_name = doc_config['navbarLabel']
-
-            # Skip validation for pre-generated docs
-            if doc_config.get('skipGeneration', False):
-                print(f"  ⏭️  Skipping validation for {doc_name} (pre-generated)")
-                continue
-
             source_path = self.root_dir / doc_config['source']
-
+            doc_name = doc_config['navbarLabel']
+            
             if not source_path.exists():
                 all_errors.append(f"{doc_name}: Source file not found: {source_path}")
                 continue
@@ -775,30 +661,29 @@ export default config;
         
         # Print results
         if all_warnings:
-            print("\n⚠️  Warnings:")
+            print("\nWarnings:")
             for w in all_warnings:
                 print(f"  - {w}")
         
         if all_errors:
-            print("\n❌ Errors:")
+            print("\nErrors:")
             for e in all_errors:
                 print(f"  - {e}")
-            print("\n❌ Validation failed! Please fix errors before building.")
+            print("\nValidation failed! Please fix errors before building.")
             return False
         
-        print("✅ Validation passed!")
+        print("Validation passed!")
         return True
     
     def clean(self):
         """Clean generated files."""
-        print("🧹 Cleaning generated files...")
-        
-        for doc in self.config['docs']:
-            output_dir = Path(self.root_dir / doc['outputDir'])
-            if output_dir.exists():
-                shutil.rmtree(output_dir)
-                print(f"  Removed {output_dir}")
-        
+        print("Cleaning generated files...")
+
+        content_dir = self.root_dir / "content"
+        if content_dir.exists():
+            shutil.rmtree(content_dir)
+            print(f"  Removed {content_dir}")
+
         sidebars_dir = self.website_dir / "sidebars"
         if sidebars_dir.exists():
             shutil.rmtree(sidebars_dir)
@@ -806,13 +691,13 @@ export default config;
     
     def build(self, clean: bool = False, skip_validation: bool = False):
         """Build all documentation."""
-        print("🚀 P2P Foundation Documentation Builder")
+        print("P2P Foundation Documentation Builder")
         print("=" * 50)
         
         # Run validation first unless skipped
         if not skip_validation:
             if not self.validate():
-                print("\n💡 Run with --no-validate to skip validation")
+                print("\nRun with --no-validate to skip validation")
                 return False
         
         if clean:
@@ -824,47 +709,28 @@ export default config;
         
         # Process each doc
         for doc_config in self.config['docs']:
-            print(f"\n📚 Processing: {doc_config['navbarLabel']}")
+            print(f"\nProcessing: {doc_config['navbarLabel']}")
             print("-" * 40)
-
-            # Check if this doc should skip generation (e.g., pre-generated translations)
-            if doc_config.get('skipGeneration', False):
-                print(f"  ⏭️  Skipping generation (pre-generated files)")
-                if 'preGeneratedFiles' in doc_config:
-                    output_dir = self.website_dir / doc_config['outputDir']
-                    enriched_files = []
-                    for file_info in doc_config['preGeneratedFiles']:
-                        enriched = dict(file_info)
-                        md_file = output_dir / f"{file_info['doc_id']}.md"
-                        if md_file.exists():
-                            content = md_file.read_text(encoding='utf-8')
-                            slug_match = re.search(r'^slug:\s*(.+)$', content, re.MULTILINE)
-                            if slug_match:
-                                enriched['url_slug'] = slug_match.group(1).strip()
-                        enriched_files.append(enriched)
-                    self._all_generated_files[doc_config['id']] = enriched_files
-                    print(f"  ✅ Loaded {len(enriched_files)} pre-generated files")
-                continue
 
             # Read source file
             source_path = self.root_dir / doc_config['source']
             if not source_path.exists():
-                print(f"  ⚠️ Source file not found: {source_path}")
+                print(f"  WARNING: Source file not found: {source_path}")
                 continue
-            
+
             with open(source_path, 'r', encoding='utf-8') as f:
                 content = f.read()
-            
+
             # Extract images if enabled
             if doc_config.get('extractImages', True):
                 content, img_count = self._extract_images(content, doc_config['id'])
                 if img_count > 0:
-                    print(f"  ✅ Extracted {img_count} images")
-            
+                    print(f"  Extracted {img_count} images")
+
             # Parse and split content
             split_level = doc_config.get('splitByHeading', 2)
             sections = self._parse_headings(content, split_level)
-            
+
             # Filter out sections to skip
             skip_sections = doc_config.get('skipSections', [])
             if skip_sections:
@@ -872,30 +738,30 @@ export default config;
                 sections = [s for s in sections if s['title'] not in skip_sections]
                 skipped = original_count - len(sections)
                 if skipped > 0:
-                    print(f"  ⏭️  Skipped {skipped} sections")
-            
-            print(f"  📑 Found {len(sections)} sections")
-            
-            # Generate doc files
+                    print(f"  Skipped {skipped} sections")
+
+            print(f"  Found {len(sections)} sections")
+
+            # Generate doc files into content/{doc_id}/
             files = self._generate_doc_files(sections, doc_config)
             self._all_generated_files[doc_config['id']] = files
-            
-            # Generate sidebar
-            sidebar_content = self._generate_sidebar(doc_config, files)
-            sidebar_path = sidebars_dir / f"{doc_config['id']}.ts"
-            with open(sidebar_path, 'w', encoding='utf-8') as f:
-                f.write(sidebar_content)
-            print(f"  📋 Generated sidebar: {sidebar_path.name}")
-        
+
+        # Generate unified sidebar
+        sidebar_content = self._generate_unified_sidebar()
+        sidebar_path = sidebars_dir / "main.ts"
+        with open(sidebar_path, 'w', encoding='utf-8') as f:
+            f.write(sidebar_content)
+        print(f"\nGenerated unified sidebar: {sidebar_path.name}")
+
         # Generate main config
-        print(f"\n⚙️ Generating docusaurus.config.ts")
+        print("Generating docusaurus.config.ts")
         config_content = self._generate_docusaurus_config()
         config_path = self.website_dir / "docusaurus.config.ts"
         with open(config_path, 'w', encoding='utf-8') as f:
             f.write(config_content)
-        
+
         print("\n" + "=" * 50)
-        print("✅ Documentation generated!")
+        print("Documentation generated successfully!")
         print(f"\nTo preview: npm run start")
         print(f"To build:   npm run build")
         return True

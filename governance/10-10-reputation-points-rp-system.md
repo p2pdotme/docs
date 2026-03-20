@@ -15,18 +15,29 @@ slug: reputation-points-rp-system
 
 ## 10.2 User Tiers (U0-U3)
 
-**Entry:** All users start at 0 RP. Verification grants +300 RP.
+**Entry:** All users start at 0 RP. Social verification via Reclaim ZK-TLS proofs (X, Instagram, LinkedIn, GitHub, Facebook) grants RP. Optional government ID verification (Aadhaar, passport) grants +300 RP.
 
 [S15, S16, S17: Order Limit Validation]
 
-| Tier | RP Range | Max Order (INR) | Max Order (IDR/BRL) | Daily Orders | Monthly Orders |
-|------|----------|-----------------|---------------------|--------------|----------------|
-| U0 | 0-10 | $0 | $0 | 5 buy / 10 sell | 25 buy |
-| U1 | 11-499 | RP ÷ 2 (up to $250) | RP × $1 (up to $499) | 5 buy / 10 sell | 25 buy |
-| U2 | 500-799 | $250 + (RP - 500) × $0.50 | $400 (cap) | 5 buy / 10 sell | 25 buy |
-| U3 | 800+ | $400 (cap) | $400 (cap) | 5 buy / 10 sell | 25 buy |
+**Limit formula (from `OrderFlowFacet.sol`):** `limit = (userRp * denominator * 1e6) / numerator`, configurable per currency.
 
-*U2 INR formula: At 500 RP = $250, at 799 RP = $399.50, scaling linearly.*
+**Current configured values (from `DiamondInitCoTUpgrade.sol`):**
+
+| Currency | Numerator | Denominator | Effective ratio |
+|----------|-----------|-------------|----------------|
+| INR | 1 | 1 | 1 RP = $1 USDT |
+| BRL | 1 | 2 | 1 RP = $2 USDT |
+| IDR | 1 | 2 | 1 RP = $2 USDT |
+| ARS | 1 | 1 | 1 RP = $1 USDT |
+
+| Tier | RP Range | Max Order (INR, 1:1) | Max Order (IDR/BRL, 1:2) | Daily Orders | Monthly Orders |
+|------|----------|----------------------|--------------------------|--------------|----------------|
+| U0 | 0-10 | $0 | $0 | 5 buy / 10 sell | 25 buy |
+| U1 | 11-499 | RP × $1 (up to $499) | RP × $2 (up to $998) | 5 buy / 10 sell | 25 buy |
+| U2 | 500-799 | $500-$799 | $1,000-$1,598 | 5 buy / 10 sell | 25 buy |
+| U3 | 800+ | Capped at max limit | Capped at max limit | 5 buy / 10 sell | 25 buy |
+
+*Limits are subject to per-currency max caps set in `maxBuyTxLimitByCurrency` and `maxSellTxLimitByCurrency`. Sell orders have a floor of $100.*
 
 
 **RP Sources:**
