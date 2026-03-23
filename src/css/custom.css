@@ -694,6 +694,18 @@ h6 {
   width: auto;
 }
 
+.footer-brand-kit-link {
+  color: #999;
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-brand-kit-link:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
 .footer-center {
   display: flex;
   align-items: center;

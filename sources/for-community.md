@@ -12,6 +12,7 @@ The P2P Foundation Ambassador Program ("The Liberation Network") is a community-
 - [How to join](/for-community/how-to-join)
 - [Weekly updates and offboarding](/for-community/weekly-updates-and-offboarding)
 - [Remuneration](/for-community/remuneration)
+- [Brand kit](/for-community/brand-kit)
 - [FAQ](/for-community/faq)
 
 Also see [`/whitepaper`](/whitepaper/abstract) for protocol context and [`/for-investors`](/for-investors/start-here) for the token thesis.
@@ -182,6 +183,79 @@ THE LIBERATION NETWORK
 - **Human selection.** "Country Leads" and "Keymasters" evaluate, not algorithms
 - **Sustainable ratio.** 1 "Keymaster" per 5 "Ciphers" max
 - **Cypherpunk ethos.** Privacy, decentralization, financial sovereignty
+
+---
+
+## Brand Kit
+
+Official P2P Protocol logo assets for press, partners, and community use.
+
+### Square Logo
+
+<div style={{textAlign: 'center', padding: '2rem', background: '#1a1a2e', borderRadius: '12px', marginBottom: '2rem'}}>
+  <img src="/brand/square.png" alt="P2P Protocol logo" width="120" />
+</div>
+
+[Download PNG](/brand/square.png)
+
+### Logo Variants
+
+#### Dark Theme
+
+For use on dark backgrounds.
+
+<div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', marginBottom: '1.5rem'}}>
+  <div style={{textAlign: 'center', padding: '1.5rem', background: '#1a1a2e', borderRadius: '8px'}}>
+    <img src="/brand/dark.svg" alt="Color logo (dark)" width="180" />
+    <p style={{margin: '0.5rem 0 0', fontSize: '0.85rem', opacity: 0.7}}>Color</p>
+  </div>
+  <div style={{textAlign: 'center', padding: '1.5rem', background: '#1a1a2e', borderRadius: '8px'}}>
+    <img src="/brand/dark-grayscale.svg" alt="Grayscale logo (dark)" width="180" />
+    <p style={{margin: '0.5rem 0 0', fontSize: '0.85rem', opacity: 0.7}}>Grayscale</p>
+  </div>
+  <div style={{textAlign: 'center', padding: '1.5rem', background: '#1a1a2e', borderRadius: '8px'}}>
+    <img src="/brand/dark-bw.svg" alt="Black and white logo (dark)" width="180" />
+    <p style={{margin: '0.5rem 0 0', fontSize: '0.85rem', opacity: 0.7}}>Black & White</p>
+  </div>
+</div>
+
+| Variant | SVG | PNG |
+|---------|-----|-----|
+| Color | [dark.svg](/brand/dark.svg) | [dark.png](/brand/dark.png) |
+| Grayscale | [dark-grayscale.svg](/brand/dark-grayscale.svg) | [dark-grayscale.png](/brand/dark-grayscale.png) |
+| Black & White | [dark-bw.svg](/brand/dark-bw.svg) | [dark-bw.png](/brand/dark-bw.png) |
+
+#### Light Theme
+
+For use on light backgrounds.
+
+<div style={{display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1rem', marginBottom: '1.5rem'}}>
+  <div style={{textAlign: 'center', padding: '1.5rem', background: '#f5f5f5', borderRadius: '8px'}}>
+    <img src="/brand/light.svg" alt="Color logo (light)" width="180" />
+    <p style={{margin: '0.5rem 0 0', fontSize: '0.85rem', opacity: 0.7}}>Color</p>
+  </div>
+  <div style={{textAlign: 'center', padding: '1.5rem', background: '#f5f5f5', borderRadius: '8px'}}>
+    <img src="/brand/light-grayscale.svg" alt="Grayscale logo (light)" width="180" />
+    <p style={{margin: '0.5rem 0 0', fontSize: '0.85rem', opacity: 0.7}}>Grayscale</p>
+  </div>
+  <div style={{textAlign: 'center', padding: '1.5rem', background: '#f5f5f5', borderRadius: '8px'}}>
+    <img src="/brand/light-bw.svg" alt="Black and white logo (light)" width="180" />
+    <p style={{margin: '0.5rem 0 0', fontSize: '0.85rem', opacity: 0.7}}>Black & White</p>
+  </div>
+</div>
+
+| Variant | SVG | PNG |
+|---------|-----|-----|
+| Color | [light.svg](/brand/light.svg) | [light.png](/brand/light.png) |
+| Grayscale | [light-grayscale.svg](/brand/light-grayscale.svg) | [light-grayscale.png](/brand/light-grayscale.png) |
+| Black & White | [light-bw.svg](/brand/light-bw.svg) | [light-bw.png](/brand/light-bw.png) |
+
+### Usage Guidelines
+
+- Use the **dark theme** logos on dark backgrounds and the **light theme** logos on light backgrounds.
+- Prefer **SVG** for web and digital use. Use **PNG** when SVG is not supported.
+- Do not stretch, rotate, recolor, or add effects to the logo.
+- Maintain clear space around the logo equal to at least the height of the logomark.
 
 ---
 
