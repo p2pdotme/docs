@@ -12,6 +12,9 @@
 /sidebars/
 /docusaurus.config.ts
 
+# Claude
+CLAUDE.md
+
 # Misc
 .DS_Store
 .env
