@@ -472,7 +472,6 @@ The following documents contain the corporate formation and token warrant agreem
 
 - **[Company Formation and Token Warrant Documents](https://docsend.com/view/s/umhy65d8uus5whun)** — Corporate formation documents and token warrant agreements with existing backers.
 
-These documents should be read alongside the [Disclosures](/for-token-holders/disclosures) section of this documentation.
 
 ---
 
