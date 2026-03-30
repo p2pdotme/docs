@@ -49,10 +49,24 @@ Before operating, ensure you have the following.
 
 ```mermaid
 flowchart LR
-    register[Register merchant] --> stake[Stake liquidity]
-    stake --> addPc[Add payment channels]
-    addPc --> approvePc[Channel approval]
-    approvePc --> live[Assignable merchant state]
+    %% Styles
+    classDef default fill:#f9f9f9,stroke:#333,stroke-width:2px;
+    classDef active fill:#e6f7ff,stroke:#1890ff,stroke-width:2px;
+    classDef pending fill:#fffbe6,stroke:#faad14,stroke-width:2px;
+    classDef live fill:#f6ffed,stroke:#52c41a,stroke-width:3px,color:#237804,font-weight:bold;
+
+    %% Nodes
+    register("fa:fa-user-plus Register merchant"):::active
+    stake("fa:fa-coins Stake liquidity"):::active
+    addPc("fa:fa-building-columns Add payment channels"):::active
+    approvePc("fa:fa-clock Channel approval"):::pending
+    live("fa:fa-check-circle Assignable<br>merchant state"):::live
+
+    %% Arrows
+    register --> stake
+    stake --> addPc
+    addPc --> approvePc
+    approvePc --> live
 ```
 
 ---
@@ -70,6 +84,36 @@ flowchart LR
 - Confirm payment actions as required by the flow.
 - Ensure finalization steps are completed in-app.
 - Keep records/evidence for dispute scenarios.
+
+```mermaid
+stateDiagram-v2
+    direction LR
+    [*] --> Assigned: Order matched
+    
+    state Assigned {
+        [*] --> PendingAcceptance
+        PendingAcceptance --> Accepted: Merchant accepts
+        PendingAcceptance --> Expired: Timeout
+    }
+    
+    Assigned --> FiatSettlement: If Accepted
+    Assigned --> [*]: If Expired (re-assigned)
+    
+    state FiatSettlement {
+        [*] --> AwaitingPayment
+        AwaitingPayment --> PaymentSent: Fiat transferred
+    }
+    
+    FiatSettlement --> CryptoRelease
+    
+    state CryptoRelease {
+        [*] --> EscrowLocked
+        EscrowLocked --> Completed: Protocol releases crypto
+        EscrowLocked --> Disputed: Issue raised
+    }
+    
+    CryptoRelease --> [*]
+```
 
 ---
 
@@ -93,12 +137,20 @@ Circles organize merchants into accountable groups, enable community oversight t
 
 ```mermaid
 flowchart TD
-    user[User order]
-    orderFlow[Order flow]
-    registry[Merchant registry]
-    country[Country config]
-    assignment[Eligibility and assignment checks]
-    settlement[Settlement and accounting]
+    classDef userAction fill:#e6f7ff,stroke:#1890ff,stroke-width:2px;
+    classDef protocolCore fill:#f9f9f9,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5;
+    classDef logic fill:#f6ffed,stroke:#52c41a,stroke-width:2px;
+
+    user("fa:fa-user User order"):::userAction
+    orderFlow("Order flow"):::userAction
+
+    subgraph "Protocol Layer (On-Chain)"
+        direction TB
+        registry("fa:fa-database Merchant registry"):::protocolCore
+        country("fa:fa-globe Country config"):::protocolCore
+        assignment("fa:fa-scale-balanced Eligibility & assignment checks"):::logic
+        settlement("fa:fa-file-invoice-dollar Settlement & accounting"):::logic
+    end
 
     user --> orderFlow
     orderFlow --> registry
@@ -153,12 +205,25 @@ If a dispute is raised, follow these steps.
 Disputes are settled on-chain by authorized admins under protocol fault rules and dispute windows.
 
 ```mermaid
-flowchart TD
-    order[Order in progress] --> issue[Issue detected]
-    issue --> dispute[Dispute raised]
-    dispute --> evidence[Submit evidence]
-    evidence --> settle[Admin settlement on-chain]
-    settle --> outcome[Final outcome]
+sequenceDiagram
+    participant U as User/Merchant
+    participant P as Protocol Escrow
+    participant A as Arbiter
+    
+    U->>P: Trade initiated
+    Note over P: Crypto Locked in Escrow
+    U--xU: Issue Detected (e.g. no fiat received)
+    U->>P: Raise Dispute
+    Note over P: State = Disputed
+    U->>A: Submit Evidence (in-app)
+    Note over A: Review Evidence
+    A->>P: Issue Ruling
+    alt Ruled for User
+        P->>U: Refund Crypto
+    else Ruled for Merchant
+        P->>U: Release Crypto to Merchant
+    end
+    Note over P: Final Outcome Settled On-Chain
 ```
 
 *Jury-based escalation tiers and governance-vote finality for disputes are planned for a future release.*
