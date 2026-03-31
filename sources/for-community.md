@@ -108,14 +108,14 @@ All tracks operate at the country level, managed by "Country Leads".
 
 ## How to Join
 
-**Becoming a Candidate.** Anyone can become a Candidate by joining Discord. No XP requirement.
+**Becoming a Candidate.** Anyone can become a Candidate by joining [Discord](https://discord.gg/p2pfoundation). No XP requirement.
 
 **Candidate to "Cipher" requirements.**
 
-1. Earn minimum 500 XP through app usage and social activity
+1. Earn minimum 500 XP through P2P Protocol apps usage (eg. P2P.me and Coins.me) and social activity
 2. Attend a mandatory induction session (held on 1st and 3rd Sunday of every month, conducted by "Country Lead")
-3. Browse open roles posted by "Keymasters" in your track/country
-4. Apply via Discord ticket
+3. Browse open roles posted by "Keymasters" in your track/country (Eg. #forge-portal, #signal-portal, #node-portal, #relay-portal)
+4. Apply via Discord ticket in your portal
 5. Pass interview with "Keymaster"
 6. Upon approval, become a "Cipher" with role and channel access
 
@@ -163,17 +163,30 @@ All payments made directly to your P2P wallet.
 
 ```
 THE LIBERATION NETWORK
-├── #liberation-hub
-├── #liberation-announcements
-├── #hall-of-fame
-├── CANDIDATES (#candidates-chat, #link-wallet)
-├── ONBOARDING (#apply-cipher, #open-roles)
-├── WEEKLY UPDATES (#cipher-updates, #keymaster-updates)
-├── RELAY GUILD (#relay-guild-india, #relay-guild-brazil, ...)
-├── NODE GUILD (#node-guild-india, #node-guild-brazil, ...)
-├── SIGNAL GUILD (#signal-guild-india, #signal-guild-brazil, ...)
-├── FORGE GUILD (#forge-guild-india, #forge-guild-brazil, ...)
-└── KEYMASTER ZONE (#keymaster-leads, #keymaster-sync, #keymaster-review)
+├── #start-here → Onboarding for candidates
+├── #select-guild → Guild selection panel (Eg. Relay, Node, Signal, Forge)
+├── #forge-portal → Forge job postings
+├── #signal-portal → Signal job postings
+├── #node-portal → Node job postings
+├── #relay-portal → Relay job postings
+│
+├── #forge-guild → Forge Cipher workspace
+├── #signal-guild → Signal Cipher workspace
+├── #node-guild → Node Cipher workspace
+├── #relay-guild → Relay Cipher workspace
+├── #keymasters → Keymaster workspace
+│
+├── #tln-argentina → Regional community & coordination
+├── #tln-brazil → Regional community & coordination
+├── #tln-indonesia → Regional community & coordination
+├── #tln-india → Regional community & coordination
+│
+├── #country-leads → Country Lead workspace
+│
+├── SYNC CHANNELS
+│   ├── 🔊 keymasters-sync
+│   ├── 🔊 ciphers-sync
+│   └── 🔊 candidates-sync
 ```
 
 ---
@@ -273,7 +286,7 @@ No. The program is anonymous-first at every level.
 
 ### What is XP and how do I earn it?
 
-XP is earned through app usage and social activity. You need 500 XP to be eligible for a "Cipher" role.
+XP is earned through Protocol app usage (eg. P2P.me and Coins.me) and social activity. You need 500 XP to be eligible for a "Cipher" role.
 
 ### What happens if I miss a weekly update?
 

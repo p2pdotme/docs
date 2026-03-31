@@ -177,7 +177,7 @@ The currency expansion framework uses open-source YAML configs. Anyone with loca
 
 ### How do disputes work at the contract level?
 
-Users call `raiseDispute` on `OrderProcessorFacet`. Admins settle via `adminSettleDispute` with a fault type. Settlement triggers accounting and RP hooks. See [Disputes](#disputes) for the full flow.
+Users call `raiseDispute` on `OrderProcessorFacet`. Admins settle via `adminSettleDispute` with a fault type. Settlement triggers accounting and RP hooks. See [Disputes](/for-builders/disputes) for the full flow.
 
 ### What is the Diamond architecture?
 
