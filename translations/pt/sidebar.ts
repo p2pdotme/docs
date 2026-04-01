@@ -35,7 +35,7 @@ const sidebars: SidebarsConfig = {
     },
     {
         "type": "category",
-        "label": "Para Detentores de Token",
+        "label": "Para Detentores do Token",
         "collapsible": true,
         "collapsed": true,
         "link": {
@@ -61,6 +61,27 @@ const sidebars: SidebarsConfig = {
             "for-token-holders/legal-documents",
             "for-token-holders/disclosures",
             "for-token-holders/faq"
+        ]
+    },
+     {
+        "type": "category",
+        "label": "Para Desenvolvedores",
+        "collapsible": true,
+        "collapsed": true,
+        "link": {
+            "type": "doc",
+            "id": "for-builders/start-here"
+        },
+        "items": [
+            "for-builders/roles-and-permissions",
+            "for-builders/protocol-parameters",
+            "for-builders/disputes",
+            "for-builders/reputation",
+            "for-builders/contract-references",
+            "for-builders/fiat-to-fiat-remittance",
+            "for-builders/global-currency-expansion",
+            "for-builders/rollout-sequence",
+            "for-builders/faq"          
         ]
     }
   ],
