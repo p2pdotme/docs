@@ -38,17 +38,17 @@ Participation requires no identity. Contribution requires no permission. Impact 
 
 ## Hierarchy
 
-| Level | Role | Code Name |
-|-------|------|-----------|
-| Core Team | Protocol founders and leads | "Core Team" |
+| Level        | Role                            | Code Name      |
+| ------------ | ------------------------------- | -------------- |
+| Core Team    | Protocol founders and leads     | "Core Team"    |
 | Country Lead | Manages all tracks in a country | "Country Lead" |
-| Coordinator | Track coordinators | "Keymaster" |
-| Contributor | Community ambassadors | "Cipher" |
+| Coordinator  | Track coordinators              | "Keymaster"    |
+| Contributor  | Community ambassadors           | "Cipher"       |
 
 ```mermaid
 flowchart TD
     CT["1. Core Team"]
-    
+
     subgraph india [India]
         CL_IN["2. Country Lead"]
         KM_IN_Relay["3. Keymaster - Relay Guild"]
@@ -60,19 +60,19 @@ flowchart TD
         CL_IN --> KM_IN_Signal
         CL_IN --> KM_IN_Forge
     end
-    
+
     subgraph brazil [Brazil]
         CL_BR["2. Country Lead"]
         KM_BR["3. Keymasters..."]
         CL_BR --> KM_BR
     end
-    
+
     subgraph other [Other Countries...]
         CL_X["2. Country Lead"]
         KM_X["3. Keymasters..."]
         CL_X --> KM_X
     end
-    
+
     CT --> CL_IN
     CT --> CL_BR
     CT --> CL_X
@@ -84,23 +84,23 @@ Each "Keymaster" manages up to 5 "Ciphers".
 
 Each "Country Lead" manages all four tracks in their country.
 
-| Code Name | Scope |
-|-----------|-------|
-| **Relay Guild** | Country Discord/Telegram channels |
-| **Node Guild** | Colleges and local events |
+| Code Name        | Scope                                          |
+| ---------------- | ---------------------------------------------- |
+| **Relay Guild**  | Country Discord/Telegram channels              |
+| **Node Guild**   | Colleges and local events                      |
 | **Signal Guild** | Regional social media (local language content) |
-| **Forge Guild** | Translations, local dev community |
+| **Forge Guild**  | Translations, local dev community              |
 
 ---
 
 ## Four Tracks
 
-| Code Name | Focus | SLA Metric |
-|-----------|-------|------------|
-| **Relay Guild** | Discord/Telegram moderation, user support | Users/merchants onboarded |
-| **Node Guild** | Colleges, local events, meetups | Users/merchants onboarded |
-| **Signal Guild** | Social media content, regional accounts | Impressions |
-| **Forge Guild** | Translations, docs, dev community | Commits/pages |
+| Code Name        | Focus                                     | SLA Metric                |
+| ---------------- | ----------------------------------------- | ------------------------- |
+| **Relay Guild**  | Discord/Telegram moderation, user support | Users/merchants onboarded |
+| **Node Guild**   | Colleges, local events, meetups           | Users/merchants onboarded |
+| **Signal Guild** | Social media content, regional accounts   | Impressions               |
+| **Forge Guild**  | Translations, docs, dev community         | Commits/pages             |
 
 All tracks operate at the country level, managed by "Country Leads".
 
@@ -125,11 +125,11 @@ All tracks operate at the country level, managed by "Country Leads".
 
 All "Ciphers" and "Keymasters" must submit weekly updates.
 
-| Role | Reports To | Deadline |
-|------|------------|----------|
-| "Cipher" | "Keymaster" | Saturday 00:00 to Sunday 24:00 UTC |
-| "Keymaster" | "Country Lead" | Saturday 00:00 to Sunday 24:00 UTC |
-| "Country Lead" | "Core Team" | Saturday 00:00 to Sunday 24:00 UTC |
+| Role           | Reports To     | Deadline                           |
+| -------------- | -------------- | ---------------------------------- |
+| "Cipher"       | "Keymaster"    | Saturday 00:00 to Sunday 24:00 UTC |
+| "Keymaster"    | "Country Lead" | Saturday 00:00 to Sunday 24:00 UTC |
+| "Country Lead" | "Core Team"    | Saturday 00:00 to Sunday 24:00 UTC |
 
 **Auto-offboarding:** 
 - Missing 1 consecutive update triggers a warning DM. 
@@ -139,21 +139,21 @@ All "Ciphers" and "Keymasters" must submit weekly updates.
 
 ## Remuneration
 
-| Role | Monthly Salary |
-|------|----------------|
-| "Keymaster" | $200 |
-| "Cipher" | Up to $100 (based on job assigned) |
+| Role        | Monthly Salary                     |
+| ----------- | ---------------------------------- |
+| "Keymaster" | $200                               |
+| "Cipher"    | Up to $100 (based on job assigned) |
 
 **Monthly Spotlight.** $500 x 3 = $1,500 monthly prize pool.
 
 All payments made directly to your P2P wallet.
 
-| Item | Count | Rate | Total |
-|------|-------|------|-------|
-| Keymasters (4 countries x 4 tracks) | 16 | $200 | $3,200 |
-| Ciphers (16 x 5) | 80 | Up to $100 | $8,000 (max) |
-| Monthly Spotlight | 3 | $500 | $1,500 |
-| **Total monthly spend** | | | **$12,700 (max)** |
+| Item                                | Count | Rate       | Total             |
+| ----------------------------------- | ----- | ---------- | ----------------- |
+| Keymasters (4 countries x 4 tracks) | 16    | $200       | $3,200            |
+| Ciphers (16 x 5)                    | 80    | Up to $100 | $8,000 (max)      |
+| Monthly Spotlight                   | 3     | $500       | $1,500            |
+| **Total monthly spend**             |       |            | **$12,700 (max)** |
 
 **Fund approval flow.** "Keymaster" raises request, "Country Lead" reviews, "Core Team" approves, disbursement.
 

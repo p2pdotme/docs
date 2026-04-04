@@ -1,15 +1,9 @@
 ---
-id: overview
-sidebar_position: 0
-title: "Overview"
-slug: overview
+id: token-details
+sidebar_position: 3
+title: "Token Details"
+slug: token-details
 ---
-
-The $P2P token is an **ownership token**. Protocol IP, treasury funds, and mint authority are all controlled by token holders through futarchy-based governance—not by any single team, foundation, or entity. This makes $P2P real, unruggable ownership of revenue-generating infrastructure.
-
-The token enables community-driven protocol management, economic participation through staking and delegation, and value accrual through treasury contributions funded by protocol revenue. Via MetaDAO futarchy governance, token holders direct treasury funds toward value-accruing actions—which may include buy-and-burn, ecosystem grants, liquidity incentives, or other measures. There are no automatic buybacks; all treasury deployment is governance-decided.
-
-## Token Details
 
 <div className="stats-grid">
   <div className="stat-card">
