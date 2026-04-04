@@ -1,6 +1,6 @@
 /**
- * Swizzled: sidebar categories never auto-expand; all start collapsed.
- * Based on @docusaurus/theme-classic DocSidebarItem/Category.
+ * Swizzled: non-active categories respect `item.collapsed`; the active section
+ * stays expanded, including after locale changes (same as theme-classic).
  */
 
 import React, {
@@ -14,6 +14,7 @@ import clsx from 'clsx';
 import {
   ThemeClassNames,
   useThemeConfig,
+  usePrevious,
   Collapsible,
   useCollapsible,
 } from '@docusaurus/theme-common';
@@ -36,6 +37,36 @@ import type {
   PropSidebarItemLink,
 } from '@docusaurus/plugin-content-docs';
 import styles from './styles.module.css';
+
+function useAutoExpandActiveCategory({
+  isActive,
+  collapsed,
+  updateCollapsed,
+  activePath,
+}: {
+  isActive: boolean;
+  collapsed: boolean;
+  updateCollapsed: (b: boolean) => void;
+  activePath: string;
+}) {
+  const wasActive = usePrevious(isActive);
+  const previousActivePath = usePrevious(activePath);
+  useEffect(() => {
+    const justBecameActive = isActive && !wasActive;
+    const stillActiveButPathChanged =
+      isActive && wasActive && activePath !== previousActivePath;
+    if ((justBecameActive || stillActiveButPathChanged) && collapsed) {
+      updateCollapsed(false);
+    }
+  }, [
+    isActive,
+    wasActive,
+    collapsed,
+    updateCollapsed,
+    activePath,
+    previousActivePath,
+  ]);
+}
 
 function useCategoryHrefWithSSRFallback(
   item: Props['item'],
@@ -155,8 +186,12 @@ function DocSidebarItemCategoryCollapsible({
   const isCurrentPage = isSamePath(href, activePath);
 
   const {collapsed, setCollapsed} = useCollapsible({
-    // Never auto-expand: always respect item.collapsed so no section opens by default.
-    initialState: () => (collapsible ? item.collapsed : false),
+    initialState: () => {
+      if (!collapsible) {
+        return false;
+      }
+      return isActive ? false : item.collapsed;
+    },
   });
 
   const {expandedItem, setExpandedItem} = useDocSidebarItemsExpandedState();
@@ -168,6 +203,13 @@ function DocSidebarItemCategoryCollapsible({
     },
     [collapsed, index, setExpandedItem, setCollapsed],
   );
+
+  useAutoExpandActiveCategory({
+    isActive,
+    collapsed,
+    updateCollapsed,
+    activePath,
+  });
 
   useEffect(() => {
     if (
