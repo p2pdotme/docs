@@ -10,8 +10,8 @@ interface Language {
 }
 
 const languages: Language[] = [
-  { code: 'en', label: 'English', flag: '🇺🇸' },
-  { code: 'pt', label: 'Português', flag: '🇧🇷' },
+  { code: 'en', label: 'English', flag: 'https://flagpedia.net/data/flags/icon/36x27/us.webp' },
+  { code: 'pt', label: 'Português', flag: 'https://flagpedia.net/data/flags/icon/36x27/br.webp' },
 ];
 
 function urlSegmentForLanguage(lang: Language): string | undefined {
@@ -83,7 +83,7 @@ export default function LanguageSwitcher(): JSX.Element {
         aria-label="Change language"
         title="Change language"
       >
-        <span className={styles.flag}>{currentLanguage.flag}</span>
+        <img className={styles.flag} src={currentLanguage.flag} alt={currentLanguage.label} />
         <span className={styles.label}>{currentLanguage.label}</span>
         <span className={styles.icon}>▼</span>
       </button>
@@ -98,7 +98,7 @@ export default function LanguageSwitcher(): JSX.Element {
               }`}
               onClick={() => handleLanguageChange(lang.code)}
             >
-              <span className={styles.flag}>{lang.flag}</span>
+              <img className={styles.flag} src={lang.flag} alt={lang.label} />
               <span>{lang.label}</span>
             </button>
           ))}
