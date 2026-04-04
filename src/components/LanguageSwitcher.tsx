@@ -9,7 +9,7 @@ interface Language {
   flag: string;
 }
 
-const languages: Language[] = [
+export const languages: Language[] = [
   { code: 'en', label: 'English', flag: 'https://flagpedia.net/data/flags/icon/36x27/us.webp' },
   { code: 'pt', label: 'Português', flag: 'https://flagpedia.net/data/flags/icon/36x27/br.webp' },
 ];

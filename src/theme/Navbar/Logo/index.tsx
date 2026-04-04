@@ -5,9 +5,8 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import {useThemeConfig, type NavbarLogo} from '@docusaurus/theme-common';
 import {useLocation} from '@docusaurus/router';
 import ThemedImage from '@theme/ThemedImage';
+import { languages } from '../../../components/LanguageSwitcher';
 import type {Props} from '@theme/Logo';
-
-const LOCALE_PREFIXES = ['pt'];
 
 function LogoThemedImage({
   logo,
@@ -44,7 +43,7 @@ function useLocaleAwareLogoLink(): string {
   const location = useLocation();
   const baseUrl = useBaseUrl('/');
   const firstSegment = location.pathname.split('/').filter(Boolean)[0];
-  if (firstSegment && LOCALE_PREFIXES.includes(firstSegment)) {
+  if (firstSegment && languages.some(lang => lang.code === firstSegment)) {
     return `/${firstSegment}/`;
   }
   return baseUrl;
