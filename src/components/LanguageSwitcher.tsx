@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import type { JSX } from 'react';
 import { useLocation, useHistory } from '@docusaurus/router';
 import styles from './LanguageSwitcher.module.css';
 
@@ -13,6 +14,38 @@ const languages: Language[] = [
   { code: 'pt', label: 'Português', flag: '🇧🇷' },
 ];
 
+function urlSegmentForLanguage(lang: Language): string | undefined {
+  if (lang.code === 'en') {
+    return undefined;
+  }
+  return lang.code;
+}
+
+function stripLocalePrefix(pathname: string): string {
+  const segments = pathname.split('/').filter(Boolean);
+  const first = segments[0];
+  const matched = languages.find((l) => urlSegmentForLanguage(l) === first);
+  if (matched && urlSegmentForLanguage(matched)) {
+    const rest = segments.slice(1).join('/');
+    return rest ? `/${rest}` : '/';
+  }
+  return pathname || '/';
+}
+
+function pathForLanguage(lang: Language, pathWithoutLocale: string): string {
+  if (lang.code === 'en') {
+    return pathWithoutLocale === '/' ? '/' : pathWithoutLocale;
+  }
+  const segment = urlSegmentForLanguage(lang);
+  if (!segment) {
+    return '/';
+  }
+  if (pathWithoutLocale === '/') {
+    return `/${segment}/`;
+  }
+  return `/${segment}${pathWithoutLocale}`;
+}
+
 export default function LanguageSwitcher(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
@@ -21,16 +54,23 @@ export default function LanguageSwitcher(): JSX.Element {
   const getCurrentLanguage = (): Language => {
     const pathSegments = location.pathname.split('/').filter(Boolean);
     const firstSegment = pathSegments[0];
-
-    const lang = languages.find(l => l.code === firstSegment);
-    return lang || languages[0]; // Default to English
+    const byPrefix = languages.find(
+      (l) => urlSegmentForLanguage(l) === firstSegment,
+    );
+    if (byPrefix) {
+      return byPrefix;
+    }
+    return languages[0];
   };
 
   const currentLanguage = getCurrentLanguage();
 
   const handleLanguageChange = (langCode: string) => {
-    // Navigate to the home page of the selected language
-    const targetPath = langCode === 'en' ? '/' : `/${langCode}/`;
+    const targetLang =
+      languages.find((l) => l.code === langCode) ?? languages[0];
+    const { pathname, search, hash } = location;
+    const withoutLocale = stripLocalePrefix(pathname);
+    const targetPath = pathForLanguage(targetLang, withoutLocale) + search + hash;
     history.push(targetPath);
     setIsOpen(false);
   };
