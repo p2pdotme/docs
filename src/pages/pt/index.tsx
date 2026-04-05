@@ -3,9 +3,9 @@ import clsx from "clsx";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import Layout from "@theme/Layout";
-import CursorGlow from "../../components/CursorGlow";
+import CursorGlow from "../../../src/components/CursorGlow";
 
-import styles from "../index.module.css";
+import styles from "../../../src/pages/index.module.css";
 
 export default function HomePt(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
@@ -39,9 +39,16 @@ export default function HomePt(): JSX.Element {
               Ver no GitHub
             </Link>
           </div>
+          <div className={styles.statsRow}>
+            <Link
+              className="button button--secondary button--lg"
+              to="/pt/stats"
+            >
+              Estatísticas do Protocolo
+            </Link>
+          </div>
         </div>
       </header>
     </Layout>
   );
 }
-
