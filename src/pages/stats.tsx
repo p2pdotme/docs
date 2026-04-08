@@ -62,13 +62,15 @@ const GRAPH_QUERY = `
 
 // Country/currency metadata for display
 const CIRCLE_META: Record<string, { flag: string; country: string; color: string }> = {
-    INR: { flag: "🇮🇳", country: "India", color: "#FF9933" },
-    BRL: { flag: "🇧🇷", country: "Brazil", color: "#009C3B" },
-    ARS: { flag: "🇦🇷", country: "Argentina", color: "#74ACDF" },
-    IDR: { flag: "🇮🇩", country: "Indonesia", color: "#CE1126" },
-    VES: { flag: "🇻🇪", country: "Venezuela", color: "#CF142B" },
-    MXN: { flag: "🇲🇽", country: "Mexico", color: "#006847" },
-    USD: { flag: "🇺🇸", country: "USA", color: "#3C3B6E" },
+    INR: { country: "India", color: "#FF9933", flag: "https://flagpedia.net/data/flags/icon/36x27/in.webp" },
+    BRL: { country: "Brazil", color: "#009C3B", flag: "https://flagpedia.net/data/flags/icon/36x27/br.webp" },
+    ARS: { country: "Argentina", color: "#74ACDF", flag: "https://flagpedia.net/data/flags/icon/36x27/ar.webp" },
+    IDR: { country: "Indonesia", color: "#CE1126", flag: "https://flagpedia.net/data/flags/icon/36x27/id.webp" },
+    VEN: { country: "Venezuela", color: "#C6C914", flag: "https://flagpedia.net/data/flags/icon/36x27/ve.webp" },
+    MEX: { country: "Mexico", color: "#006847", flag: "https://flagpedia.net/data/flags/icon/36x27/mx.webp" },
+    NGN: { country: "Nigeria", color: "#008751", flag: "https://flagpedia.net/data/flags/icon/36x27/ng.webp" },
+    USD: { country: "USA", color: "#F72754", flag: "https://flagpedia.net/data/flags/icon/36x27/us.webp" },
+    EUR: { country: "Europe", color: "#0044CE", flag: "https://images.emojiterra.com/google/noto-emoji/unicode-17.0/color/svg/1f1ea-1f1fa.svg" },
 };
 
 // ── Helpers ───────────────────────────────────────────────────────────────
@@ -196,7 +198,7 @@ function RegionCard({ circle, maxOrders }: RegionCardProps) {
     return (
         <div className={styles.regionCard}>
             <div className={styles.regionHeader}>
-                <span className={styles.regionFlag}>{meta.flag}</span>
+                <img className={styles.regionFlag} src={meta.flag} alt={meta.country} />
                 <div>
                     <div className={styles.regionCountry}>{meta.country}</div>
                     <div className={styles.regionCurrency}>{decodedCurrency} · {circle.name}</div>
