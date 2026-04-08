@@ -172,7 +172,8 @@ h6 {
   padding-top: 0;
   padding-bottom: 0;
   background: transparent !important;
-  position: relative;
+  position: sticky;
+  top: 0;
 }
 
 .navbar::before {
