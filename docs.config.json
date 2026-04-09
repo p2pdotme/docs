@@ -156,6 +156,37 @@
           ]
         }
       ]
+    },
+    {
+      "id": "translations-es",
+      "outputDir": "translations/es",
+      "routeBasePath": "es",
+      "navbarLabel": "Whitepaper",
+      "navbarPosition": "left",
+      "sidebarId": "esSidebar",
+      "sidebarPath": "./translations/es/sidebar.ts",
+      "skipGeneration": true,
+      "isTranslation": true,
+      "translationSections": [
+        {
+          "id": "whitepaper",
+          "outputDir": "translations/es/whitepaper",
+          "routeBasePath": "es/whitepaper",
+          "preGeneratedFiles": [
+            {"doc_id": "00-abstract", "title": "Resumen"},
+            {"doc_id": "01-1-the-vision", "title": "1. La Visión"}
+          ]
+        },
+        {
+          "id": "for-investors",
+          "outputDir": "translations/es/for-investors",
+          "routeBasePath": "es/for-investors",
+          "preGeneratedFiles": [
+            {"doc_id": "start-here", "title": "Comienza Aquí"},
+            {"doc_id": "protocol-overview", "title": "Resumen del Protocolo"}
+          ]
+        }
+      ]
     }
   ],
   "navbar": {
