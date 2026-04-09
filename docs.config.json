@@ -174,7 +174,11 @@
           "routeBasePath": "es/whitepaper",
           "preGeneratedFiles": [
             {"doc_id": "00-abstract", "title": "Resumen"},
-            {"doc_id": "01-1-the-vision", "title": "1. La Visión"}
+            {"doc_id": "01-1-the-vision", "title": "1. La Visión"},
+            {"doc_id": "02-2-design-goals-and-non-goals", "title": "2. Objetivos de Diseño y No-Objetivos"},
+            {"doc_id": "03-3-system-overview", "title": "3. Resumen del Sistema"},
+            {"doc_id": "04-4-cryptographic-primitives-proof-integration", "title": "4. Primitivas Criptográficas e Integración de Pruebas"},
+            {"doc_id": "05-5-trade-protocol-on-and-off-ramp", "title": "5. Protocolo de Operaciones (On-Ramp y Off-Ramp)"}
           ]
         },
         {
