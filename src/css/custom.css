@@ -172,7 +172,8 @@ h6 {
   padding-top: 0;
   padding-bottom: 0;
   background: transparent !important;
-  position: relative;
+  position: sticky;
+  top: 0;
 }
 
 .navbar::before {
@@ -795,7 +796,7 @@ h6 {
 
 /* Search Bar Styles */
 .navbar__search {
-  margin-left: auto;
+  margin-left: 0 !important;
 }
 
 .navbar__search-input {
@@ -957,7 +958,10 @@ h6 {
     position: absolute;
     right: 0;
     padding: 0.5rem 1rem !important;
+    padding-left: 2rem !important;
     background: var(--ifm-background-color) !important;
+    background-repeat: no-repeat !important;
+    background-position: 0.375rem center !important;
     border: 1px solid var(--p2p-blue) !important;
     color: var(--search-text) !important;
     background-image: none !important;

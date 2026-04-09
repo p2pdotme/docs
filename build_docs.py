@@ -444,6 +444,13 @@ const config: Config = {{
     {{
       tagName: 'meta',
       attributes: {{
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1, maximum-scale=1',
+      }},
+    }},
+    {{
+      tagName: 'meta',
+      attributes: {{
         property: 'og:title',
         content: '{self.config.get("siteTitle", "P2P Foundation Docs")}',
       }},

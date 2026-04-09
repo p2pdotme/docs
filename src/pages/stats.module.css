@@ -293,8 +293,7 @@
 }
 
 .regionFlag {
-    font-size: 2rem;
-    line-height: 1;
+    width: 1.75rem;
     flex-shrink: 0;
 }
 
