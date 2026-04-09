@@ -954,7 +954,7 @@ h6 {
   }
 
   .navbar__search-input:focus {
-    width: calc(100vw - 2.75rem) !important;
+    width: calc(100vw - 2rem) !important;
     position: absolute;
     right: 0;
     padding: 0.5rem 1rem !important;
