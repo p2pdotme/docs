@@ -3,7 +3,7 @@
   align-items: center;
   gap: 8px;
   padding: 14px 16px;
-  margin: 0 8px 8px;
+  margin: 2px 8px 8px;
   border-radius: 8px;
   font-size: 0.8rem;
   font-weight: 600;
@@ -29,6 +29,16 @@
   opacity: 1;
 }
 
+.legalLink::before {
+  content: "";
+  position: absolute;
+  top: calc(-10px - 2px - 1px); /* -10px for the link height, -2px for the margin, -1px for the border */
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background-image: linear-gradient(to bottom, transparent, var(--site-sidebar-bg));
+}
+
 .legalLinkIcon {
   flex-shrink: 0;
   margin-left: auto;
@@ -40,5 +50,9 @@
   .legalLink {
     position: static;
     margin: 8px;
+  }
+
+  .legalLink::before {
+    display: none;
   }
 }
