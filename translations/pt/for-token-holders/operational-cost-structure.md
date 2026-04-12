@@ -5,7 +5,7 @@ title: "Estrutura de Custo Operacional"
 slug: operational-cost-structure
 ---
 
-> *This page is provided for informational purposes to explain protocol mechanics. It does not constitute an offer of securities or investment advice. $P2P is not available to US persons. Nothing herein should be construed as a promise of financial return. Please read the full [Disclosures](/pt/for-token-holders/disclosures) before proceeding.*
+> *Esta página é fornecida para fins informativos para explicar a mecânica do protocolo. Não constitui uma oferta de valores mobiliários ou aconselhamento de investimento. $P2P não está disponível para pessoas dos EUA. Nada aqui deve ser interpretado como uma promessa de retorno financeiro. Por favor, leia a [Divulgação completa](/pt/for-token-holders/disclosures) antes de prosseguir.*
 
 ## Despesas Operacionais Mensais
 

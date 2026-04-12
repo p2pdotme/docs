@@ -20,7 +20,7 @@ O modelo alvo dá aos detentores de tokens controle direto sobre os parâmetros 
 
 Os parâmetros controláveis incluem percentuais de taxas, configuração de spread, regras de staking e slashing, limites de volume de transações, alocação de tesouro, atualizações de contrato inteligente e whitelist de tokens.
 
-Para detalhes de governança em nível de contrato (funções, permissões, mecânica de disputas), veja [`/pt/for-builders`](/pt/for-builders/start-here).
+Para detalhes de governança em nível de contrato (funções, permissões, mecânica de disputas), veja [`/for-builders`](/for-builders/start-here).
 
 ---
 
