@@ -15,7 +15,7 @@ El protocolo involucra a varios participantes clave que trabajan juntos para hab
 
 **Contratos del Protocolo** son los smart contracts on-chain que orquestan todo el ciclo de vida de las órdenes. Manejan el encolamiento de órdenes, el emparejamiento basado en puntajes de credibilidad, la verificación de estado y los resultados finales de liquidación. Estos contratos operan actualmente en Base L2 (con expansión multichain a Solana planeada).
 
-**Verificadores de Pruebas** validan actualmente las pruebas ZK-KYC para la verificación de identidad (IDs gubernamentales, cuentas sociales y pasaportes a través de Reclaim Protocol y otros verificadores ZK). La verificación de transacciones bancarias está planificada (ver [Sección 4.2](/es/whitepaper/cryptographic-primitives-proof-integration#42-módulo-de-evidencia-para-verificación-de-transacciones-bancarias-hoja-de-ruta)).
+**Verificadores de Pruebas** validan actualmente las pruebas ZK-KYC para la verificación de identidad (IDs gubernamentales, cuentas sociales y pasaportes a través de Reclaim Protocol y otros verificadores ZK). La verificación de transacciones bancarias está planificada (ver [Sección 4.2](/es/whitepaper/cryptographic-primitives-proof-integration#42-módulo-de-evidencia-para-verificación-de-transacciones-bancarias-roadmap)).
 
 **Gobernanza** abarca los mecanismos a través de los cuales se toman decisiones sobre parámetros del protocolo, actualizaciones y la tesorería. La implementación actual es operada por admin/multisig, con una transición planificada hacia una gobernanza más amplia por parte de los poseedores del token a medida que el protocolo madure.
 
@@ -146,7 +146,7 @@ flowchart LR
 - El **comerciante** cumple la función de mediar la liquidez para las transacciones.
 - La **responsabilidad de confirmar el pago** recae en el comerciante (para off-ramps) o puede ser proporcionada por cualquiera de las partes.
 - **ZK-KYC realiza verificación de identidad sin confianza** para el usuario sin exponer datos personales.
-- **La evidencia se envía y revisa** en las disputas. En el sistema actual, los resultados se ejecutan mediante liquidación por admin on-chain; la resolución más amplia impulsada por verificadores y gobernanza permanece en la hoja de ruta (ver [Sección 4.2](/es/whitepaper/cryptographic-primitives-proof-integration#42-módulo-de-evidencia-para-verificación-de-transacciones-bancarias-hoja-de-ruta)).
+- **La evidencia se envía y revisa** en las disputas. En el sistema actual, los resultados se ejecutan mediante liquidación por admin on-chain; la resolución más amplia impulsada por verificadores y gobernanza permanece en el roadmap (ver [Sección 4.2](/es/whitepaper/cryptographic-primitives-proof-integration#42-módulo-de-evidencia-para-verificación-de-transacciones-bancarias-roadmap)).
 - **Reclaim Protocol** habilita la verificación de identidad que preserva la privacidad mediante cuentas sociales e IDs gubernamentales.
 
 ---

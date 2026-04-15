@@ -178,7 +178,21 @@
             {"doc_id": "02-2-design-goals-and-non-goals", "title": "2. Objetivos de Diseño y No-Objetivos"},
             {"doc_id": "03-3-system-overview", "title": "3. Resumen del Sistema"},
             {"doc_id": "04-4-cryptographic-primitives-proof-integration", "title": "4. Primitivas Criptográficas e Integración de Pruebas"},
-            {"doc_id": "05-5-trade-protocol-on-and-off-ramp", "title": "5. Protocolo de Operaciones (On-Ramp y Off-Ramp)"}
+            {"doc_id": "05-5-trade-protocol-on-and-off-ramp", "title": "5. Protocolo de Operaciones (On-Ramp y Off-Ramp)"},
+            {"doc_id": "06-6-proof-of-credibility-reputation-matching", "title": "6. Prueba-de-Credibilidad (Reputación y Emparejamiento)"},
+            {"doc_id": "07-7-fraud-prevention", "title": "7. Prevención de Fraude"},
+            {"doc_id": "08-8-dispute-resolution", "title": "8. Resolución de Disputas"},
+            {"doc_id": "09-9-pricing-oracle-mechanics", "title": "9. Precios y Mecánica de Oráculos"},
+            {"doc_id": "10-10-liquidity-market-design", "title": "10. Liquidez y Diseño de Mercado"},
+            {"doc_id": "11-11-security-model", "title": "11. Modelo de Seguridad"},
+            {"doc_id": "12-12-privacy-model", "title": "12. Modelo de Privacidad"},
+            {"doc_id": "13-13-compliance-policy-positioning", "title": "13. Cumplimiento y Posicionamiento de Políticas"},
+            {"doc_id": "14-14-accessing-p2p-protocol-clients-sdks", "title": "14. Acceso al Protocolo P2P: Clientes y SDKs"},
+            {"doc_id": "15-15-governance-upgradability", "title": "15. Gobernanza y Actualizabilidad"},
+            {"doc_id": "16-16-token-economics", "title": "16. Economía del Token"},
+            {"doc_id": "17-17-disclosures-risks", "title": "17. Divulgaciones y Riesgos"},
+            {"doc_id": "18-18-references", "title": "18. Referencias"},
+            {"doc_id": "19-appendices", "title": "Apéndices"}
           ]
         },
         {
