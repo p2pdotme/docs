@@ -114,7 +114,7 @@ All tracks operate at the country level, managed by "Country Leads".
 
 1. Earn minimum 500 XP through P2P Protocol apps usage (eg. P2P.me and Coins.me) and social activity
 2. Attend a mandatory induction session (held on 1st and 3rd Sunday of every month, conducted by "Country Lead")
-3. Browse open roles posted by "Keymasters" in your track/country (Eg. #forge-portal, #signal-portal, #node-portal, #relay-portal)
+3. Browse open roles posted by "Keymasters" in your track/country (Eg. `#forge-portal`, `#signal-portal`, `#node-portal`, `#relay-portal`)
 4. Apply via Discord ticket in your portal
 5. Pass interview with "Keymaster"
 6. Upon approval, become a "Cipher" with role and channel access

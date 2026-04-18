@@ -27,7 +27,7 @@ The protocol defines three governance scopes.
 
 - **Admin** manages operational parameters including spread, merchant fee percentages, disputes, and merchant/payment-channel actions.
 
-- **Merchant and user** scope covers order lifecycle, staking/registration flows, and dispute initiation according to contract rules.
+- **Merchants and Users** scope covers order lifecycle, staking/registration flows, and dispute initiation according to contract rules.
 
 ```mermaid
 flowchart TD
