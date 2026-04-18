@@ -23,11 +23,11 @@ Also see [`/whitepaper`](/whitepaper/abstract) for protocol design and [`/for-to
 
 The protocol defines three governance scopes.
 
-**Super admin** launches currencies, sets core risk/limit parameters, and manages critical protocol configuration.
+- **Super admin** launches currencies, sets core risk/limit parameters, and manages critical protocol configuration.
 
-**Admin** manages operational parameters including spread, merchant fee percentages, disputes, and merchant/payment-channel actions.
+- **Admin** manages operational parameters including spread, merchant fee percentages, disputes, and merchant/payment-channel actions.
 
-**Merchant and user** scope covers order lifecycle, staking/registration flows, and dispute initiation according to contract rules.
+- **Merchants and Users** scope covers order lifecycle, staking/registration flows, and dispute initiation according to contract rules.
 
 ```mermaid
 flowchart TD
@@ -49,19 +49,19 @@ flowchart TD
 
 Protocol behavior is heavily parameterized rather than hardcoded because markets differ. A spread that works for INR/USDC on UPI rails would be wrong for BRL/USDC on PIX. Parameterization lets the protocol adapt per-currency without redeploying contracts.
 
-**Pricing and spread.** Base spread and price bump by currency, adjusted for local liquidity conditions.
+- **Pricing and spread.** Base spread and price bump by currency, adjusted for local liquidity conditions.
 
-**Risk limits.** Min stake, volume caps, RP-per-USDT limits, and max tx limits. These gate how much risk the protocol takes per merchant and per user.
+- **Risk limits.** Min stake, volume caps, RP-per-USDT limits, and max tx limits. These gate how much risk the protocol takes per merchant and per user.
 
-**Fee controls.** Merchant fee percentage and small-order fixed fees, tuned to make micro-transactions viable without subsidizing them.
+- **Fee controls.** Merchant fee percentage and small-order fixed fees, tuned to make micro-transactions viable without subsidizing them.
 
-**Operational controls.** Currency and payment-channel activation lifecycles.
+- **Operational controls.** Currency and payment-channel activation lifecycles.
 
 ---
 
 ## Disputes
 
-A user raises a dispute for an order if timing and state conditions are met. The order is marked disputed, merchant dispute state is updated, and an admin settles with a fault type (`USER`, `MERCHANT`, or `BANK`). Settlement triggers order/accounting paths and RP updates via hooks.
+A user raises a dispute for an order if timing and state conditions of the order are met. The order is marked disputed; merchant dispute state is updated, and an admin settles with a fault type (`USER`, `MERCHANT`, or `BANK`). Settlement triggers order/accounting paths and [RP](#reputation) (Reputation Points) gets updated via hooks.
 
 - Dispute windows differ by order type.
 - A dispute cannot be raised twice.

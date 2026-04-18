@@ -25,7 +25,7 @@ Also see [`/for-merchants`](/for-merchants/start-here) to understand counterpart
 
 - An account on a P2P Protocol client app (wallet is provided in-app via thirdweb integration).
 - Access to supported payment rails in your region.
-- Stablecoin balance for SELL/PAY flows.
+- Stablecoin balance for `SELL`/`PAY` flows.
 
 **Basic safety checks.**
 
@@ -37,9 +37,11 @@ Also see [`/for-merchants`](/for-merchants/start-here) to understand counterpart
 
 ## Order Types
 
-- **BUY.** You pay fiat and receive stablecoin.
-- **SELL.** You transfer stablecoin and receive fiat.
-- **PAY.** You transfer stablecoin for payment use cases where fiat settlement rails are involved.
+There are 3 types of orders supported, namely:
+
+- **BUY** -  You pay fiat and receive stablecoin.
+- **SELL** - You transfer stablecoin and receive fiat.
+- **PAY** - You transfer stablecoin for payment use cases where fiat settlement rails are involved.
 
 ---
 
@@ -51,9 +53,14 @@ Also see [`/for-merchants`](/for-merchants/start-here) to understand counterpart
 4. Follow app prompts for transfer and confirmation.
 
 ```mermaid
-flowchart LR
-    start[Start in app] --> choose[Choose order type]
-    choose --> submit[Submit order]
+flowchart TD
+    start[Start the app] --> choose[Choose order type]
+    choose --> buy[BUY]
+    choose --> sell[SELL]
+    choose --> pay[PAY]
+    buy --> submit[Submit order]
+    sell --> submit[Submit order]
+    pay --> submit[Submit order]
     submit --> assign[Merchant assigned]
     assign --> transfer[Complete transfer step]
     transfer --> finish[Order final state]
@@ -65,7 +72,7 @@ flowchart LR
 
 ### BUY (Fiat to Stablecoin)
 
-1. Place BUY order.
+1. Place `BUY` order.
 2. Receive assigned merchant payment details.
 3. Send fiat using the instructed rail.
 4. Complete required in-app confirmation.
@@ -73,7 +80,7 @@ flowchart LR
 
 ### SELL / PAY (Stablecoin to Fiat or Payment Rail)
 
-1. Place SELL or PAY order.
+1. Place `SELL` or `PAY` order.
 2. Approve/transfer stablecoin when prompted.
 3. Wait for counterparty settlement actions.
 4. Confirm and track until completion.
@@ -120,8 +127,8 @@ Disputes are resolved on-chain by authorized admins under protocol fault rules. 
 
 ### Transfer failed
 
-- Confirm token approval/balance for SELL/PAY.
-- Confirm rail details and payment confirmation steps for BUY.
+- Confirm token approval/balance for `SELL`/`PAY`.
+- Confirm rail details and payment confirmation steps for `BUY`.
 
 ---
 
@@ -129,19 +136,19 @@ Disputes are resolved on-chain by authorized admins under protocol fault rules. 
 
 ### Do I need to understand on-chain mechanics?
 
-No. The client app handles all contract interaction. Follow status prompts.
+No, you are not forced to understand on-chain mechanics. The client app handles all contract interaction. Follow the status prompts to fulfill your action.
 
 ### Why wasn't my order matched instantly?
 
-Merchant assignment depends on real-time eligibility factors, including liquidity, channel status, volume limits, and operational availability. If no merchant qualifies, the order waits or times out.
+Merchant assignment depends on real-time eligibility factors, including liquidity, channel status, volume limits, and operational availability. If no merchant qualifies, the order waits or times out and the order gets cancelled.
 
 ### Can I appeal a dispute?
 
-Use the in-app dispute process. *Governance-driven escalation tiers are planned for a future release.*
+Use the in-app dispute process to appeal for a dispute. *Governance-driven escalation tiers are planned for a future release.*
 
 ### Is my identity stored on-chain?
 
-No raw PII is stored on-chain. The protocol uses ZK-KYC proofs for identity verification and stores only commitments and verdicts on-chain.
+No raw PII(Personally Identifiable Information) is stored on-chain. The protocol uses ZK-KYC proofs for identity verification and stores only commitments and verdicts on-chain.
 
 ### How do I know what to do next?
 
