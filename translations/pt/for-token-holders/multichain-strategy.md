@@ -15,7 +15,7 @@ Não. O protocolo é agnóstico em relação à cadeia por arquitetura. Registro
 
 ## Como separo o que está ativo do que está planejado?
 
-Notas embutidas em toda a documentação marcam recursos planejados para lançamentos futuros. Para detalhes em nível de contrato sobre o que foi implantado, veja [`/pt/for-builders`](/pt/for-builders/start-here).
+Notas embutidas em toda a documentação marcam recursos planejados para lançamentos futuros. Para detalhes em nível de contrato sobre o que foi implantado, veja [`/for-builders`](/for-builders/start-here).
 
 ---
 

@@ -20,7 +20,7 @@ Neste modelo:
 - Um usuário em qualquer país suportado pode comprar ou vender stablecoins em ~minutos — visando conclusão em menos de 90 segundos em trilhos rápidos — sem dar custódia a ninguém.
 - Comerciantes são combinados on-chain com base em USDC apostado, com spread definido no nível do protocolo em vez de através de competição entre comerciantes. O sistema Proof-of-Credibility lida com prevenção de fraude e escalonamento de limites de transação.
 - ZK-KYC desbloqueia limites mais altos e caminhos mais rápidos enquanto mantém dados pessoais fora da chain.
-- Aplicativos e carteiras de terceiros integram o protocolo através de SDKs abertos; Coins.me é apenas um front-end de consumidor de referência, não um gateway privilegiado.
+- Aplicativos e carteiras de terceiros integram o protocolo através de SDKs abertos; [Coins.me](https://coins.me) é apenas um front-end de consumidor de referência, não um gateway privilegiado.
 - Conforme a credibilidade se acumula, novos produtos (pagamentos em parcelas, comércio sem escrow, salários transfronteiriços, seguro de disputas) podem ser construídos sem re-KYCar o mundo.
 
 ## 1.3 Primeiros princípios

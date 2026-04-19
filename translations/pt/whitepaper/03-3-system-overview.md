@@ -15,7 +15,7 @@ O protocolo envolve vários participantes-chave trabalhando juntos para habilita
 
 **Contratos de Protocolo** são os contratos inteligentes on-chain que orquestram todo o ciclo de vida do pedido. Eles lidam com fila de pedidos, correspondência baseada em pontuações de credibilidade, verificação de estado e resultados finais de liquidação. Estes contratos atualmente operam em Base L2 (Solana planejado).
 
-**Verificadores de Prova** atualmente validam provas ZK-KYC para verificação de identidade (IDs governamentais, contas sociais e passaportes via Reclaim Protocol e outros verificadores ZK). Verificação de transações bancárias está planejada (veja Seção 4.2).
+**Verificadores de Prova** atualmente validam provas ZK-KYC para verificação de identidade (IDs governamentais, contas sociais e passaportes via Reclaim Protocol e outros verificadores ZK). Verificação de transações bancárias está planejada (veja [Seção 4.2](/pt/whitepaper/cryptographic-primitives-proof-integration#42-evidence-module-for-bank-transaction-verification-roadmap)).
 
 **Governança** abrange os mecanismos através dos quais parâmetros do protocolo, atualizações e decisões de tesouro são feitas. A implementação atual é operada por admin/multisig, com uma transição planejada para governança mais ampla de detentores de tokens conforme o protocolo amadurece.
 
@@ -145,7 +145,7 @@ flowchart LR
 - O **comerciante** serve a função de mediar liquidez para as transações.
 - O **ônus de confirmar pagamento** repousa sobre o comerciante (para off-ramps) ou pode ser fornecido por qualquer uma das partes.
 - **ZK-KYC realiza verificação de identidade trustless** para o usuário sem expor dados pessoais.
-- **Evidência é submetida e revisada** em disputas. No sistema atual, resultados são executados via liquidação de admin on-chain; resolução mais ampla orientada por verificador e governança permanece no roadmap (veja Seção 4.2).
+- **Evidência é submetida e revisada** em disputas. No sistema atual, resultados são executados via liquidação de admin on-chain; resolução mais ampla orientada por verificador e governança permanece no roadmap (veja [Seção 4.2](/pt/whitepaper/cryptographic-primitives-proof-integration#42-evidence-module-for-bank-transaction-verification-roadmap)).
 - **Reclaim Protocol** habilita verificação de identidade preservadora de privacidade via contas sociais e IDs governamentais.
 
 ---

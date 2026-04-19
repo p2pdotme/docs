@@ -24,7 +24,7 @@ Esta página cobre a mecânica dos tokens, o modelo de governança e as pergunta
 - [Documentos legais](/pt/for-token-holders/legal-documents)
 - [Perguntas frequentes](/pt/for-token-holders/faq)
 
-Veja também [`/whitepaper`](/pt/whitepaper/00-abstract) para contexto do protocolo e [`/for-builders`](/for-builders/start-here) para detalhes de governança em nível de contrato.
+Veja também [`/whitepaper`](/pt/whitepaper/abstract) para contexto do protocolo e [`/for-builders`](/for-builders/start-here) para detalhes de governança em nível de contrato.
 
 ---
 

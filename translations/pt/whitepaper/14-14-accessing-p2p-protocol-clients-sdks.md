@@ -7,7 +7,7 @@ slug: accessing-p2p-protocol-clients-sdks
 
 ## 14.1 Clientes e Facilidade de Uso
 
-Os clientes primários para acessar o Protocolo P2P são os Aplicativos Web Progressivos (PWAs) p2p.me e coins.me. Estes aplicativos baseados em navegador fornecem acesso contínuo entre dispositivos com funcionalidade de carteira integrada alimentada por thirdweb.
+Os clientes primários para acessar o Protocolo P2P são os Aplicativos Web Progressivos (PWAs) [P2P.me](https://p2p.me) e [coins.me](https://coins.me). Estes aplicativos baseados em navegador fornecem acesso contínuo entre dispositivos com funcionalidade de carteira integrada alimentada por [Thirdweb](https://thirdweb.com/).
 
 Começar com on-ramps é tão simples quanto comprar stablecoins via transferência fiduciária. Off-ramps são igualmente confiáveis através de depósito de stablecoin para a carteira no aplicativo.
 
@@ -19,7 +19,7 @@ O SDK do Protocolo P2P permite que desenvolvedores integrem o protocolo para on/
 
 ## 14.3 Coins.me (Aplicativo de Consumidor)
 
-Coins.me é um dos dois PWAs primários para acessar o Protocolo P2P, ao lado de p2p.me. Como um aplicativo focado em consumidor, fornece uma interface simplificada para usuários cotidianos. Taxas, roteamento e recursos permanecem governados por protocolo para encorajar um ecossistema multi-cliente saudável.
+[Coins.me](https://coins.me) é um dos dois PWAs primários para acessar o Protocolo P2P, ao lado de [P2P.me](https://p2p.me). Como um aplicativo focado em consumidor, fornece uma interface simplificada para usuários cotidianos. Taxas, roteamento e recursos permanecem governados por protocolo para encorajar um ecossistema multi-cliente saudável.
 
 ---
 

@@ -8,7 +8,7 @@ slug: design-goals-and-non-goals
 ## 2.1 Objetivos
 
 - On/off-ramp descentralizado entre moeda fiduciária e stablecoins sem escrow fiduciário.
-- Privacidade por design usando provas ZK para verificação de identidade enquanto mantém dados brutos fora da chain. Verificação de transações bancárias está planejada (veja Seção 4.2).
+- Privacidade por design usando provas ZK para verificação de identidade enquanto mantém dados brutos fora da chain. Verificação de transações bancárias está planejada (veja [Seção 4.2](/pt/whitepaper/cryptographic-primitives-proof-integration#42-evidence-module-for-bank-transaction-verification-roadmap))
 - Neutralidade credível: regras no nível do protocolo são abertas, transparentes e atualizáveis via governança.
 - Liquidação rápida: conclusão típica em minutos, visando menos de ~90s para trilhos comuns conforme rede, liquidez e automação melhoram.
 - Segurança e integridade: modelo de ameaça explícito, fluxos de disputa e controles de taxa/limite para minimizar fraude.
