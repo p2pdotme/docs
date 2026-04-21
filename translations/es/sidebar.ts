@@ -43,7 +43,24 @@ const sidebars: SidebarsConfig = {
             "id": "for-token-holders/start-here"
         },
         "items": [
-            "for-token-holders/protocol-overview"
+            "for-token-holders/protocol-overview",
+            "for-token-holders/why-the-token-exists",
+            "for-token-holders/token-details",
+            "for-token-holders/token-utility",
+            "for-token-holders/token-allocation",
+            "for-token-holders/past-backers",
+            "for-token-holders/metadao-sale",
+            "for-token-holders/vesting-schedules",
+            "for-token-holders/treasury-operations",
+            "for-token-holders/staking-mechanics",
+            "for-token-holders/token-holder-governance",
+            "for-token-holders/progressive-decentralization",
+            "for-token-holders/insurance",
+            "for-token-holders/operational-cost-structure",
+            "for-token-holders/multichain-strategy",
+            "for-token-holders/disclosures",
+            "for-token-holders/legal-documents",
+            "for-token-holders/faq"
         ]
     }
   ]

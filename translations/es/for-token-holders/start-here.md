@@ -5,7 +5,7 @@ title: "Comienza Aqui"
 slug: start-here
 ---
 
-> *Esta página se proporciona con fines informativos para explicar los mecanismos del protocolo. No constituye una oferta de valores ni asesoramiento de inversión. $P2P no está disponible para personas de EE.UU. Nada de lo aquí contenido debe interpretarse como una promesa de rendimiento financiero. Por favor, lee las [Divulgaciones](/es/for-token-holders/disclosures) completas antes de continuar.*
+> *Esta página se proporciona con fines informativos para explicar la mecánica del protocolo. No constituye una oferta de valores ni un consejo de inversión. $P2P no está disponible para personas de EE.UU. Nada de lo aquí expuesto debe interpretarse como una promesa de rendimiento financiero. Por favor, lea las [Divulgaciones](/es/for-token-holders/disclosures) completas antes de continuar.*
 
 Esta página reúne en un solo lugar los mecanismos del token, el modelo de gobernanza y las preguntas frecuentes (FAQ).
 
