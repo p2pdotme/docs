@@ -84,7 +84,6 @@ As a merchant, you should routinely perform the following.
 - Use unstake/request flows when reducing or exiting activity.
 
 ---
-
 ## Circles of Trust
 
 A Circle of Trust is a community-backed collective of merchants operated by a Circle Admin. Each Circle functions as a semi-autonomous unit within the protocol, managing its own merchant network while adhering to shared on-chain protocol rules.
@@ -113,6 +112,7 @@ The merchant registry is the operational core that Circles wrap. All merchant op
 *First-class Circle entities with dedicated lifecycle, Circle Admin roles with explicit stake requirements, and Circle-scoped merchant grouping are planned for a future release.*
 
 ---
+
 
 ## Payment Channels and Country Controls
 
@@ -154,11 +154,25 @@ Disputes are settled on-chain by authorized admins under protocol fault rules an
 
 ```mermaid
 flowchart TD
-    order[Order in progress] --> issue[Issue detected]
-    issue --> dispute[Dispute raised]
-    dispute --> evidence[Submit evidence]
-    evidence --> settle[Admin settlement on-chain]
-    settle --> outcome[Final outcome]
+    Order["Order in Progress"] --> Issue["Issue/Conflict Detected"]
+    Issue --> Dispute["Dispute Raised (USDC Locked)"]
+    
+    subgraph Evidence["Evidence Phase"]
+        direction LR
+        Payer["Submit Proof of Payment"]
+        Payee["Submit Proof of Non-Receipt"]
+    end
+    
+    Dispute --> Evidence
+    Evidence --> Review["Admin Review (On-Chain Settlement)"]
+    
+    Review -- "Fault determination" --> Outcome
+    
+    subgraph Outcome["Settlement & Penalties"]
+        Release["Release/Refund USDC"]
+        Slash["Slash Performance Bond"]
+        RP["Reputation (RP) Adjustment"]
+    end
 ```
 
 *Jury-based escalation tiers and governance-vote finality for disputes are planned for a future release.*

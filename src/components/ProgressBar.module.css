@@ -1,0 +1,18 @@
+.progressBarContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  z-index: 10000;
+  pointer-events: none;
+  background: transparent;
+}
+
+.progressBar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--p2p-blue) 0%, var(--p2p-blue-light) 100%);
+  width: 0%;
+  transition: width 0.1s ease-out;
+  box-shadow: 0 0 10px var(--p2p-blue);
+}
