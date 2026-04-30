@@ -370,14 +370,14 @@ function OrderFlow() {
       currency: "INR",
       user: userAddress,
       recipientAddr: userAddress,
-      amount: 10_000_000n, // 10 USDC
-      fiatAmount: 850_000_000n, // 850 INR
+      amount: 10_000_000n, // 10 USDC (6 decimals)
+      fiatAmount: 850_000_000n, // 850 INR (6 decimals)
       fiatAmountLimit: 0n,
     });
 
     result.match(
-      ({ hash, meta }) => console.log("Placed!", hash, meta.orderId),
-      (err) => console.error(`Error: ${err.code}`, err.message),
+      ({ hash, meta }) => console.log("✓ Order placed!", hash),
+      (err) => console.error(`✗ Error: ${err.code} - ${err.message}`),
     );
   }
 
@@ -385,17 +385,31 @@ function OrderFlow() {
 }
 ```
 
-### Handle Results
+### Understanding Result Types
 
-All SDK methods return `Result` types (never throw):
+All SDK methods return `Result` types from neverthrow (never throw exceptions):
 
 ```ts
 const result = await orders.placeOrder.execute(params);
 
+// Always use .match() to handle success and error
 result.match(
-  (success) => console.log("Success:", success),
-  (error) => console.error("Error:", error.code, error.message),
+  (success) => {
+    // Handle success
+    console.log("Success:", success.hash);
+  },
+  (error) => {
+    // Handle error
+    console.error("Error:", error.code, error.message);
+  }
 );
+
+// Or check with .isOk()
+if (result.isOk()) {
+  console.log("Hash:", result.value.hash);
+} else {
+  console.log("Error:", result.error.code);
+}
 ```
 
 ---
@@ -461,27 +475,51 @@ await orders.setSellOrderUpi.execute({
 ### Track Orders
 
 ```ts
-// Get all user orders
-const orders = await orders.getOrders({
-  user: userAddress,
+// Get all user orders (returns Result type)
+const result = await orders.getOrders({
+  userAddress: userAddress,
   limit: 20,
-  offset: 0,
+  skip: 0,
 });
+
+result.match(
+  (ordersList) => {
+    console.log(`Found ${ordersList.length} orders`);
+    ordersList.forEach((order) => {
+      console.log(`Order ${order.id}: ${order.status}`);
+    });
+  },
+  (err) => console.error(`Error: ${err.code}`),
+);
 
 // Get single order
-const order = await orders.getOrder({ orderId: "0x123..." });
+const singleResult = await orders.getOrder({ orderId: "0x123..." });
+singleResult.match(
+  (order) => console.log("Order:", order),
+  (err) => console.error("Error:", err),
+);
 
 // Cancel order
-await orders.cancelOrder.execute({
+const cancelResult = await orders.cancelOrder.execute({
   walletClient,
   orderId: "0x123...",
 });
 
+cancelResult.match(
+  ({ hash }) => console.log("Cancelled! Hash:", hash),
+  (err) => console.error("Error:", err.message),
+);
+
 // Raise dispute
-await orders.raiseDispute.execute({
+const disputeResult = await orders.raiseDispute.execute({
   walletClient,
   orderId: "0x123...",
 });
+
+disputeResult.match(
+  ({ hash }) => console.log("Dispute raised! Hash:", hash),
+  (err) => console.error("Error:", err.message),
+);
 ```
 
 ### Get Fees
@@ -523,15 +561,19 @@ console.log(balances.usdc, balances.fiat);
 ### Check Limits
 
 ```ts
-const limits = await profile.getTxLimits({
+const result = await profile.getTxLimits({
   address: userAddress,
   currency: "INR",
 });
 
-console.log(limits.minOrderAmount);
-console.log(limits.maxOrderAmount);
-console.log(limits.dailyLimit);
-console.log(limits.monthlyLimit);
+result.match(
+  (limits) => {
+    // limits has: buyLimit, sellLimit
+    console.log("Buy Limit:", limits.buyLimit);
+    console.log("Sell Limit:", limits.sellLimit);
+  },
+  (err) => console.error("Error:", err.code),
+);
 ```
 
 Limits depend on reputation, KYC level, and currency risk parameters.
@@ -540,30 +582,47 @@ Limits depend on reputation, KYC level, and currency risk parameters.
 
 Before BUY:
 ```ts
-const limits = await profile.getTxLimits({
+const result = await profile.getTxLimits({
   address: userAddr,
-  currency,
+  currency: "INR",
 });
 
-if (amount < limits.minOrderAmount) {
-  return "Below minimum";
-}
-if (amount > limits.maxOrderAmount) {
-  return "Above maximum";
-}
+result.match(
+  (limits) => {
+    if (amount > limits.buyLimit) {
+      console.log("Exceeds buy limit");
+    } else {
+      console.log("Amount OK");
+    }
+  },
+  (err) => console.error("Error:", err.code),
+);
 ```
 
 Before SELL:
 ```ts
-const [usdc, allowance, limits] = await Promise.all([
-  profile.getUsdcBalance({ address: userAddr }),
-  profile.getUsdcAllowance({ owner: userAddr }),
-  profile.getTxLimits({ address: userAddr, currency: "INR" }),
-]);
+// Get USDC balance
+const balanceResult = await profile.getUsdcBalance({ address: userAddr });
+const usdcBalance = balanceResult; // Returns bigint directly
 
-if (usdc < amount) return "Insufficient USDC";
-if (allowance < amount) return "Need approval";
-if (amount > limits.maxOrderAmount) return "Exceeds limit";
+// Get limits
+const limitsResult = await profile.getTxLimits({
+  address: userAddr,
+  currency: "INR",
+});
+
+limitsResult.match(
+  (limits) => {
+    if (usdcBalance < amount) {
+      console.log("Insufficient USDC");
+    } else if (amount > limits.sellLimit) {
+      console.log("Exceeds sell limit");
+    } else {
+      console.log("Can sell");
+    }
+  },
+  (err) => console.error("Error:", err.code),
+);
 ```
 
 ---
@@ -602,22 +661,27 @@ orders.placeOrder.execute(params).match(
 
 ### Common Error Codes
 
-| Code | Meaning |
-|------|---------|
-| `INSUFFICIENT_BALANCE` | Not enough USDC/fiat |
-| `EXCEEDS_LIMIT` | Order exceeds limit |
-| `INSUFFICIENT_RP` | Reputation too low |
-| `INVALID_CURRENCY` | Currency not supported |
-| `ORDER_NOT_FOUND` | Order doesn't exist |
-| `INSUFFICIENT_ALLOWANCE` | Need USDC approval |
+| Code | Meaning | Action |
+|------|---------|--------|
+| `INVALID_INPUT` | Invalid parameters | Check your inputs |
+| `VALIDATION_ERROR` | Validation failed | Fix the data format |
+| `NETWORK_ERROR` | RPC/subgraph error | Retry with backoff |
+| `INSUFFICIENT_ALLOWANCE` | Need USDC approval | Call `approveUsdc.execute()` |
 
 ### Error Handling Patterns
 
 Graceful degradation:
 ```ts
+const result = await orders.placeOrder.execute(params);
+
 result.match(
-  (success) => ({ ok: true, hash: success.hash }),
-  (error) => ({ ok: false, message: error.message }),
+  (success) => {
+    return { ok: true, hash: success.hash };
+  },
+  (error) => {
+    console.error(`Error [${error.code}]: ${error.message}`);
+    return { ok: false, message: error.message };
+  },
 );
 ```
 
@@ -626,12 +690,21 @@ Retry with backoff:
 async function retryOrder(params, maxRetries = 3) {
   for (let i = 0; i < maxRetries; i++) {
     const result = await orders.placeOrder.execute(params);
-    if (result.isOk()) return result.value;
+
+    if (result.isOk()) {
+      return result.value;
+    }
 
     const { code } = result.error;
-    if (!isRetryable(code)) throw result.error;
 
-    await sleep(1000 * Math.pow(2, i));
+    // Only retry on network errors
+    if (code === "NETWORK_ERROR") {
+      await new Promise(r => setTimeout(r, 1000 * Math.pow(2, i)));
+      continue;
+    }
+
+    // Don't retry validation errors
+    throw result.error;
   }
 }
 ```
@@ -710,12 +783,36 @@ Use factories directly:
 ```ts
 import { createOrders } from "@p2pdotme/sdk/orders";
 import { createProfile } from "@p2pdotme/sdk/profile";
+import { createPublicClient, http } from "viem";
+import { baseSepolia } from "viem/chains";
 
-const orders = createOrders({ publicClient, diamondAddress, ... });
-const profile = createProfile({ publicClient, diamondAddress, ... });
+const publicClient = createPublicClient({
+  chain: baseSepolia,
+  transport: http("https://sepolia.base.org"),
+});
 
-await orders.getOrder({ orderId });
-await profile.getBalances({ address, currency });
+const orders = createOrders({
+  publicClient,
+  diamondAddress: "0xce868398FDaDcA368EAc203222874D6888532aE2",
+  usdcAddress: "0xDABa329Ed949f28F64019f22c33c3B253B2Ded60",
+  subgraphUrl: "https://api.studio.thegraph.com/query/110312/indexer-one/version/latest",
+});
+
+const profile = createProfile({
+  publicClient,
+  diamondAddress: "0xce868398FDaDcA368EAc203222874D6888532aE2",
+  usdcAddress: "0xDABa329Ed949f28F64019f22c33c3B253B2Ded60",
+});
+
+// Use them
+const orderResult = await orders.getOrder({ orderId: "0x123..." });
+orderResult.match(
+  (order) => console.log("Order:", order),
+  (err) => console.error("Error:", err),
+);
+
+const balanceResult = await profile.getUsdcBalance({ address: "0x..." });
+console.log("USDC:", balanceResult);
 ```
 
 ---
