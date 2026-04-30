@@ -14,6 +14,7 @@ This page covers what builders need to integrate with, extend, or contribute to 
 - [Remittance expansion](/for-builders/fiat-to-fiat-remittance)
 - [Currency expansion](/for-builders/global-currency-expansion)
 - [FAQ](/for-builders/faq)
+- [SDK](/for-builders/sdk)
 
 Also see [`/whitepaper`](/whitepaper/abstract) for protocol design and [`/for-token-holders`](/for-token-holders/start-here) for token governance and economics.
 
@@ -190,3 +191,617 @@ RP hooks are whitelisted in the `ReputationManager`. Order volume updates, dispu
 ### Where does governance detail live for token holders?
 
 Token-holder governance (voting model, quorum, progressive decentralization) is documented in [`/for-token-holders`](/for-token-holders/start-here).
+
+---
+
+## SDK
+
+The easiest way to integrate P2P Protocol into your application is via the TypeScript SDK (`@p2pdotme/sdk`). It provides pre-built modules for orders, user profiles, pricing, KYC, and fraud detection.
+
+**Framework-agnostic** — core is pure TypeScript; optional React hooks.
+**Wallet-agnostic** — bring your own viem client.
+**No exceptions** — all methods return `Result` / `ResultAsync` types.
+**Modular** — import only what you need.
+
+Installation:
+```bash
+npm install @p2pdotme/sdk
+```
+
+Full source: https://github.com/p2pdotme/p2pdotme-sdk
+
+### Environment Setup
+
+#### Networks
+
+The SDK supports **Base** (mainnet and testnet). Choose one:
+
+| Network | Chain ID | Use Case |
+|---------|----------|----------|
+| **Base Mainnet** | 8453 | Production (real money) |
+| **Base Sepolia** | 84532 | Development & testing |
+
+#### Contract Addresses
+
+You need three addresses for your network:
+
+| Variable | Purpose |
+|----------|---------|
+| `DIAMOND_ADDRESS` | P2P.me protocol contract |
+| `USDC_ADDRESS` | USDC token contract |
+| `SUBGRAPH_URL` | GraphQL endpoint for order queries |
+
+#### Base Sepolia (Testnet)
+
+```env
+REACT_APP_DIAMOND_ADDRESS=0xce868398FDaDcA368EAc203222874D6888532aE2
+REACT_APP_USDC_ADDRESS=0xDABa329Ed949f28F64019f22c33c3B253B2Ded60
+REACT_APP_SUBGRAPH_URL=https://api.studio.thegraph.com/query/110312/indexer-one/version/latest
+```
+
+#### Base Mainnet (Production)
+
+```env
+REACT_APP_DIAMOND_ADDRESS=0x4cad6eC90e65baBec9335cAd728DDC610c316368
+REACT_APP_USDC_ADDRESS=0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
+REACT_APP_SUBGRAPH_URL=<deploy-your-own>
+```
+
+**For mainnet subgraph**: Deploy your own using the [P2P.me Subgraph repository](https://github.com/p2pdotme/subgraph).
+
+#### RPC URLs
+
+You need an RPC endpoint. Options:
+
+**Public (free, rate-limited):**
+```env
+# Base Mainnet
+REACT_APP_RPC_URL=https://mainnet.base.org
+
+# Base Sepolia Testnet
+REACT_APP_RPC_URL=https://sepolia.base.org
+```
+
+**Recommended (commercial, faster, more reliable):**
+- [Alchemy](https://www.alchemy.com/) — free tier available
+- [Infura](https://www.infura.io/) — free tier available
+- [QuickNode](https://www.quicknode.com/) — free tier available
+
+#### Setup `.env.local` File
+
+Create a `.env.local` in your project root. Copy the values from above based on your network:
+
+**For Base Sepolia Testnet:**
+```env
+# Network
+REACT_APP_RPC_URL=https://sepolia.base.org
+REACT_APP_CHAIN_ID=84532
+
+# Contract Addresses
+REACT_APP_DIAMOND_ADDRESS=0xce868398FDaDcA368EAc203222874D6888532aE2
+REACT_APP_USDC_ADDRESS=0xDABa329Ed949f28F64019f22c33c3B253B2Ded60
+REACT_APP_SUBGRAPH_URL=https://api.studio.thegraph.com/query/110312/indexer-one/version/latest
+
+# Your Account (for testing; development only!)
+REACT_APP_PRIVATE_KEY=<your-private-key-here>
+```
+
+**For Base Mainnet (Production):**
+```env
+# Network
+REACT_APP_RPC_URL=https://mainnet.base.org
+REACT_APP_CHAIN_ID=8453
+
+# Contract Addresses
+REACT_APP_DIAMOND_ADDRESS=0x4cad6eC90e65baBec9335cAd728DDC610c316368
+REACT_APP_USDC_ADDRESS=0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913
+REACT_APP_SUBGRAPH_URL=<your-deployed-subgraph-url>
+```
+
+Load in your code:
+
+```ts
+const RPC_URL = import.meta.env.REACT_APP_RPC_URL;
+const DIAMOND_ADDRESS = import.meta.env.REACT_APP_DIAMOND_ADDRESS;
+const USDC_ADDRESS = import.meta.env.REACT_APP_USDC_ADDRESS;
+const SUBGRAPH_URL = import.meta.env.REACT_APP_SUBGRAPH_URL;
+```
+
+#### Getting Testnet Funds
+
+To test SELL/PAY orders on Base Sepolia, you need ETH + USDC:
+
+- [Faucet.circle.com](https://faucet.circle.com/) — gives both ETH + testnet USDC (recommended)
+- [SepoliaFaucet.com](https://sepoliafaucet.com/) — ETH only
+
+### Setup
+
+Install the SDK:
+```bash
+npm install @p2pdotme/sdk viem
+```
+
+You need:
+- **publicClient**: viem `PublicClient` for reads
+- **walletClient**: viem `WalletClient` for writes
+- **diamondAddress**: P2P Protocol contract
+- **usdcAddress**: USDC token address
+- **subgraphUrl**: GraphQL endpoint
+
+### React Example
+
+```tsx
+import { SdkProvider, useOrders, useProfile } from "@p2pdotme/sdk/react";
+import { createPublicClient, createWalletClient, http } from "viem";
+import { baseSepolia } from "viem/chains";
+
+const publicClient = createPublicClient({
+  chain: baseSepolia,
+  transport: http(RPC_URL),
+});
+
+const walletClient = createWalletClient({
+  chain: baseSepolia,
+  transport: http(RPC_URL),
+  account: YOUR_ACCOUNT,
+});
+
+function App() {
+  return (
+    <SdkProvider
+      publicClient={publicClient}
+      diamondAddress={DIAMOND_ADDRESS}
+      usdcAddress={USDC_ADDRESS}
+      subgraphUrl={SUBGRAPH_URL}
+    >
+      <OrderFlow />
+    </SdkProvider>
+  );
+}
+
+function OrderFlow() {
+  const orders = useOrders();
+  const profile = useProfile();
+
+  async function buyUsdc() {
+    const result = await orders.placeOrder.execute({
+      walletClient,
+      orderType: 0, // BUY
+      currency: "INR",
+      user: userAddress,
+      recipientAddr: userAddress,
+      amount: 10_000_000n, // 10 USDC
+      fiatAmount: 850_000_000n, // 850 INR
+      fiatAmountLimit: 0n,
+    });
+
+    result.match(
+      ({ hash, meta }) => console.log("Placed!", hash, meta.orderId),
+      (err) => console.error(`Error: ${err.code}`, err.message),
+    );
+  }
+
+  return <button onClick={buyUsdc}>Buy USDC</button>;
+}
+```
+
+### Handle Results
+
+All SDK methods return `Result` types (never throw):
+
+```ts
+const result = await orders.placeOrder.execute(params);
+
+result.match(
+  (success) => console.log("Success:", success),
+  (error) => console.error("Error:", error.code, error.message),
+);
+```
+
+---
+
+### Orders
+
+The `orders` module handles all order lifecycle operations.
+
+### Order Types
+
+| Type | Value | Description |
+|------|-------|-------------|
+| BUY | `0` | User receives USDC, sends fiat |
+| SELL | `1` | User sends USDC, receives fiat |
+| PAY | `2` | User sends USDC to wallet |
+
+### Place BUY Order
+
+```ts
+const result = await orders.placeOrder.execute({
+  walletClient,
+  orderType: 0,
+  currency: "INR",
+  user: userAddress,
+  recipientAddr: userAddress,
+  amount: 10_000_000n,
+  fiatAmount: 850_000_000n,
+  fiatAmountLimit: 0n,
+});
+```
+
+### Place SELL Order
+
+SELL requires USDC approval first:
+
+```ts
+// 1. Approve
+await orders.approveUsdc.execute({
+  walletClient,
+  amount: 10_000_000n,
+});
+
+// 2. Place order
+const result = await orders.placeOrder.execute({
+  walletClient,
+  orderType: 1, // SELL
+  currency: "INR",
+  user: userAddress,
+  recipientAddr: userAddress,
+  amount: 10_000_000n,
+  fiatAmount: 850_000_000n,
+  fiatAmountLimit: 0n,
+});
+
+// 3. Set payment destination
+await orders.setSellOrderUpi.execute({
+  walletClient,
+  orderId: result.value.meta.orderId,
+  paymentAddress: "user@upi",
+});
+```
+
+### Track Orders
+
+```ts
+// Get all user orders
+const orders = await orders.getOrders({
+  user: userAddress,
+  limit: 20,
+  offset: 0,
+});
+
+// Get single order
+const order = await orders.getOrder({ orderId: "0x123..." });
+
+// Cancel order
+await orders.cancelOrder.execute({
+  walletClient,
+  orderId: "0x123...",
+});
+
+// Raise dispute
+await orders.raiseDispute.execute({
+  walletClient,
+  orderId: "0x123...",
+});
+```
+
+### Get Fees
+
+```ts
+const feeConfig = await orders.getFeeConfig({
+  currency: "INR",
+});
+
+console.log(feeConfig.spread, feeConfig.merchantFee);
+```
+
+---
+
+### Profile & Limits
+
+Check user balances, USDC allowance, and trading limits.
+
+### Check Balances
+
+```ts
+// USDC balance
+const balance = await profile.getUsdcBalance({ address: userAddress });
+
+// USDC allowance (before SELL/PAY)
+const allowance = await profile.getUsdcAllowance({
+  owner: userAddress,
+});
+
+// Fiat conversion
+const balances = await profile.getBalances({
+  address: userAddress,
+  currency: "INR",
+});
+
+console.log(balances.usdc, balances.fiat);
+```
+
+### Check Limits
+
+```ts
+const limits = await profile.getTxLimits({
+  address: userAddress,
+  currency: "INR",
+});
+
+console.log(limits.minOrderAmount);
+console.log(limits.maxOrderAmount);
+console.log(limits.dailyLimit);
+console.log(limits.monthlyLimit);
+```
+
+Limits depend on reputation, KYC level, and currency risk parameters.
+
+### Pre-flight Checks
+
+Before BUY:
+```ts
+const limits = await profile.getTxLimits({
+  address: userAddr,
+  currency,
+});
+
+if (amount < limits.minOrderAmount) {
+  return "Below minimum";
+}
+if (amount > limits.maxOrderAmount) {
+  return "Above maximum";
+}
+```
+
+Before SELL:
+```ts
+const [usdc, allowance, limits] = await Promise.all([
+  profile.getUsdcBalance({ address: userAddr }),
+  profile.getUsdcAllowance({ owner: userAddr }),
+  profile.getTxLimits({ address: userAddr, currency: "INR" }),
+]);
+
+if (usdc < amount) return "Insufficient USDC";
+if (allowance < amount) return "Need approval";
+if (amount > limits.maxOrderAmount) return "Exceeds limit";
+```
+
+---
+
+### Error Handling
+
+Decode contract errors to user-friendly messages.
+
+### Error Structure
+
+```ts
+const error = {
+  code: "INSUFFICIENT_BALANCE",
+  message: "User has insufficient USDC balance",
+  cause: rawError, // underlying error
+};
+```
+
+### Decode Contract Errors
+
+```ts
+import {
+  parseContractError,
+  getContractErrorMessage,
+} from "@p2pdotme/sdk/orders";
+
+orders.placeOrder.execute(params).match(
+  ({ hash }) => console.log("Placed:", hash),
+  (err) => {
+    const code = parseContractError(err.cause);
+    const message = getContractErrorMessage(code);
+    showToast(message); // "Order amount exceeds limit"
+  },
+);
+```
+
+### Common Error Codes
+
+| Code | Meaning |
+|------|---------|
+| `INSUFFICIENT_BALANCE` | Not enough USDC/fiat |
+| `EXCEEDS_LIMIT` | Order exceeds limit |
+| `INSUFFICIENT_RP` | Reputation too low |
+| `INVALID_CURRENCY` | Currency not supported |
+| `ORDER_NOT_FOUND` | Order doesn't exist |
+| `INSUFFICIENT_ALLOWANCE` | Need USDC approval |
+
+### Error Handling Patterns
+
+Graceful degradation:
+```ts
+result.match(
+  (success) => ({ ok: true, hash: success.hash }),
+  (error) => ({ ok: false, message: error.message }),
+);
+```
+
+Retry with backoff:
+```ts
+async function retryOrder(params, maxRetries = 3) {
+  for (let i = 0; i < maxRetries; i++) {
+    const result = await orders.placeOrder.execute(params);
+    if (result.isOk()) return result.value;
+
+    const { code } = result.error;
+    if (!isRetryable(code)) throw result.error;
+
+    await sleep(1000 * Math.pow(2, i));
+  }
+}
+```
+
+---
+
+### Advanced Patterns
+
+Use `prepare`/`execute` separation, relay identity, and custom storage.
+
+### Prepare vs Execute
+
+`prepare()` returns raw transaction without signing:
+```ts
+const result = await orders.placeOrder.prepare(params);
+// Returns: { to, data, value, meta }
+// Send via relayer, multisig, or custom signer
+```
+
+`execute()` signs and sends with viem:
+```ts
+const result = await orders.placeOrder.execute({
+  walletClient,
+  ...params
+});
+```
+
+### Use Cases
+
+**Gasless relaying:**
+```ts
+const tx = await orders.placeOrder.prepare(params);
+await relayerApi.send(tx.value);
+```
+
+**Multi-sig:**
+```ts
+const tx = await orders.placeOrder.prepare(params);
+await multiSigWallet.queue(tx.value);
+```
+
+**Server-side signing:**
+```ts
+const tx = await orders.placeOrder.prepare(params);
+const signed = await serverSignAndSend(tx.value);
+```
+
+### Relay Identity
+
+SDK uses a keypair for sender anonymity. Default is in-memory (lost on refresh).
+
+Persist to localStorage:
+```tsx
+import { createLocalStorageRelayStore } from "@p2pdotme/sdk/orders";
+
+<SdkProvider
+  orders={{
+    relayIdentityStore: createLocalStorageRelayStore({ key: "relay" })
+  }}
+/>
+```
+
+Custom storage:
+```tsx
+const store = {
+  get: async () => db.getRelayIdentity(),
+  set: async (id) => db.saveRelayIdentity(id),
+};
+
+<SdkProvider orders={{ relayIdentityStore: store }} />
+```
+
+### Standalone (No React)
+
+Use factories directly:
+```ts
+import { createOrders } from "@p2pdotme/sdk/orders";
+import { createProfile } from "@p2pdotme/sdk/profile";
+
+const orders = createOrders({ publicClient, diamondAddress, ... });
+const profile = createProfile({ publicClient, diamondAddress, ... });
+
+await orders.getOrder({ orderId });
+await profile.getBalances({ address, currency });
+```
+
+---
+
+### Examples
+
+Complete workflows for common patterns.
+
+### Buy Flow
+
+```ts
+async function buyUsdc(userAddr, currency, fiatAmount) {
+  const limits = await profile.getTxLimits({ address: userAddr, currency });
+  if (fiatAmount > limits.maxOrderAmount) throw new Error("Exceeds limit");
+
+  const prices = await prices.getPriceConfig({ currency });
+  const usdcAmount = (fiatAmount * 1_000_000n) / prices.price;
+
+  return await orders.placeOrder.execute({
+    walletClient,
+    orderType: 0,
+    currency,
+    user: userAddr,
+    recipientAddr: userAddr,
+    amount: usdcAmount,
+    fiatAmount,
+    fiatAmountLimit: 0n,
+  });
+}
+```
+
+### Sell Flow
+
+```ts
+async function sellUsdc(userAddr, currency, usdcAmount) {
+  const balance = await profile.getUsdcBalance({ address: userAddr });
+  if (balance < usdcAmount) throw new Error("Insufficient USDC");
+
+  const allowance = await profile.getUsdcAllowance({ owner: userAddr });
+  if (allowance < usdcAmount) {
+    await orders.approveUsdc.execute({ walletClient, amount: usdcAmount });
+  }
+
+  const prices = await prices.getPriceConfig({ currency });
+  const fiatAmount = (usdcAmount * prices.price) / 1_000_000n;
+
+  const placed = await orders.placeOrder.execute({
+    walletClient,
+    orderType: 1,
+    currency,
+    user: userAddr,
+    recipientAddr: userAddr,
+    amount: usdcAmount,
+    fiatAmount,
+    fiatAmountLimit: 0n,
+  });
+
+  if (!placed.isOk()) return placed;
+
+  return await orders.setSellOrderUpi.execute({
+    walletClient,
+    orderId: placed.value.meta.orderId,
+    paymentAddress: "user@upi",
+  });
+}
+```
+
+### Monitor Order Status
+
+```ts
+function useOrderStatus(orderId) {
+  const [order, setOrder] = useState(null);
+  const orders = useOrders();
+
+  useEffect(() => {
+    let poll;
+    const fn = async () => {
+      const result = await orders.getOrder({ orderId });
+      if (result.isOk()) setOrder(result.value);
+    };
+
+    fn();
+    poll = setInterval(fn, 3000);
+    return () => clearInterval(poll);
+  }, [orderId, orders]);
+
+  return order;
+}
+```
