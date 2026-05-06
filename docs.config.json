@@ -203,6 +203,23 @@
             {"doc_id": "start-here", "title": "Comienza Aquí"},
             {"doc_id": "protocol-overview", "title": "Resumen del Protocolo"}
           ]
+        },
+        {
+          "id": "for-builders",
+          "outputDir": "translations/es/for-builders",
+          "routeBasePath": "es/for-builders",
+          "preGeneratedFiles": [
+            {"doc_id": "start-here", "title": "Comienza Aquí"},
+            {"doc_id": "roles-and-permissions", "title": "Roles y Permisos"},
+            {"doc_id": "protocol-parameters", "title": "Parámetros del Protocolo"},
+            {"doc_id": "disputes", "title": "Disputas"},
+            {"doc_id": "reputation", "title": "Reputación"},
+            {"doc_id": "contract-references", "title": "Referencias de Contratos"},
+            {"doc_id": "fiat-to-fiat-remittance", "title": "Remesas Fiat a Fiat"},
+            {"doc_id": "global-currency-expansion", "title": "Expansión Global de Monedas"},
+            {"doc_id": "rollout-sequence", "title": "Secuencia de Lanzamiento"},
+            {"doc_id": "faq", "title": "Preguntas Frecuentes"}
+          ]
         }
       ]
     }
