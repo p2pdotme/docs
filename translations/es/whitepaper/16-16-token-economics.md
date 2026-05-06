@@ -11,7 +11,7 @@ En el aspecto de propiedad, las decisiones que afectan el suministro del token d
 
 En el aspecto de gobernanza, los holders votan sobre estructuras de comisiones, límites de transacción, ponderaciones de riesgo, configuraciones de oráculos, asignación de tesorería y actualizaciones del protocolo. La dirección de ingresos, los cambios de parámetros y la custodia de la propiedad intelectual pertenecen a la base de holders de tokens en lugar de a un equipo centralizado.
 
-En el aspecto económico, los comerciantes y verificadores stakear tokens como bonos, alineando sus incentivos con un comportamiento honesto. El enrutamiento de comisiones proporciona reembolsos y descuentos a los participantes activos. El token habilita la participación en pools de seguro de disputas y delegación comunitaria para compartir ingresos.
+En el aspecto económico, los merchants y verificadores stakear tokens como bonos, alineando sus incentivos con un comportamiento honesto. El enrutamiento de comisiones proporciona reembolsos y descuentos a los participantes activos. El token habilita la participación en pools de seguro de disputas y delegación comunitaria para compartir ingresos.
 
 Una porción de las comisiones del protocolo fluye hacia una tesorería gobernada on-chain. Estos fondos apoyan auditorías de seguridad, bounty de bugs, grants al ecosistema y liquidez. Si los recursos del protocolo fueran alguna vez malversados, la gobernanza del token proporciona el mecanismo para que los holders redirijan el control.
 

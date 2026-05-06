@@ -9,7 +9,7 @@ Aunque el protocolo está diseñado pensando en la seguridad y la resiliencia, l
 
 **Incertidumbre regulatoria** sigue siendo un factor en el cambiante panorama de las criptomonedas. Cambios jurisdiccionales en la forma en que los reguladores clasifican o restringen las transacciones peer-to-peer pueden limitar las funciones del protocolo o su cobertura geográfica con el tiempo. El protocolo busca mantenerse conforme mediante parámetros de políticas programables, pero no puede garantizar el tratamiento regulatorio futuro.
 
-**Condiciones de liquidez** afectan la experiencia del usuario. Durante períodos de baja actividad de comerciantes o libros de órdenes poco profundos, los spreads pueden ampliarse y los tiempos de emparejamiento pueden aumentar. El sistema de Prueba-de-Credibilidad incentiva la provisión confiable de liquidez, pero las condiciones de mercado permanecen fuera del control directo del protocolo.
+**Condiciones de liquidez** afectan la experiencia del usuario. Durante períodos de baja actividad de merchants o libros de órdenes poco profundos, los spreads pueden ampliarse y los tiempos de emparejamiento pueden aumentar. El sistema de Prueba-de-Credibilidad incentiva la provisión confiable de liquidez, pero las condiciones de mercado permanecen fuera del control directo del protocolo.
 
 **Dependencias de oráculos** introducen posibles puntos de falla. Los feeds de precios provenientes de oráculos externos podrían sufrir interrupciones o intentos de manipulación. El protocolo mitiga esto mediante guards de desviación, comprobaciones de obsolescencia, agregación de múltiples fuentes y circuit breakers que pausan el trading cuando se detectan anomalías.
 

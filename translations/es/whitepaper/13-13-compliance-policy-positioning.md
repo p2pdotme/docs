@@ -8,7 +8,7 @@ slug: compliance-policy-positioning
 El Protocolo P2P busca mantenerse en buena posición con las regulaciones legales. El usuario es responsable del uso legítimo y de la tributación en su jurisdicción.
 
 - **Postura no custodial:** El Protocolo coordina pares y verifica evidencia; no toma custodia de fiat.
-- **Controles de riesgo:** límites de transacción, niveles de reputación, ZK-KYC opcional, interfaces de screening de sanciones para comerciantes y conjuntos de parámetros regionales gobernados.
+- **Controles de riesgo:** límites de transacción, niveles de reputación, ZK-KYC opcional, interfaces de screening de sanciones para merchants y conjuntos de parámetros regionales gobernados.
 - **Divulgaciones:** El Protocolo no promueve la evasión fiscal ni actividades ilegales; las violaciones siguen siendo responsabilidad del usuario.
 
 ## 13.1 Responsabilidad del Usuario en Materia de Impuestos

@@ -11,7 +11,7 @@ La liquidez de stablecoin se ofrece actualmente por pares cuidadosamente revisad
 
 ## 10.2 Mejoras Futuras de Liquidez
 
-Las versiones futuras pueden introducir staking de comerciantes o incentivos LP utilizando tokens del protocolo. Específicamente, los usuarios más frecuentes y reputados del protocolo podrán stakear sus tenencias de stablecoin para obtener recompensas en forma de tokens del protocolo. Esta nueva liquidez existiría por encima de la liquidez existente ofrecida por los comerciantes.
+Las versiones futuras pueden introducir staking de merchants o incentivos LP utilizando tokens del protocolo. Específicamente, los usuarios más frecuentes y reputados del protocolo podrán stakear sus tenencias de stablecoin para obtener recompensas en forma de tokens del protocolo. Esta nueva liquidez existiría por encima de la liquidez existente ofrecida por los merchants.
 
 El compromiso de cotización, la profundidad mínima y las penalizaciones por cancelación están gobernadas para reducir la selección adversa y los no-shows.
 

@@ -16,12 +16,12 @@ En este modelo:
 
 - **La reputación** se gana on-chain a través de operaciones completadas, historiales limpios de disputas y niveles de ZK-KYC, no mediante verificación centralizada de cuentas.
 - **La privacidad** se preserva por defecto mediante pruebas de zero-knowledge (ZK) para la verificación de identidad, revelando únicamente que un usuario está verificado y autorizado, sin exponer identidades reales.
-- **La utilidad** vence a la teoría: los micropagos, offramps cotidianos, salarios, remesas y pagos a comerciantes tienen prioridad, diseñados para sentirse tan simples como enviar un mensaje.
+- **La utilidad** vence a la teoría: los micropagos, offramps cotidianos, salarios, remesas y pagos a merchants tienen prioridad, diseñados para sentirse tan simples como enviar un mensaje.
 
 ## 1.2 Cómo se ve el "éxito" para 2026+
 
 - Un usuario en cualquier país soportado puede comprar, vender o pagar con stablecoins en aproximadamente minutos (apuntando a menos de 90 segundos en vías rápidas), sin entregar custodia a nadie.
-- Los comerciantes se emparejan on-chain basándose en USDC stakeado, con el spread definido a nivel de protocolo en lugar de competencia entre comerciantes. El sistema Proof-of-Credibility se encarga de la prevención de fraude y la asignación de límites de transacción por niveles.
+- Los merchants se emparejan on-chain basándose en USDC stakeado, con el spread definido a nivel de protocolo en lugar de competencia entre merchants. El sistema Proof-of-Credibility se encarga de la prevención de fraude y la asignación de límites de transacción por niveles.
 - El ZK-KYC desbloquea límites más altos y procesos más rápidos mientras mantiene los datos personales fuera de la cadena.
 - Las aplicaciones y wallets de terceros integran el protocolo mediante SDKs abiertos; [Coins.me](https://coins.me) es solo un front-end de referencia para usuarios, no una puerta de entrada privilegiada.
 - A medida que la credibilidad se acumula, se pueden crear nuevos productos (pagos a plazos, comercio sin escrow, salarios transfronterizos, seguros de disputas) sin necesidad de volver a hacer KYC a todo el mundo.
@@ -36,7 +36,7 @@ En este modelo:
 
 ## 1.4 Qué es (y no es) el Protocolo P2P
 
-**Es:** una capa abierta y descentralizada de coordinación que empareja de forma trustless a un comprador con un comerciante on-chain basado en USDC stakeado; liquida las operaciones con coordinación on-chain; y canaliza tarifas y parámetros a través de la gobernanza.
+**Es:** una capa abierta y descentralizada de coordinación que empareja de forma trustless a un comprador con un merchant on-chain basado en USDC stakeado; liquida las operaciones con coordinación on-chain; y canaliza tarifas y parámetros a través de la gobernanza.
 
 **No es:** un custodio, un banco ni un corredor de datos. El Protocolo P2P no custodia fiat, no almacena información personal de los usuarios y no promete rendimientos fijos.
 
@@ -102,7 +102,7 @@ La mayoría de las personas quiere dos cosas al mismo tiempo: privacidad y legal
 ## 1.12 Lo que se desbloquea si lo hacemos bien
 
 - **Ingresos sin fronteras:** creadores, contratistas y trabajadores remotos reciben pagos donde viven, sin custodia de exchanges.
-- **Pagos a comerciantes:** los marketplaces liquidan a los vendedores en vías locales de forma instantánea, con spreads justos y sin manejo de archivos CSV.
+- **Pagos a merchants:** los marketplaces liquidan a los vendedores en vías locales de forma instantánea, con spreads justos y sin manejo de archivos CSV.
 - **Finanzas comunitarias:** ahorros rotativos, microcréditos y marketplaces sin escrow pueden construirse sobre una capa compartida de credibilidad y liquidez entre los dominios fiat y crypto.
 - **Resiliencia cívica:** las personas pueden mover valor de forma privada y legal cuando el mundo se vuelve inestable.
 
@@ -122,7 +122,7 @@ La mayoría de las personas quiere dos cosas al mismo tiempo: privacidad y legal
 
 ## 1.15 Hitos que importan
 
-- **Ubicuidad:** presencia creíble de comerciantes en cada par de región/vía importante.
+- **Ubicuidad:** presencia creíble de merchants en cada par de región/vía importante.
 - **Alcance geográfico:** expansión a más de 20 mercados en Asia, África, Latinoamérica y MENA.
 - **Presencia multichain:** Solana es la cadena hub planeada. El token $P2P se lanza primero en Solana para generar efectos de red; el despliegue del protocolo en Solana viene después. Se soportarán cadenas de alto rendimiento adicionales como spokes.
 - **Composabilidad:** aplicaciones de terceros lanzando características útiles sobre el SDK sin pedir permiso.

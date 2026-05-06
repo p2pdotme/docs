@@ -18,19 +18,19 @@ Formalizamos el ciclo de vida de las órdenes como una máquina de estados con t
 ## 5.1 On-Ramp (Fiat → USDC en Base; expandiendo a Solana)
 
 1. **Abrir:** El usuario abre una orden de BUY (compra) con monto y vía.
-2. **Emparejamiento:** El protocolo asigna un comerciante on-chain basado en USDC stakeado. Se pueden bloquear bonos reembolsables.
+2. **Emparejamiento:** El protocolo asigna un merchant on-chain basado en USDC stakeado. Se pueden bloquear bonos reembolsables.
 3. **Transferir Fiat:** El usuario paga fiat a la cuenta proporcionada dentro de `T_fiat`.
-4. **Confirmación del Comerciante:** El comerciante confirma la recepción del pago fiat.
+4. **Confirmación del Merchant:** El merchant confirma la recepción del pago fiat.
 5. **Liquidación:** El contrato libera USDC al usuario; se cobran comisiones; se desbloquean bonos.
 6. **Disputa:** En caso de conflicto, las partes presentan evidencia; administradores autorizados emiten un veredicto on-chain.
 
 ## 5.2 Off-Ramp (USDC en Base → Fiat; expandiendo a Solana)
 
 1. **Abrir:** El usuario abre una orden de SELL (venta); transfiere USDC al adaptador de liquidación sin escrow (el contrato mantiene o transmite de forma atómica según el diseño).
-2. **Emparejamiento:** El comerciante acepta y publica cotización/bono.
+2. **Emparejamiento:** El merchant acepta y publica cotización/bono.
 3. **Fondos Crypto:** El USDC del usuario se bloquea para la liquidación.
-4. **Comerciante paga Fiat:** El comerciante paga fiat y confirma la finalización; o el usuario impugna.
-5. **Liquidación:** El contrato libera USDC al comerciante; se cobran comisiones; se desbloquean bonos.
+4. **Merchant paga Fiat:** El merchant paga fiat y confirma la finalización; o el usuario impugna.
+5. **Liquidación:** El contrato libera USDC al merchant; se cobran comisiones; se desbloquean bonos.
 6. **Disputa:** En caso de conflicto, las partes presentan evidencia; administradores autorizados emiten un veredicto on-chain.
 
 ## 5.3 Clases de Riesgo por Vía de Pago

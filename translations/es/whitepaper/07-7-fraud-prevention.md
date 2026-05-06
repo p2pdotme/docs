@@ -15,9 +15,9 @@ Es importante destacar que los exchanges centralizados enfrentan dificultades co
 
 El mecanismo subyacente de RP prácticamente elimina el riesgo de lavado de dinero y prácticas maliciosas similares. Los límites de transacción impuestos se encargan de manera natural del cumplimiento de las normas anti-lavado de dinero. Simplemente hay mucho menos margen para lavar cualquier cantidad no trivial de dinero negro, dada la falta de escalabilidad transaccional y los riesgos de suspensión por reputación involucrados.
 
-## 7.3 Responsabilidad de los Comerciantes
+## 7.3 Responsabilidad de los Merchants
 
-La naturaleza selectiva de los comerciantes que cumplen órdenes individuales —a través del algoritmo de Prueba-de-Credibilidad— supone un fuerte desincentivo y hace muy poco probable que cualquier comerciante intente realizar una transacción fraudulenta.
+La naturaleza selectiva de los merchants que cumplen órdenes individuales —a través del algoritmo de Prueba-de-Credibilidad— supone un fuerte desincentivo y hace muy poco probable que cualquier merchant intente realizar una transacción fraudulenta.
 
 ---
 

@@ -11,7 +11,7 @@ El protocolo involucra a varios participantes clave que trabajan juntos para hab
 
 **Compradores y Vendedores** son usuarios cotidianos que inician órdenes de on-ramp u off-ramp. Interactúan con el protocolo a través de aplicaciones cliente utilizando wallets integradas y transaccionando sin ceder la custodia de sus fondos.
 
-**Comerciantes**, también conocidos como pares de liquidez, actúan como contrapartes que median la liquidez entre stablecoins y monedas fiat. Estos son participantes cuidadosamente vetados que mantienen liquidez suficiente y han establecido fuertes reputaciones a través del sistema Proof-of-Credibility.
+**Merchants**, también conocidos como pares de liquidez, actúan como contrapartes que median la liquidez entre stablecoins y monedas fiat. Estos son participantes cuidadosamente vetados que mantienen liquidez suficiente y han establecido fuertes reputaciones a través del sistema Proof-of-Credibility.
 
 **Contratos del Protocolo** son los smart contracts on-chain que orquestan todo el ciclo de vida de las órdenes. Manejan el encolamiento de órdenes, el emparejamiento basado en puntajes de credibilidad, la verificación de estado y los resultados finales de liquidación. Estos contratos operan actualmente en Base L2 (con expansión multichain a Solana planeada).
 
@@ -29,14 +29,14 @@ El protocolo involucra a varios participantes clave que trabajan juntos para hab
 ## 3.3 Flujo de Alto Nivel
 
 1. **Colocación de Órdenes:** Un usuario hace clic en “Comprar USDC” (o “Vender USDC”) e ingresa el monto. La app proporciona una wallet integrada para la transacción.
-2. **Emparejamiento de Órdenes:** Se asigna un comerciante on-chain basado en USDC stakeado. Se comparte una dirección de pago fiat a través del smart contract, cifrada con las claves del usuario; para off-ramps, se presenta una dirección de USDC en Base (en expansión a Solana).
+2. **Emparejamiento de Órdenes:** Se asigna un merchant on-chain basado en USDC stakeado. Se comparte una dirección de pago fiat a través del smart contract, cifrada con las claves del usuario; para off-ramps, se presenta una dirección de USDC en Base (en expansión a Solana).
 3. **Transferencia Fiat/Stablecoin:** El pagador realiza la transferencia en la vía designada.
-4. **Confirmación/Liquidación:** En minutos, la liquidación se completa una vez que el comerciante confirma la recepción. Los saldos de las wallets se actualizan en consecuencia.
+4. **Confirmación/Liquidación:** En minutos, la liquidación se completa una vez que el merchant confirma la recepción. Los saldos de las wallets se actualizan en consecuencia.
 5. **Ventana de Disputa:** Si alguna parte impugna, presenta evidencia de que un pago o acción ocurrió (o no ocurrió). En la implementación actual, administradores autorizados resuelven las órdenes en disputa on-chain según las reglas de falla del protocolo y las ventanas de disputa.
 
 ```mermaid
 flowchart LR
-    place[Colocar orden] --> match[Emparejamiento con comerciante]
+    place[Colocar orden] --> match[Emparejamiento con merchant]
     match --> transfer[Transferencia de fiat o stablecoin]
     transfer --> confirm[Confirmar y liquidar]
     confirm --> done[Completado]
@@ -53,7 +53,7 @@ flowchart LR
 ├─────────────────────────────────────────────────────────────────────────┤
 │                                                                         │
 │   ┌──────────┐         ┌──────────────┐         ┌──────────────┐        │
-│   │ USUARIO  │         │  PROTOCOLO   │         │ COMERCIANTE  │        │
+│   │ USUARIO  │         │  PROTOCOLO   │         │   MERCHANT   │        │
 │   └────┬─────┘         └──────┬───────┘         └──────┬───────┘        │
 │        │                      │                        │                │
 │        │ 1. Abre orden de     │                        │                │
@@ -76,7 +76,7 @@ flowchart LR
 │        │  vía banco/UPI/PIX   │                        │                │
 │        │──────────────────────────────────────────────►│                │
 │        │                      │                        │                │
-│        │                      │  5. Comerciante        │                │
+│        │                      │  5. Merchant           │                │
 │        │                      │  confirma la recepción │                │
 │        │                      │◄───────────────────────│                │
 │        │                      │                        │                │
@@ -101,7 +101,7 @@ flowchart LR
 ├─────────────────────────────────────────────────────────────────────────┤
 │                                                                         │
 │   ┌──────────┐         ┌──────────────┐         ┌──────────────┐        │
-│   │ USUARIO  │         │  PROTOCOLO   │         │ COMERCIANTE  │        │
+│   │ USUARIO  │         │  PROTOCOLO   │         │   MERCHANT   │        │
 │   └────┬─────┘         └──────┬───────┘         └──────┬───────┘        │
 │        │                      │                        │                │
 │        │ 1. Abre orden de     │                        │                │
@@ -111,7 +111,7 @@ flowchart LR
 │        │                      │                        │                │
 │        │                      │  2. Emparejamiento     │                │
 │        │                      │  vía PoC               │                │
-│        │                      │  + comerciante publica │                │
+│        │                      │  + merchant publica    │                │
 │        │                      │    garantía            │                │
 │        │                      │───────────────────────►│                │
 │        │                      │                        │                │
@@ -121,16 +121,16 @@ flowchart LR
 │        │─────────────────────►│                        │                │
 │        │  (encriptado)        │                        │                │
 │        │                      │                        │                │
-│        │                      │  4. Comerciante envía  │                │
+│        │                      │  4. Merchant envía     │                │
 │        │  Recibe fiat         │  pago fiat             │                │
 │        │◄──────────────────────────────────────────────│                │
 │        │                      │                        │                │
-│        │                      │  5. Comerciante sube   │                │
+│        │                      │  5. Merchant sube      │                │
 │        │                      │  confirmación de pago  │                │
 │        │                      │◄───────────────────────│                │
 │        │                      │                        │                │
 │        │                      │  6. USDC liberado      │                │
-│        │                      │  al comerciante        │                │
+│        │                      │  al merchant           │                │
 │        │                      │───────────────────────►│                │
 │        │                      │                        │                │
 │   ┌────▼─────┐         ┌──────▼───────┐         ┌──────▼───────┐        │
@@ -143,8 +143,8 @@ flowchart LR
 
 ## 3.6 Consideraciones clave
 
-- El **comerciante** cumple la función de mediar la liquidez para las transacciones.
-- La **responsabilidad de confirmar el pago** recae en el comerciante (para off-ramps) o puede ser proporcionada por cualquiera de las partes.
+- El **merchant** cumple la función de mediar la liquidez para las transacciones.
+- La **responsabilidad de confirmar el pago** recae en el merchant (para off-ramps) o puede ser proporcionada por cualquiera de las partes.
 - **ZK-KYC realiza verificación de identidad sin confianza** para el usuario sin exponer datos personales.
 - **La evidencia se envía y revisa** en las disputas. En el sistema actual, los resultados se ejecutan mediante liquidación por admin on-chain; la resolución más amplia impulsada por verificadores y gobernanza permanece en el roadmap (ver [Sección 4.2](/es/whitepaper/cryptographic-primitives-proof-integration#42-módulo-de-evidencia-para-verificación-de-transacciones-bancarias-roadmap)).
 - **Reclaim Protocol** habilita la verificación de identidad que preserva la privacidad mediante cuentas sociales e IDs gubernamentales.
