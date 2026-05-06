@@ -128,6 +128,28 @@ const sidebars: SidebarsConfig = {
             "for-users/troubleshooting",
             "for-users/faq"
         ]
+    },
+    {
+        "type": "category",
+        "label": "Para Comunidad",
+        "collapsible": true,
+        "collapsed": true,
+        "link": {
+            "type": "doc",
+            "id": "for-community/start-here"
+        },
+        "items": [
+            "for-community/cypherpunk-20-manifesto",
+            "for-community/hierarchy",
+            "for-community/four-tracks",
+            "for-community/how-to-join",
+            "for-community/weekly-updates-and-offboarding",
+            "for-community/remuneration",
+            "for-community/discord-structure",
+            "for-community/principles",
+            "for-community/brand-kit",
+            "for-community/faq"
+        ]
     }
   ]
 };
