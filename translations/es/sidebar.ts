@@ -108,6 +108,26 @@ const sidebars: SidebarsConfig = {
             "for-merchants/troubleshooting",
             "for-merchants/faq"
         ]
+    },
+    {
+        "type": "category",
+        "label": "Para Usuarios",
+        "collapsible": true,
+        "collapsed": true,
+        "link": {
+            "type": "doc",
+            "id": "for-users/start-here"
+        },
+        "items": [
+            "for-users/before-you-start",
+            "for-users/order-types",
+            "for-users/how-to-place-an-order",
+            "for-users/what-to-do-by-order-type",
+            "for-users/understanding-order-states",
+            "for-users/disputes-and-evidence",
+            "for-users/troubleshooting",
+            "for-users/faq"
+        ]
     }
   ]
 };
