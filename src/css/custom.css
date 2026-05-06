@@ -577,6 +577,10 @@ h6 {
   content: "Nesta página";
 }
 
+.lang-es .theme-doc-toc-desktop::before {
+  content: "En esta página";
+}
+
 .table-of-contents__link {
   font-size: 0.85rem;
   border-left: 1px solid var(--border-color);

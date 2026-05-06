@@ -3,7 +3,7 @@ import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 if (ExecutionEnvironment.canUseDOM) {
   function getCurrentLanguage() {
     const firstSegment = window.location.pathname.split('/').filter(Boolean)[0];
-    return firstSegment === 'pt' ? 'pt' : 'en';
+    return firstSegment === 'pt' ? 'pt' : firstSegment === 'es' ? 'es' : 'en';
   }
 
   function updateUITranslations() {
@@ -11,6 +11,7 @@ if (ExecutionEnvironment.canUseDOM) {
 
     // Toggle lang-pt class on html element for CSS-based translations
     document.documentElement.classList.toggle('lang-pt', lang === 'pt');
+    document.documentElement.classList.toggle('lang-es', lang === 'es');
 
     // Translate Previous / Next pagination
     if (lang === 'pt') {
@@ -19,9 +20,15 @@ if (ExecutionEnvironment.canUseDOM) {
         if (el.textContent.trim() === 'Next') el.textContent = 'Próximo';
       });
     }
+    if (lang === 'es') {
+      document.querySelectorAll('.pagination-nav__sublabel').forEach((el) => {
+        if (el.textContent.trim() === 'Previous') el.textContent = 'Anterior';
+        if (el.textContent.trim() === 'Next') el.textContent = 'Siguiente';
+      });
+    }
 
     // Translate Search button placeholder and input
-    const searchPlaceholder = lang === 'pt' ? 'Pesquisar' : 'Search';
+    const searchPlaceholder = lang === 'pt' ? 'Pesquisar' : lang === 'es' ? 'Buscar' : 'Search';
 
     // DocSearch button placeholder
     document.querySelectorAll('.DocSearch-Button-Placeholder').forEach((el) => {
