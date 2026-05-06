@@ -220,6 +220,27 @@
             {"doc_id": "rollout-sequence", "title": "Secuencia de Lanzamiento"},
             {"doc_id": "faq", "title": "Preguntas Frecuentes"}
           ]
+        },
+        {
+          "id": "for-merchants",
+          "outputDir": "translations/es/for-merchants",
+          "routeBasePath": "es/for-merchants",
+          "preGeneratedFiles": [
+            {"doc_id": "start-here", "title": "Comienza Aquí"},
+            {"doc_id": "merchant-readiness", "title": "Preparación del Merchant"},
+            {"doc_id": "merchant-setup-flow", "title": "Flujo de Configuración del Merchant"},
+            {"doc_id": "handling-orders", "title": "Manejo de Órdenes"},
+            {"doc_id": "operational-controls", "title": "Controles Operativos"},
+            {"doc_id": "circles-of-trust", "title": "Círculos de Confianza"},
+            {"doc_id": "payment-channels-and-country-controls", "title": "Canales de Pago y Controles por País"},
+            {"doc_id": "order-assignment", "title": "Asignación de Órdenes"},
+            {"doc_id": "disputes", "title": "Disputas"},
+            {"doc_id": "delegation-and-revenue-sharing", "title": "Delegación y Reparto de Ingresos"},
+            {"doc_id": "insurance", "title": "Seguro"},
+            {"doc_id": "risk-and-reliability-practices", "title": "Prácticas de Riesgo y Confiabilidad"},
+            {"doc_id": "troubleshooting", "title": "Solución de Problemas"},
+            {"doc_id": "faq", "title": "Preguntas Frecuentes"}
+          ]
         }
       ]
     }

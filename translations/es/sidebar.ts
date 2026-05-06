@@ -83,6 +83,31 @@ const sidebars: SidebarsConfig = {
             "for-builders/rollout-sequence",
             "for-builders/faq"
         ]
+    },
+    {
+        "type": "category",
+        "label": "Para Merchants P2P",
+        "collapsible": true,
+        "collapsed": true,
+        "link": {
+            "type": "doc",
+            "id": "for-merchants/start-here"
+        },
+        "items": [
+            "for-merchants/merchant-readiness",
+            "for-merchants/merchant-setup-flow",
+            "for-merchants/handling-orders",
+            "for-merchants/operational-controls",
+            "for-merchants/circles-of-trust",
+            "for-merchants/payment-channels-and-country-controls",
+            "for-merchants/order-assignment",
+            "for-merchants/disputes",
+            "for-merchants/delegation-and-revenue-sharing",
+            "for-merchants/insurance",
+            "for-merchants/risk-and-reliability-practices",
+            "for-merchants/troubleshooting",
+            "for-merchants/faq"
+        ]
     }
   ]
 };
